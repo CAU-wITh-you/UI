@@ -1,0 +1,193 @@
+@font-face {
+    font-family: 'HSYuji-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSYuji-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    font-family: 'HSYuji-Regular';
+    margin: 0;
+    cursor: default;
+    width: 100%;
+    height: 100%;
+
+}
+
+h3 {
+    font-family: 'HSYuji-Regular';
+    text-align: center;
+    color: white;
+}
+
+img {
+    object-fit: cover;
+}
+
+button {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.fa-cog {
+    color: green;
+}
+
+.extensions__left {
+    float: left;
+    width: 60%;
+    height: 800px;
+    background-color: #333F50;
+}
+
+.videobuttons1 {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.areadesignbutton {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.areadesignbutton__icon {
+    margin-left: 50px;
+    margin-right: 10px;
+    float: left;
+}
+
+.areadesignbutton__title {
+    margin: 0;
+    text-align: left;
+}
+
+.video {
+    width: 100%;
+    height: 66%;
+    background-color: #1C222C;
+}
+
+.areaselectionbutton {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.areaselectionbutton__icon {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 10px;
+    float: left;
+}
+
+.areaselectionbutton__title {
+    margin: 0px;
+    margin-top: 10px;
+    float: left;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.videoarea {
+    width: 100%;
+    height: 70%;
+}
+
+.videobuttons2 {
+    width: 30%;
+    height: 10%;
+    margin: 10px auto;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center
+}
+
+.video__btn {
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+}
+
+.videobuttons3 {
+    width: 36%;
+    height: 15%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin: auto;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center
+}
+
+.code__btn {
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+}
+
+.extensions__right {
+    float: right;
+    width: 40%;
+    height: 800px;
+}
+
+.notebuttons1 {
+    clear: both;
+    width: 100%;
+    height: 8%;
+    vertical-align: middle;
+}
+
+.timestampopen__icon {
+    width: 5%;
+    height: 100%;
+    float: left;
+    vertical-align: middle;
+    background-color: crimson;
+}
+
+.question__icon {
+    width: 5%;
+    height: 100%;
+    float: left;
+    vertical-align: middle;
+    margin-left: 250px;
+}
+
+.mypage {
+    width: 30%;
+    height: 100%;
+    float: right;
+    background-color: gray;
+    text-align: right;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.note {
+    width: 100%;
+    height: 95%;
+}
+
+.maketimestamp_note__area {
+    clear: both;
+    width: 5%;
+    height: 680px;
+    background-color: #F6C0C0;
+    float: left;
+}
+
+.notearea {
+    width: 95%;
+    height: 680px;
+    float: right;
+}
