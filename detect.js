@@ -1,4 +1,5 @@
 let videoSelected = false;
+let lastHtml;
 
 if(document.querySelector('video') && videoSelected == false){
     var canvas1 = document.createElement("canvas");
@@ -73,14 +74,14 @@ if(document.querySelector('video') && videoSelected == false){
 
         if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
             videoSelected = true;
-            if(confirm("in "+x+","+y)){
+            if(confirm("in "+x+","+y+","+$("#movie_player > div.html5-video-container > video").currentTime)){
                 /*canvas1.width = 0;
                 canvas1.height = 0;
                 ctx.clearRect(0, 0, canvas1.width, canvas1.height);*/
                 canvas1.remove();
-                boundRect();
-                $("#related").html(`<h1>Hello world<br>
-                <iframe src="${chrome.runtime.getURL("hello_world.html")}" style="width:480px !important; height:100%; z-index:10; position:absolute;"></iframe></h1><br><br>`);
+                lastHtml = $("#columns").html;
+                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100%; z-index:10; position:absolute; left:-0%"></iframe>`);
+                
                 //$("#meta-contents").html(`<h1>hello hyejin</h1><br>`);
                 //alert(chrome.runtime.getURL("hello_world.html"));
                 //var iFrame  = document.createElement ("iframe");
@@ -93,9 +94,14 @@ if(document.querySelector('video') && videoSelected == false){
     
     }, false);
 
-    $(document).ready(function(){
-    
-        initCanvas();
 
+    
+    $(document).ready(function(){
+   
+        window.addEventListener('resize', function(event) {
+            initCanvas();
+        }, true);
+        
+        boundRect();
     });
 }

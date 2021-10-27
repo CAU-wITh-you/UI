@@ -7,12 +7,13 @@
     <title>Portforlio</title>
     <meta name="description" content="Cau 3-2 Capstone design team 5-5">
     <meta name="author" content="Team name : wITh you">
-    <script src="https://kit.fontawesome.com/9ff9f6bf5f.js" crossorigin="anonymous"></script>
+    <script src="9ff9f6bf5f.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer>
     </script>
+    <script src="\assets\jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,8 +35,8 @@
                     <h3 class="areaselectionbutton__title">영역 보이게/안보이게</h3>
                 </div>
                 <!--video 불러오기-->
-                <div class="videoarea">
-                    <p>hi</p>
+                <div class="videoarea" style="text-align: center;">
+                    <iframe id="ytvideo" style="width:80%; height:100%;" src="https://www.youtube.com/embed/poRckH1hSwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="videobuttons2">
                     <button type="button" id="" class="video__btn">
@@ -68,14 +69,12 @@
         </div>
         <div class=" extensions__right">
             <div class="notebuttons1">
-                <div class="timestampopen__icon" , style="vertical-align: middle">
-                    <i class="fas fa-caret-right fa-3x"></i>
+                <div class="timestampopen__icon", style="vertical-align: middle">
+                    <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;"></i>
                 </div>
-                <div class="question__icon">
-                    <i class="fas fa-question-circle fa-2x"></i>
-                </div>
-                <button class="mypage">
-                    <h3 class="mypage__title">내 문서함</h3>
+                <button class="mypage" style="position: absolute; height: inherit; width: 10%; right: -1%; display: inline-flex; justify-content:space-between;">
+                    <i class="fas fa-question-circle fa-2x" style="margin-top: 12px;"></i>
+                    <h3 class="mypage__title" style="margin-right: 20%;">내 문서함</h3>
                 </button>
             </div>
             <div dlass="note">
@@ -88,3 +87,5 @@
         </div>
     </section>
 </body>
+<script src="change.js"></script>
+<script src="boundrect.js"></script>
