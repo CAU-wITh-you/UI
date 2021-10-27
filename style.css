@@ -5,6 +5,18 @@
     font-style: normal;
 }
 
+:root {
+    --color-pink: #F6C0C0;
+    --color-dark-pink: #D8505A;
+    --color-yellow: #F1CD8B;
+    --color-dark-yellow: #FBC35F;
+    --color-blue: #96B0DE;
+    --color-dark-blue: #6D91D1;
+    --color-purple: #D5B8EA;
+    --color-dark-purple: #B482DA;
+    --color-border: #caced4;
+}
+
 html,
 body {
     font-family: 'HSYuji-Regular';
@@ -18,7 +30,13 @@ body {
 h3 {
     font-family: 'HSYuji-Regular';
     text-align: center;
-    color: white;
+    color: whitesmoke;
+}
+
+h2 {
+    font-family: 'HSYuji-Regular';
+    text-align: center;
+    color: var(--color-dark-pink);
 }
 
 img {
@@ -30,10 +48,6 @@ button {
     cursor: pointer;
     border: none;
     outline: none;
-}
-
-.fa-cog {
-    color: green;
 }
 
 .extensions__left {
@@ -64,6 +78,11 @@ button {
     float: left;
 }
 
+.areadesignbutton__icon:hover {
+    transform: scale(1.1);
+}
+
+
 .areadesignbutton__title {
     margin: 0;
     text-align: left;
@@ -87,6 +106,11 @@ button {
     margin-left: 50px;
     margin-right: 10px;
     float: left;
+}
+
+.areaselectionbutton__icon:hover {
+    transform: scale(1.1);
+    color: var(--color-dark-pink);
 }
 
 .areaselectionbutton__title {
@@ -117,6 +141,10 @@ button {
     object-fit: cover;
 }
 
+.video__btn:hover {
+    transform: scale(1.1);
+}
+
 .videobuttons3 {
     width: 36%;
     height: 15%;
@@ -132,6 +160,10 @@ button {
     width: 60%;
     height: 60%;
     object-fit: cover;
+}
+
+.code__btn:hover {
+    transform: scale(1.1);
 }
 
 .extensions__right {
@@ -152,7 +184,9 @@ button {
     height: 100%;
     float: left;
     vertical-align: middle;
-    background-color: crimson;
+    background-color: var(--color-pink);
+    transition: all ease 1s;
+    color: var(--color-dark-pink);
 }
 
 .question__icon {
@@ -161,33 +195,58 @@ button {
     float: left;
     vertical-align: middle;
     margin-left: 250px;
+    color: var(--color-dark-pink);
+}
+
+.question__icon:hover {
+    transform: scale(1.1);
 }
 
 .mypage {
-    width: 30%;
+    width: 20%;
     height: 100%;
     float: right;
-    background-color: gray;
     text-align: right;
     margin-right: 10px;
     vertical-align: middle;
 }
 
+.mypage__title {
+    color: #1C222C;
+}
+
+.mypage__title:hover {
+    transform: scale(1.1);
+}
+
 .note {
     width: 100%;
-    height: 95%;
+    height: 92%;
 }
 
 .maketimestamp_note__area {
     clear: both;
     width: 5%;
     height: 680px;
-    background-color: #F6C0C0;
+    background-color: var(--color-dark-pink);
     float: left;
 }
 
+.timestamp {
+    clear: both;
+    width: 100%;
+    height: 680px;
+    background-color: var(--color-pink);
+    float: right;
+    display: none;
+    transition: all ease 1s;
+}
+
 .notearea {
-    width: 95%;
+    width: 94%;
     height: 680px;
     float: right;
+    border: 3px solid;
+    border-color: #caced4;
+    ;
 }

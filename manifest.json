@@ -34,7 +34,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": [ "index.html", "hello_world.html", "/images/get_started128.png", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js" ],
+      "resources": [ "index.html", "hello_world.html", "index.js", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js" ],
       "matches": [ "<all_urls>" ]
     }
   ]
