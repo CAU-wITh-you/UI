@@ -11,8 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css2" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer>
-    </script>
+    <script src="index.js" defer="defer"></script>
     <script src="\assets\jquery.min.js"></script>
 </head>
 
@@ -36,47 +35,74 @@
                 </div>
                 <!--video 불러오기-->
                 <div class="videoarea" style="text-align: center;">
-                    <iframe id="ytvideo" style="width:80%; height:100%;" src="https://www.youtube.com/embed/poRckH1hSwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe
+                        id="ytvideo"
+                        style="width:80%; height:100%;"
+                        src="https://www.youtube.com/embed/poRckH1hSwc"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="allowfullscreen"></iframe>
                 </div>
                 <div class="videobuttons2">
                     <button type="button" id="" class="video__btn">
-                        <img src="buttons/5minbeforebutton-pink.png" alt="5minbeforeBtn" id="5minbeforebtn"
-                        style="width:50px; height:50px;">
+                        <img src="buttons/5minbeforebutton-pink.png"
+                            alt="5minbeforeBtn"
+                            id="5minbeforebtn"
+                            style="width:50px; height:50px;">
                     </button>
                     <button type="button" id="" class="video__btn">
-                        <img src="buttons/playbutton-pink.png" alt="playBtn" id="playbtn"
-                        onclick="toggleImgplay()"style="width:50px; height:50px;">
+                        <img
+                            src="buttons/playbutton-pink.png"
+                            alt="playBtn"
+                            id="playbtn"
+                            style="width:50px; height:50px;">
                     </button>
                     <button type="button" id="" class="video__btn">
-                        <img src="buttons/5minafterbutton-pink.png" alt="5minafterBtn" id="5minafterbtn"
-                        style="width:50px; height:50px;">
+                        <img
+                            src="buttons/5minafterbutton-pink.png"
+                            alt="5minafterBtn"
+                            id="5minafterbtn"
+                            style="width:50px; height:50px;">
                     </button>
                 </div>
             </div>
-            <div class=" videobuttons3">
+            <div class="videobuttons3">
                 <button type="startpointBtn" id="" class="code__btn">
-                    <img src="buttons/startbutton-pink.png" alt="startpointBtn" class="not_select" id="startbtn"
-                    onclick="toggleImgstart()" title="startpoint" style="width:40px; height:80px;">
+                    <img src="buttons/startbutton-pink.png"
+                        alt="startpointBtn"
+                        class="not_select"
+                        id="startbtn"
+                        title="startpoint"
+                        style="width:40px; height:80px;">
                 </button>
                 <button type=" button" id="" class="code__btn">
-                    <img src="buttons/codebutton-pink.png" alt="codeExtractBtn" class="not_select" id="codebtn"
-                    onclick="toggleImgcode()" title="코드 추출"
+                    <img src="buttons/codebutton-pink.png"
+                        alt="codeExtractBtn"
+                        class="not_select"
+                        id="codebtn"
+                        title="코드 추출"
                         style="width:80px; height:80px;">
                 </button>
-                <button type=" button" id="" class="code__btn">
-                    <img src="buttons/endbutton-pink.png" alt="endpointBtn" class="not_select" id="endbtn"
-                    onclick="toggleImgend()" title="endpoint"
+                <button type="button" id="" class="code__btn">
+                    <img src="buttons/endbutton-pink.png"
+                        alt="endpointBtn"
+                        class="not_select"
+                        id="endbtn"
+                        title="endpoint"
                         style="width:40px; height:80px;">
                 </button>
             </div>
         </div>
         <div class=" extensions__right">
             <div class="notebuttons1">
-                <div class="timestampopen__icon" style="vertical-align: middle" id="timestampbtn" onclick="clicktimestamp()" title="click to open timestamp">
-                    <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;"></i>
+                <div class="timestampopen__icon" style="vertical-align: middle" id="timestampbtn"
+                    title="click to open timestamp">
+                    <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;" id="timestampbtn__icon"></i>
                 </div>
                 <button class="mypage" style="position: absolute; height: inherit; width: 10%; right: -1%; display: inline-flex; justify-content:space-between;">
-                    <i class="fas fa-question-circle fa-2x" style="margin-top: 12px;"  onmouseenter="hoverdescription()" onmouseout="nohoverdescription()"></i>
+                    <i class="fas fa-question-circle fa-2x" id="questionbtn",style="margin-top: 12px;">
+                    </i>
                     <h2 class="mypage__title" style="margin-right: 20%;">내 문서함</h2>
                 </button>
             </div>
@@ -87,7 +113,9 @@
                     </div>
                 </div>
                 <div class="notearea">
-                    <p> here </p>
+                    <p>
+                        here
+                    </p>
                 </div>
             </div>
         </div>
