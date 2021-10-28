@@ -211,8 +211,12 @@ button {
     vertical-align: middle;
 }
 
+#questionbtn {
+    color: var(--color-dark-pink);
+}
+
 .mypage__title {
-    color: #1C222C;
+    color: whitesmoke;
 }
 
 .mypage__title:hover {
@@ -239,7 +243,6 @@ button {
     background-color: var(--color-pink);
     float: right;
     display: none;
-    transition: all ease 1s;
 }
 
 .notearea {
