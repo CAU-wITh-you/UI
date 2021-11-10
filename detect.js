@@ -101,7 +101,7 @@ if(document.querySelector('video') && videoSelected == false){
         window.addEventListener('resize', function(event) {
             initCanvas();
         }, true);
-        
-        boundRect();
+
+        //boundRect();
     });
 }
