@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "activeTab", "scripting","tabs"],
+  "permissions": ["storage", "activeTab", "scripting","tabs", "http://*/*", "https://*/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -28,7 +28,7 @@
       "matches": [
       "<all_urls>"
         ],  
-      "js": ["./assets/jquery.min.js","./assets/html2canvas.min.js", "./assets/jquery-3.3.1.min.js","detect.js", "boundrect.js"],
+      "js": ["./assets/jquery.min.js","./assets/html2canvas.min.js", "./assets/jquery-3.3.1.min.js", "boundrect.js"],
       "all-frames": true
     }
   ],
@@ -37,5 +37,8 @@
       "resources": [ "index.html", "hello_world.html", "index.js", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js", "https://html2canvas.hertzen.com/dist/html2canvas.min.js" ],
       "matches": [ "<all_urls>" ]
     }
+  ],
+  "host_permissions": [
+    "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=AIzaSyAIClo7wQnXWdTCMQq5jsmGIu2fKvnEhq4"
   ]
 }

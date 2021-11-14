@@ -1,5 +1,5 @@
 let videoSelected = false;
-let lastHtml;
+alert("detect.js");
 
 if(document.querySelector('video') && videoSelected == false){
     var canvas1 = document.createElement("canvas");
@@ -8,7 +8,7 @@ if(document.querySelector('video') && videoSelected == false){
     // this right here should be fixed
     // for the youtube videos to work properly
     
-    console.log("hello hyejin2")
+    console.log("hello detect")
     
     document.body.appendChild(canvas1);
     var ctx = canvas1.getContext("2d");
@@ -16,6 +16,7 @@ if(document.querySelector('video') && videoSelected == false){
     var video = document.querySelector('video');
     var height = $("video").height();
     var width = $("video").width();
+    console.log(height,width);
     
     function getOffset( el ) {
         var rect = el.getBoundingClientRect(),
@@ -74,34 +75,49 @@ if(document.querySelector('video') && videoSelected == false){
 
         if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
             videoSelected = true;
-            if(confirm("in "+x+","+y+","+$("#movie_player > div.html5-video-container > video").currentTime)){
-                /*canvas1.width = 0;
-                canvas1.height = 0;
-                ctx.clearRect(0, 0, canvas1.width, canvas1.height);*/
+            var video = document.querySelector("#movie_player > div.html5-video-container > video");
+            video.pause();
+            if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
                 canvas1.remove();
                 lastHtml = $("#columns").html;
-                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100%; z-index:10; position:absolute; left:-0%"></iframe>`);
-                
-                //$("#meta-contents").html(`<h1>hello hyejin</h1><br>`);
-                //alert(chrome.runtime.getURL("hello_world.html"));
-                //var iFrame  = document.createElement ("iframe");
-                //iFrame.src  = chrome.runtime.getURL("hello_world.htm");
-                //$("#meta-contents").appendChild(iFrame);
-                //$("#comments").html(``);
-                //$("#info-contents").load(chrome.runtime.getURL("div.html")); 
+                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100%; z-index:10; position:absolute; left:-0%"></iframe>`);   
             }
         }
     
     }, false);
 
-
     
     $(document).ready(function(){
-   
-        window.addEventListener('resize', function(event) {
-            initCanvas();
-        }, true);
-
+        
+        initCanvas();
         //boundRect();
+
+        window.onpageshow = function(event) {
+            if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+                // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+                alert("히스토리백!!!!");
+            }
+        }
+        
+        window.onresize = function(event){
+            if(!videoSelected){
+                console.log("resize!");
+                console.log("start");
+                ctx.beginPath();
+                ctx.clearRect(0, 0, canvas1.width, canvas1.height);
+                ctx.fillStyle = "#51E7FF27";
+                ctx.fillRect(0, 0, $("video").width(), $("video").height());
+                ctx.strokeStyle = "#51E7FF"
+                ctx.lineWidth = 5;
+                ctx.rect(0, 0, $("video").width(), $("video").height());
+                ctx.stroke();
+                ctx.font = '48px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'blue';
+                ctx.fillText('동영상을 선택해주세요', $("video").width()/2, $("video").height()/2);
+                console.log("end")    
+            }
+        }
     });
 }
+

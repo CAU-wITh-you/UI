@@ -1,12 +1,12 @@
 function boundRect(){
-    if(document.querySelector('video')){
+    if(document.querySelector("#youtubeMP4")){
         var canvas = document.createElement("canvas");
         canvas.setAttribute("id", "selectionCanvas");
         
         // this right here should be fixed
         // for the youtube videos to work properly
         
-        console.log("hello hyejin")
+        console.log("hello boundrect")
         
         document.body.appendChild(canvas);
         var ctx = canvas.getContext("2d");
@@ -38,25 +38,24 @@ function boundRect(){
     
         function pos(){
                 var theVid;
-                var offset = getOffset(document.querySelector('video'));
+                var offset = getOffset(document.querySelector("#youtubeMP4"));
                 return {
                     top:offset.top,
                     left:offset.left,
-                    height:$("video").height(),
-                    width:$("video").height(),
+                    height:$("#youtubeMP4").height(),
+                    width:$("#youtubeMP4").height(),
             }	
         }
-    
-        var video = document.querySelector('video');
-        var height = $("video").height();
-        var width = $("video").width();
+        var video = document.querySelector("#youtubeMP4");
+        var height = $("#youtubeMP4").height();
+        var width = $("#youtubeMP4").width();
     
         scale = ()=> {
-            return video.videoHeight/$("video").height();
+            return video.videoHeight/$("#youtubeMP4").height();
         }
     
         function initCanvas(){
-            if($('video').position()){
+            if($("#youtubeMP4").position()){
                 $("#selectionCanvas").css({
                     position: 'absolute',
                     'z-index': -1,

@@ -1,3 +1,74 @@
+if(document.getElementById("youtubeMP4")){
+    var canvas1 = document.createElement("canvas");
+    canvas1.setAttribute("id", "selectionVideo");
+    
+    // this right here should be fixed
+    // for the youtube videos to work properly
+    
+    console.log("hello hyejin2")
+    
+    document.body.appendChild(canvas1);
+    var ctx = canvas1.getContext("2d");
+
+    var video = document.getElementById("youtubeMP4");
+    var height = $("#youtubeMP4").height();
+    var width = $("#youtubeMP4").width();
+    
+    function getOffset( el ) {
+        var rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        return { 
+            top: rect.top + scrollTop, left: rect.left + scrollLeft 
+        }
+    }
+
+    function pos(){
+            var offset = getOffset(document.getElementById("youtubeMP4"));
+            return {
+                top:offset.top,
+                left:offset.left,
+                height:$("#youtubeMP4").height(),
+                width:$("#youtubeMP4").height(),
+        }	
+    }
+
+    function initCanvas(){
+        if($('#youtubeMP4').position()){
+            $("#selectionVideo").css({
+                position: 'absolute',
+                'z-index': 990,
+                top: pos().top+'px',
+                left: pos().left+'px',
+                height:height,
+                width: width
+            });
+            $("#selectionVideo").attr("height", height);
+            $("#selectionVideo").attr("width", width);		
+            
+            console.log("start");
+            ctx.beginPath();
+            ctx.fillStyle = "#51E7FF27";
+            ctx.fillRect(0, 0, canvas1.width, canvas1.height);
+            ctx.strokeStyle = "#51E7FF"
+            ctx.lineWidth = 5;
+            ctx.rect(0, 0, canvas1.width, canvas1.height);
+            ctx.stroke();
+            ctx.font = '48px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'blue';
+            //ctx.fillText('동영상을 선택해주세요', canvas1.width/2, canvas1.height/2);
+            console.log("end")
+        }
+    }
+       
+    $(document).ready(function(){
+        
+        //initCanvas();
+        //boundRect();
+    });
+}
+
 //client info에 저장
 var color = "pink"
 
@@ -114,7 +185,7 @@ document.getElementById('questionbtn').addEventListener('mouseout', nohoverdescr
 /* 전체 캡쳐 */
 function capture() {
     console.log("hicapture 함수");
-    var scaleFactor = 1;
+    /*var scaleFactor = 1;
     var video = document.getElementById("youtubeMP4");
     //var w = document.getElementById("youtubeMP4").clientWidth * scaleFactor
     //var h = document.getElementById("youtubeMP4").clientHeight * scaleFactor
@@ -131,7 +202,8 @@ function capture() {
     var el = document.getElementById("target");
     el.href = canvas1.toDataURL("image/jpeg");
     el.download = '파일명.jpg';
-    el.click();
+    el.click();*/
+    
 }
 
 document.getElementById('codeExtractBtn').addEventListener('click', capture);
