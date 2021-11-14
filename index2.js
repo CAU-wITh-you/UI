@@ -51,7 +51,7 @@ function onPlayerStateChange() {
     }
     else{
         if(player.getPlayerState() == 1){
-            document.getElementById("playBtn").src="buttons/pausebutton-pink.png";
+            document.getElementById("pauseBtn " + player.getCurrentTime()+"s").src="buttons/pausebutton-pink.png";
         }
         else if(player.getPlayerState() == 2){
             document.getElementById("playBtn").src="buttons/playbutton-pink.png";
