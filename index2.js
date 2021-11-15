@@ -74,3 +74,11 @@ function onPlayerStateChange() {
         console.log(canvas2.style.width, canvas2.style.height);
     }
 }
+
+document.getElementById('startbtn').addEventListener('click', function(e){
+        
+});
+
+document.getElementById('endbtn').addEventListener('click', function(e){
+    
+});
