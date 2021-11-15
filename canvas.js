@@ -41,12 +41,13 @@ function clearCanvas(){
 
 window.onresize = function(event){
     console.log("resize!");
-    height = $("#youtubeMP4").height()*0.9;
-    width = $("#youtubeMP4").width();
+
     canvas3.height = $("#youtubeMP4").height()*0.9;
     canvas3.width = $("#youtubeMP4").width();
-    w = width-x;
-    h = height-y;
+    w = $("#youtubeMP4").width()-(width-w);
+    h = $("#youtubeMP4").height()-(height-h);
+    height = $("#youtubeMP4").height()*0.9;
+    width = $("#youtubeMP4").width();
     if(canvasVisible){
         ctx3.beginPath();
         ctx3.clearRect(0, 0, width, height);
@@ -137,7 +138,9 @@ $(document).ready(function () {
     })
 
     document.querySelector("#codeExtractBtn").addEventListener('click', function(e){
-        alert(x,y,w-x,h-y);
+        var ch = canvas3.height = $("#youtubeMP4").height();
+        var cw = canvas3.width = $("#youtubeMP4").width();
+        alert("x:"+String(x/cw)+" y:"+String(y/ch)+" w:"+String((w-x)/cw)+" h:"+String((h-y)/ch)+" time:"+String(player.getCurrentTime())+" dur:"+String(player.getDuration()));
     });
 });
 
