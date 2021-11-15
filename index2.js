@@ -51,17 +51,18 @@ function onPlayerStateChange() {
     }
     else{
         if(player.getPlayerState() == 1){
-            document.getElementById("pauseBtn " + player.getCurrentTime()+"s").src="buttons/pausebutton-pink.png";
+            console.log("pause " + player.getCurrentTime()+"s");
+            document.getElementById("playBtn").src="buttons/pausebutton-pink.png";
         }
         else if(player.getPlayerState() == 2){
             document.getElementById("playBtn").src="buttons/playbutton-pink.png";
         } 
         document.getElementById("playbutton").hidden=false;
-        canvas2.style.width = "57%";
-        canvas2.style.height = "5%";
+        canvas2.style.width = "56%";
+        canvas2.style.height = "4%";
         var height = $("#youtubeMP4").height();
         console.log(height);
-        canvas2.style.marginTop = String(height*0.88)+"px";
+        canvas2.style.marginTop = String(height*0.89)+"px";
         ctx.beginPath();
         ctx.clearRect(0, 0, canvas2.width, canvas2.height);
         ctx.fillStyle = "#A566FF67";

@@ -179,8 +179,8 @@ document.getElementById('endbtn').addEventListener('click', toggleImgend);
 document.getElementById('timestampbtn').addEventListener('click', clicktimestamp);
 
 /* hover 클릭 이벤트 */
-document.getElementById('questionbtn').addEventListener('mouseover', hoverdescription);
-document.getElementById('questionbtn').addEventListener('mouseout', nohoverdescription);
+//document.getElementById('questionbtn').addEventListener('mouseover', hoverdescription);
+//document.getElementById('questionbtn').addEventListener('mouseout', nohoverdescription);
 
 /* 전체 캡쳐 */
 function capture() {

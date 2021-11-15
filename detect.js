@@ -28,8 +28,8 @@ if(document.querySelector('video') && videoSelected == false){
     }
 
     function pos(){
-            var offset = getOffset(document.querySelector('video'));
-            return {
+        var offset = getOffset(document.querySelector('video'));
+        return {
                 top:offset.top,
                 left:offset.left,
                 height:$("video").height(),

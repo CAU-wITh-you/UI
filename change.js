@@ -1,25 +1,27 @@
 let lastTab;
 console.log("change.js");
-chrome.tabs.getCurrent(function (tab, tabId) {
-    lastTab = tab.url;
-    var url = new URL(tab.url);
-    var videoId = url.searchParams.get("v");
-    console.log(videoId);
-    console.log(tab);
-    //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
-    document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
-    console.log(document.getElementById("youtubeMP4"));
+chrome.tabs.getCurrent(function (tab) {
+    if (tab.url != lastTab) {
+        lastTab = tab.url;
+        var url = new URL(tab.url);
+        var videoId = url.searchParams.get("v");
+        console.log(videoId);
+        console.log(tab);
+        //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
+        document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
+        console.log(document.getElementById("youtubeMP4")); 
+    }
 });
 
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+/*chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     //console.log(tabId, changeInfo, tab);
     if (tab.url != lastTab) {
         lastTab = tab.url;
         location.reload();
         //toggleMuteState(tabId);
     }
-});
+});*/
 
 /*function toggleMuteState(tabId) {
     chrome.tabs.get(tabId, async (tab) => {
