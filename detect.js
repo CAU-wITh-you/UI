@@ -1,5 +1,5 @@
 let videoSelected = false;
-alert("detect.js");
+//alert("detect.js");
 
 if(document.querySelector('video') && videoSelected == false){
     var canvas1 = document.createElement("canvas");

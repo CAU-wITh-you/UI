@@ -253,6 +253,15 @@ video::-webkit-media-controls-fullscreen-button {
   height: 92%;
 }
 
+.divtext {
+  border: ridge 2px;
+  padding: 5px;
+  width: 100%;
+  min-height: 50px;
+  overflow: auto;
+  font-size: 18px;
+}
+
 .maketimestamp_note__area {
   clear: both;
   width: 5%;

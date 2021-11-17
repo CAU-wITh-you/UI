@@ -162,6 +162,7 @@ function clicktimestamp() {
         document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
 
         document.getElementById("realtimestamp").style.display = "block";
+        makeTimestamp();
     }
 }
 
@@ -178,7 +179,37 @@ document.getElementById('endbtn').addEventListener('click', toggleImgend);
 document.getElementById('timestampbtn').addEventListener('click', clicktimestamp);
 document.querySelector("#extensions > div.extensions__right > div.note > div").addEventListener('click', clicktimestamp);
 
-var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
+//<i class="fas fa-carrot fa-2x" id="1"></i>
+
+
+
+var timestampNum = 0;
+
+function makeTimestamp(){
+    timestampNum++;
+
+    var carrotText = document.createElement("div");
+    carrotText.className = "divtext";
+    carrotText.id = timestampNum;
+    carrotText.contentEditable = "true";
+    carrotText.addEventListener("input", function(e) {
+        document.getElementById("c"+e.target.id).style.marginBottom = String(e.target.offsetHeight-22)+"px";
+    }, false);
+    document.querySelector("#extensions > div.extensions__right > div.note > text").appendChild(carrotText);
+
+
+    var carrot = document.createElement("i");
+    console.log("carrot");
+    carrot.className = "fas fa-carrot fa-2x";
+    carrot.style.display="block";
+    var now = transSectoTime(player.getCurrentTime());
+    carrot.id = "c"+timestampNum;
+    carrot.title = now;
+    carrot.style.marginBottom = String(carrotText.offsetHeight-22)+"px";
+    document.querySelector("#realtimestamp").appendChild(carrot);
+}
+
+/*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
 for (var i = 0; i < timestampArea.length; i++) {
     var eachArea = timestampArea[i];
     eachArea.addEventListener('click', function (e) {
@@ -195,7 +226,7 @@ for (var i = 0; i < timestampArea.length; i++) {
             console.log(timeStamp);
         }
     });
-}
+}*/
 
 //1초단위
 function transSectoTime(nowTime) {
