@@ -57,7 +57,7 @@ video::-webkit-media-controls-fullscreen-button {
 .extensions__left {
   float: left;
   width: 60%;
-  height: 750px;
+  height: 670px;
   background-color: #333f50;
 }
 
@@ -70,12 +70,12 @@ video::-webkit-media-controls-fullscreen-button {
 
 .videobuttons2 {
   width: 30%;
-  height: 0%;
+  height: 1%;
   margin: 10px auto;
   justify-content: space-evenly;
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .videobuttons3 {
@@ -114,7 +114,7 @@ video::-webkit-media-controls-fullscreen-button {
 
 .video {
   width: 100%;
-  height: 71%;
+  height: 80%;
   background-color: #1c222c;
 }
 
@@ -157,7 +157,7 @@ video::-webkit-media-controls-fullscreen-button {
   height: 60%;
   object-fit: cover;
   transform: scale(0.7);
-  margin-top: 3px;
+  margin-top: 7px;
 }
 
 .video__btn:hover {
@@ -168,12 +168,11 @@ video::-webkit-media-controls-fullscreen-button {
   width: 60%;
   height: 60%;
   object-fit: cover;
-  transform: scale(0.8);
+  transform: scale(0.82);
 }
 
 .video__btn1:hover {
   transform: scale(0.9);
-  margin-bottom: 3px;
 }
 
 .code__btn {
@@ -190,7 +189,7 @@ video::-webkit-media-controls-fullscreen-button {
 .extensions__right {
   float: right;
   width: 40%;
-  height: 750px;
+  height: 670px;
 }
 
 .notebuttons1 {
@@ -265,7 +264,7 @@ video::-webkit-media-controls-fullscreen-button {
 .maketimestamp_note__area {
   clear: both;
   width: 5%;
-  height: 680px;
+  height: 100%;
   background-color: var(--color-dark-pink);
   float: left;
 }
@@ -273,7 +272,7 @@ video::-webkit-media-controls-fullscreen-button {
 .timestamp {
   clear: both;
   width: 100%;
-  height: 680px;
+  height: 100%;
   background-color: var(--color-pink);
   float: right;
   display: none;
@@ -289,7 +288,7 @@ video::-webkit-media-controls-fullscreen-button {
 
 .notearea {
   width: 94%;
-  height: 680px;
+  /*height: 680px;*/
   float: right;
   border: 3px solid;
   border-color: #caced4;

@@ -25,11 +25,13 @@ function drawCanvas(){
         ctx3.beginPath();
         ctx3.clearRect(0, 0, width, height);
         if(canvasClickable){
-            ctx3.fillStyle = "#51E7FF27";
-            ctx3.fillRect(x, y, w-x, h-y);    
+            ctx3.fillStyle = "#00D8FF27";
+            ctx3.fillRect(x, y, w-x, h-y); 
+            ctx3.strokeStyle = "#6799FF"
+            ctx3.lineWidth = 2;   
         }
         else{
-            ctx3.strokeStyle = "#51E7FF"
+            ctx3.strokeStyle = "#6799FF"
             ctx3.lineWidth = 3;
         }
         ctx3.rect(x, y, w-x, h-y);
@@ -58,12 +60,14 @@ window.onresize = function(event){
         ctx3.beginPath();
         ctx3.clearRect(0, 0, width, height);
         if(canvasClickable){
-            ctx3.fillStyle = "#51E7FF27";
+            ctx3.fillStyle = "#00D8FF27";
             ctx3.fillRect(x, y, w-x, h-y);    
+            ctx3.strokeStyle = "#6799FF";
+            ctx3.lineWidth = 2;
         }
         else{
-            ctx3.strokeStyle = "#51E7FF"
-            ctx3.lineWidth = 5;
+            ctx3.strokeStyle = "#6799FF"
+            ctx3.lineWidth = 3;
         }
         ctx3.rect(x, y, w-x, h-y);
         ctx3.stroke();
@@ -95,7 +99,8 @@ $(document).ready(function () {
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areaselectionbutton")
     .addEventListener('click', function(e){
-        canvasVisible = !canvasVisible;
+        if(canvasClickable) canvasVisible = true;
+        else canvasVisible = !canvasVisible;
         canvasClickable = false;
         canvas3.style.pointerEvents = "none";
         if(canvasVisible){
@@ -106,7 +111,9 @@ $(document).ready(function () {
         }
     });
     
-    
+
+    var prevX = 0;
+    var prevY = 0;
     document.addEventListener('mousedown', function(e){
         //console.log(e);
         //console.log("start",x,y,w,h);
@@ -114,6 +121,8 @@ $(document).ready(function () {
             offset = getOffset(document.getElementById("youtubeMP4"));
             var myX = e.clientX - offset.left;
             var myY = e.clientY - offset.top;    
+            prevX = myX;
+            prevY = myY;
             
             selectedBorder = getSelectedBorder(myX, myY);
             //console.log(myX, myY);
@@ -126,7 +135,6 @@ $(document).ready(function () {
         selectedBorder = 0;
     });
 
-
     document.addEventListener('mousemove', function(e){
         if(selectedBorder>0){
             offset = getOffset(document.getElementById("youtubeMP4"));
@@ -137,7 +145,17 @@ $(document).ready(function () {
             if(selectedBorder == 2 || selectedBorder == 7 || selectedBorder == 8) w = myX;
             if(selectedBorder == 3 || selectedBorder == 5 || selectedBorder == 7) y = myY;
             if(selectedBorder == 4 || selectedBorder == 6 || selectedBorder == 8) h = myY;
+            if(selectedBorder == 9){
+                var dx = myX-prevX;
+                var dy = myY-prevY;
+                x += dx;
+                y += dy; 
+                w += dx;
+                h += dy;
+            }
             
+            prevX = myX;
+            prevY = myY;
             var ch = canvas3.height = $("#youtubeMP4").height()-10;
             var cw = canvas3.width = $("#youtubeMP4").width();
             x2 = x/cw;
@@ -158,6 +176,7 @@ $(document).ready(function () {
         +"\ntime:"+String(player.getCurrentTime())
         +"\nstart:"+String(startTime)+"/"+transSectoTime(startTime)
         +"\nend:"+String(endTime)+"/"+transSectoTime(endTime));
+        drawCanvas();
     });
 });
 
@@ -165,14 +184,16 @@ $(document).ready(function () {
 function getSelectedBorder(myX, myY){
     //console.log(myX, myY,"/",x,y,w,h);
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
-    if(Math.abs(myX-x)<50 && Math.abs(myY-y)<30) return 5;
-    if(Math.abs(myX-x)<50 && Math.abs(myY-h)<30) return 6;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) return 7;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) return 8;
+    if(Math.abs(myX-x)<50 && Math.abs(myY-y)<50) return 5;
+    if(Math.abs(myX-x)<50 && Math.abs(myY-h)<50) return 6;
+    if(Math.abs(myX-w)<50 && Math.abs(myY-y)<50) return 7;
+    if(Math.abs(myX-w)<50 && Math.abs(myY-h)<50) return 8;
     
     if(Math.abs(myX-x)<50) return 1;
-    if(Math.abs(myX-w)<30) return 2;
-    if(Math.abs(myY-y)<30) return 3;
-    if(Math.abs(myY-h)<30) return 4;
+    if(Math.abs(myX-w)<50) return 2;
+    if(Math.abs(myY-y)<50) return 3;
+    if(Math.abs(myY-h)<50) return 4;
+
+    if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) return 9;
     return 0;
 }

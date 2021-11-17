@@ -193,20 +193,40 @@ function makeTimestamp(){
     carrotText.id = timestampNum;
     carrotText.contentEditable = "true";
     carrotText.addEventListener("input", function(e) {
-        document.getElementById("c"+e.target.id).style.marginBottom = String(e.target.offsetHeight-22)+"px";
+        document.getElementById("c"+e.target.id).style.height = String(e.target.offsetHeight)+"px";
+        div.style.backgroundColor = "#f6c0c0"
     }, false);
-    document.querySelector("#extensions > div.extensions__right > div.note > text").appendChild(carrotText);
+    document.querySelector("#timestamptext").appendChild(carrotText);
 
 
+    var div = document.createElement("div");
+    //div.style.border = "1px solid blue";
+    div.id = "c"+timestampNum;
     var carrot = document.createElement("i");
     console.log("carrot");
     carrot.className = "fas fa-carrot fa-2x";
     carrot.style.display="block";
     var now = transSectoTime(player.getCurrentTime());
-    carrot.id = "c"+timestampNum;
     carrot.title = now;
-    carrot.style.marginBottom = String(carrotText.offsetHeight-22)+"px";
-    document.querySelector("#realtimestamp").appendChild(carrot);
+    div.style.height = String(carrotText.offsetHeight)+"px";
+    div.style.backgroundColor = "#f6c0c0"
+    div.appendChild(carrot);
+    document.querySelector("#realtimestamp").appendChild(div);
+    
+
+    var d = $("#timestamptext")
+    d.scrollTop(d.prop("scrollHeight"));
+
+    (function() {
+        $("#timestamptext").scroll(function() {
+            console.log("scrolling");
+            console.log($("#realtimestamp"));
+            $("#realtimestamp").prop("scrollTop", this.scrollTop)
+                    .prop("scrollLeft", this.scrollLeft);
+            $("#timestamp_area").prop("scrollTop", this.scrollTop)
+                    .prop("scrollLeft", this.scrollLeft);
+        });
+      })();
 }
 
 /*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');

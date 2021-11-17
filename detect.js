@@ -52,15 +52,15 @@ if(document.querySelector('video') && videoSelected == false){
             
             console.log("start");
             ctx.beginPath();
-            ctx.fillStyle = "#51E7FF27";
+            ctx.fillStyle = "#00D8FF27";
             ctx.fillRect(0, 0, canvas1.width, canvas1.height);
-            ctx.strokeStyle = "#51E7FF"
+            ctx.strokeStyle = "#6799FF";
             ctx.lineWidth = 5;
             ctx.rect(0, 0, canvas1.width, canvas1.height);
             ctx.stroke();
-            ctx.font = '48px Arial';
+            ctx.font = '48px HSYuji-Regular';
             ctx.textAlign = 'center';
-            ctx.fillStyle = 'blue';
+            ctx.fillStyle = "#6799FF";
             ctx.fillText('동영상을 선택해주세요', canvas1.width/2, canvas1.height/2);
             console.log("end")
         }
@@ -80,7 +80,7 @@ if(document.querySelector('video') && videoSelected == false){
             if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
                 canvas1.remove();
                 lastHtml = $("#columns").html;
-                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100%; z-index:10; position:absolute; left:-0%"></iframe>`);   
+                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);   
             }
         }
     
@@ -105,15 +105,15 @@ if(document.querySelector('video') && videoSelected == false){
                 console.log("start");
                 ctx.beginPath();
                 ctx.clearRect(0, 0, canvas1.width, canvas1.height);
-                ctx.fillStyle = "#51E7FF27";
+                ctx.fillStyle = "#00D8FF27";
                 ctx.fillRect(0, 0, $("video").width(), $("video").height());
-                ctx.strokeStyle = "#51E7FF"
+                ctx.strokeStyle = "#6799FF";
                 ctx.lineWidth = 5;
                 ctx.rect(0, 0, $("video").width(), $("video").height());
                 ctx.stroke();
-                ctx.font = '48px Arial';
+                ctx.font = '48px HSYuji-Regular';
                 ctx.textAlign = 'center';
-                ctx.fillStyle = 'blue';
+                ctx.fillStyle = "#6799FF";
                 ctx.fillText('동영상을 선택해주세요', $("video").width()/2, $("video").height()/2);
                 console.log("end")    
             }

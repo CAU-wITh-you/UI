@@ -51,6 +51,13 @@ function onPlayerStateChange() {
         if(player.getPlayerState() == 1){
             console.log("play " + player.getCurrentTime()+"s");
             document.getElementById("playBtn").src="buttons/pausebutton-pink.png";
+            if(canvasClickable){
+                canvasVisible = true;
+                canvasClickable = false;
+                canvas3.style.pointerEvents = "none";
+                if(canvasVisible) drawCanvas();
+                else clearCanvas();
+            }
         }
         else if(player.getPlayerState() == 2){
             console.log("pause " + player.getCurrentTime()+"s");
@@ -88,9 +95,9 @@ function drawTimecanvas(){
         w = width*endPercent+2;       
     }
     console.log("drawTimecanvas",x,w);
-    ctx.fillStyle = "#A566FF67";
+    ctx.fillStyle = "#FA807267";
     ctx.fillRect(margin+x, 0, w-x, canvas2.height);
-    ctx.strokeStyle = "#A566FF"
+    ctx.strokeStyle = "#FA8072"
     ctx.lineWidth = 3;
     ctx.rect(margin+x, 0, w-x, canvas2.height);
     ctx.stroke();

@@ -37,8 +37,5 @@
       "resources": [ "index.html", "hello_world.html", "index.js", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js", "https://html2canvas.hertzen.com/dist/html2canvas.min.js" ],
       "matches": [ "<all_urls>" ]
     }
-  ],
-  "host_permissions": [
-    "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=AIzaSyAIClo7wQnXWdTCMQq5jsmGIu2fKvnEhq4"
   ]
 }

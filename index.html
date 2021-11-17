@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow:hidden">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>wITh you</title>
     <meta name="description" content="Cau 3-2 Capstone design team 5-5">
     <meta name="author" content="Team name : wITh you">
@@ -11,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer="defer"></script>
+    <script src="index0.js" defer="defer"></script>
     <script src="index2.js" defer="defer"></script>
     <script src="canvas.js" defer="defer"></script>
     <script src="iframe_api"></script>
@@ -102,18 +104,23 @@
                 </button>
             </div>
             <div class="note" style="display: flex;">
-                <div class="maketimestamp_note__area">
+                <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden">
                     <div class="timestamp" id="realtimestamp">
                     </div>
                 </div>
-                <text class="notearea">
+                <div class="notearea" id="timestamptext" scroll=auto style="overflow-x:hidden">
                     <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
                     <!--<div class="divtext" contentEditable>Hello World</div>-->
-                </text>
+                </div>
             </div>
         </div>
     </section>
     <a id="target" style="display : none;"></a>
 </body>
+
+<script src="assets/firebase-app.js"></script>
+<script src="assets/firebase-firestore.js"></script>
+<script src="assets/firebase-auth.js"></script>
+<script src="assets/firebase-database.js"></script>
 <script src="change.js"></script>
 <script src="boundrect.js"></script>
