@@ -73,8 +73,6 @@ if(document.getElementById("youtubeMP4")){
 var color = "pink"
 
 //각 videoinfo에 저장되어야 하는 변수
-var startTime = 0;
-var endTime = 0;
 var timeStamp = [];
 var timeStampnum = 0;
 var startclicknum = 0
@@ -85,14 +83,14 @@ function toggleImgstart() {
         document
             .getElementById("startbtn")
             .src = "buttons/startbutton-" + color + ".png";
-        startTime = 0;
+        //startTime = 0;
     } else {
         document
             .getElementById("startbtn")
             .src = "buttons/startbutton2-" + color + ".png";
-        startTime = document.getElementById("youtubeMP4").currentTime;
+        //startTime = document.getElementById("youtubeMP4").currentTime;
     }
-    console.log(startTime);
+    //console.log(startTime);
 }
 
 var endclicknum = 0
@@ -102,14 +100,14 @@ function toggleImgend() {
         document
             .getElementById("endbtn")
             .src = "buttons/endbutton-" + color + ".png";
-        endTime = 0;
+        //endTime = 0;
     } else {
         document
             .getElementById("endbtn")
             .src = "buttons/endbutton2-" + color + ".png";
-        endTime = document.getElementById("youtubeMP4").currentTime;
+        //endTime = document.getElementById("youtubeMP4").currentTime;
     }
-    console.log(endTime);
+    //console.log(endTime);
 }
 var playclicknum = 0
 function toggleImgplay() {
@@ -147,6 +145,7 @@ function nohoverdescription() {
 }
 
 timestampbtnclicknum = 0;
+
 function clicktimestamp() {
     timestampbtnclicknum += 1;
     if (timestampbtnclicknum % 2 == 0) {
@@ -177,15 +176,53 @@ document.getElementById('startbtn').addEventListener('click', toggleImgstart);
 //document.getElementById('codebtn').addEventListener('click', toggleImgcode);
 document.getElementById('endbtn').addEventListener('click', toggleImgend);
 document.getElementById('timestampbtn').addEventListener('click', clicktimestamp);
+document.querySelector("#extensions > div.extensions__right > div.note > div").addEventListener('click', clicktimestamp);
+
+var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
+for (var i = 0; i < timestampArea.length; i++) {
+    var eachArea = timestampArea[i];
+    eachArea.addEventListener('click', function (e) {
+        if (e.target == document.getElementById("realtimestamp")) {
+            console.log("그낭지나감");
+        }
+        else {
+            timeStampnum += 1;
+            document.getElementById(String(timeStampnum)).style.display = "block";
+            var now = player.getCurrentTime();
+            document.getElementById(String(timeStampnum)).title = transSectoTime(now);
+            timeStamp.push(String(transSectoTime(now)));
+            timeStamp.sort();
+            console.log(timeStamp);
+        }
+    });
+}
+
+//1초단위
+function transSectoTime(nowTime) {
+    var hour = parseInt(nowTime / 3600);
+    var minute = parseInt((nowTime - 3600 * hour) / 60);
+    var second = nowTime - 3600 * hour - 60 * minute;
+    return hour + ":" + minute + ":" + parseInt(second);
+}
+
+for (var j = 1; j <= timeStampnum; j++) {
+    document.getElementById(String(j)).addEventListener('click', function () {
+        nowscr = document.getElementById('videoOne').src;
+        document.getElementById('videoOne').src + "#" + t + "="[timeStamp[j - 1]];
+        console.log("hihere");
+    });
+}
+
+
 
 /* hover 클릭 이벤트 */
 //document.getElementById('questionbtn').addEventListener('mouseover', hoverdescription);
 //document.getElementById('questionbtn').addEventListener('mouseout', nohoverdescription);
 
 /* 전체 캡쳐 */
-function capture() {
+/*function capture() {
     console.log("hicapture 함수");
-    /*var scaleFactor = 1;
+    var scaleFactor = 1;
     var video = document.getElementById("youtubeMP4");
     //var w = document.getElementById("youtubeMP4").clientWidth * scaleFactor
     //var h = document.getElementById("youtubeMP4").clientHeight * scaleFactor
@@ -202,43 +239,7 @@ function capture() {
     var el = document.getElementById("target");
     el.href = canvas1.toDataURL("image/jpeg");
     el.download = '파일명.jpg';
-    el.click();*/
-    
-}
+    el.click();  
+}*/
 
-document.getElementById('codeExtractBtn').addEventListener('click', capture);
-
-var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
-for (var i = 0; i < timestampArea.length; i++) {
-    var eachArea = timestampArea[i];
-    eachArea.addEventListener('click', function (e) {
-        if (e.target == document.getElementById("realtimestamp")) {
-            console.log("그낭지나감");
-        }
-        else {
-            timeStampnum += 1;
-            document.getElementById(String(timeStampnum)).style.display = "block";
-            var now = document.getElementById("youtubeMP4").currentTime.toFixed();
-            document.getElementById(String(timeStampnum)).title = transSectoTime(now);
-            timeStamp.push(String(transSectoTime(now)));
-            timeStamp.sort();
-            console.log(timeStamp);
-        }
-    });
-}
-
-//1초단위
-function transSectoTime(nowTime) {
-    var hour = parseInt(nowTime / 3600);
-    var minute = parseInt((nowTime - 3600 * hour) / 60);
-    var second = nowTime - 3600 * hour - 60 * minute;
-    return hour + ":" + minute + ":" + second;
-}
-
-for (var j = 1; j <= timeStampnum; j++) {
-    document.getElementById(String(j)).addEventListener('click', function () {
-        nowscr = document.getElementById('videoOne').src;
-        document.getElementById('videoOne').src + "#" + t + "="[timeStamp[j - 1]];
-        console.log("hihere");
-    });
-}
+//document.getElementById('codeExtractBtn').addEventListener('click', capture);

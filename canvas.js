@@ -2,19 +2,22 @@ var canvas3 = document.getElementById("mycanvas");
 var ctx3 = canvas3.getContext("2d");
 var video = document.querySelector('#youtubeMP4');
 
-var height = $("#youtubeMP4").height();
-height = height*0.9;
+var height = $("#youtubeMP4").height()-10;
 var width = $("#youtubeMP4").width();
 var x = 0;
 var y = 0;
 var w = width;
 var h = height;
+var x2 = 0;
+var y2 = 0;
+var w2 = width;
+var h2 = height;
 
 console.log("hello canvas");
 console.log(height,width);
 
 function drawCanvas(){
-    console.log(selectedBorder)
+    //console.log(selectedBorder)
     //console.log("start");
     canvas3.height = height;
     canvas3.width = width;
@@ -27,7 +30,7 @@ function drawCanvas(){
         }
         else{
             ctx3.strokeStyle = "#51E7FF"
-            ctx3.lineWidth = 5;
+            ctx3.lineWidth = 3;
         }
         ctx3.rect(x, y, w-x, h-y);
         ctx3.stroke();
@@ -42,11 +45,14 @@ function clearCanvas(){
 window.onresize = function(event){
     console.log("resize!");
 
-    canvas3.height = $("#youtubeMP4").height()*0.9;
+    canvas3.height = $("#youtubeMP4").height()-10;
     canvas3.width = $("#youtubeMP4").width();
-    w = $("#youtubeMP4").width()-(width-w);
-    h = $("#youtubeMP4").height()-(height-h);
-    height = $("#youtubeMP4").height()*0.9;
+    x = $("#youtubeMP4").width()*x2;
+    y = ($("#youtubeMP4").height()-10)*y2;
+    w = $("#youtubeMP4").width()*w2;
+    h = ($("#youtubeMP4").height()-10)*h2;
+
+    height = $("#youtubeMP4").height()-10;
     width = $("#youtubeMP4").width();
     if(canvasVisible){
         ctx3.beginPath();
@@ -63,6 +69,7 @@ window.onresize = function(event){
         ctx3.stroke();
     }
 
+    drawTimecanvas();
 }
 
 let canvasClickable = false;
@@ -102,20 +109,20 @@ $(document).ready(function () {
     
     document.addEventListener('mousedown', function(e){
         //console.log(e);
-        console.log("start",x,y,w,h);
+        //console.log("start",x,y,w,h);
         if(selectedBorder == 0){
             offset = getOffset(document.getElementById("youtubeMP4"));
             var myX = e.clientX - offset.left;
             var myY = e.clientY - offset.top;    
             
             selectedBorder = getSelectedBorder(myX, myY);
-            console.log(myX, myY);
-            console.log(selectedBorder);
+            //console.log(myX, myY);
+            //console.log(selectedBorder);
         }
     });
 
     document.addEventListener('mouseup', function(e){
-        console.log("end",x,y,w,h);
+        //console.log("end",x,y,w,h);
         selectedBorder = 0;
     });
 
@@ -126,11 +133,18 @@ $(document).ready(function () {
             var myX = e.clientX - offset.left;
             var myY = e.clientY - offset.top;
 
-            if(selectedBorder == 1) x = myX;
-            else if (selectedBorder == 2) w = myX;
-            else if (selectedBorder == 3) y = myY;
-            else if (selectedBorder == 4) h = myY;
+            if(selectedBorder == 1 || selectedBorder == 5 || selectedBorder == 6) x = myX;
+            if(selectedBorder == 2 || selectedBorder == 7 || selectedBorder == 8) w = myX;
+            if(selectedBorder == 3 || selectedBorder == 5 || selectedBorder == 7) y = myY;
+            if(selectedBorder == 4 || selectedBorder == 6 || selectedBorder == 8) h = myY;
             
+            var ch = canvas3.height = $("#youtubeMP4").height()-10;
+            var cw = canvas3.width = $("#youtubeMP4").width();
+            x2 = x/cw;
+            y2 = y/ch;
+            w2 = w/cw;
+            h2 = h/ch;
+
             drawCanvas(true);
             getSelectedBorder(myX,myY);
         }
@@ -138,9 +152,11 @@ $(document).ready(function () {
     })
 
     document.querySelector("#codeExtractBtn").addEventListener('click', function(e){
-        var ch = canvas3.height = $("#youtubeMP4").height();
+        var ch = canvas3.height = $("#youtubeMP4").height()-10;
         var cw = canvas3.width = $("#youtubeMP4").width();
-        alert("x:"+String(x/cw)+" y:"+String(y/ch)+" w:"+String((w-x)/cw)+" h:"+String((h-y)/ch)+" time:"+String(player.getCurrentTime())+" dur:"+String(player.getDuration()));
+        alert("x:"+String(x/cw)+" y:"+String(y/ch)+" w:"+String((w-x)/cw)+" h:"+String((h-y)/ch)
+        +"\ntime:"+String(player.getCurrentTime())+" dur:"+String(player.getDuration())
+        +"\nstart:"+String()+" end:"+String());
     });
 });
 
@@ -148,6 +164,11 @@ $(document).ready(function () {
 function getSelectedBorder(myX, myY){
     //console.log(myX, myY,"/",x,y,w,h);
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
+    if(Math.abs(myX-x)<50 && Math.abs(myY-y)<30) return 5;
+    if(Math.abs(myX-x)<50 && Math.abs(myY-h)<30) return 6;
+    if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) return 7;
+    if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) return 8;
+    
     if(Math.abs(myX-x)<50) return 1;
     if(Math.abs(myX-w)<30) return 2;
     if(Math.abs(myY-y)<30) return 3;
