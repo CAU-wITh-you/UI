@@ -155,8 +155,9 @@ $(document).ready(function () {
         var ch = canvas3.height = $("#youtubeMP4").height()-10;
         var cw = canvas3.width = $("#youtubeMP4").width();
         alert("x:"+String(x/cw)+" y:"+String(y/ch)+" w:"+String((w-x)/cw)+" h:"+String((h-y)/ch)
-        +"\ntime:"+String(player.getCurrentTime())+" dur:"+String(player.getDuration())
-        +"\nstart:"+String()+" end:"+String());
+        +"\ntime:"+String(player.getCurrentTime())
+        +"\nstart:"+String(startTime)+"/"+transSectoTime(startTime)
+        +"\nend:"+String(endTime)+"/"+transSectoTime(endTime));
     });
 });
 
