@@ -255,7 +255,7 @@ video::-webkit-media-controls-fullscreen-button {
 .divtext {
   border: ridge 2px;
   padding: 5px;
-  width: 100%;
+  width: 97%;
   min-height: 50px;
   overflow: auto;
   font-size: 18px;
@@ -291,5 +291,6 @@ video::-webkit-media-controls-fullscreen-button {
   /*height: 680px;*/
   float: right;
   border: 3px solid;
+  background-color: whitesmoke;
   border-color: #caced4;
 }

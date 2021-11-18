@@ -8,13 +8,14 @@
     <title>wITh you</title>
     <meta name="description" content="Cau 3-2 Capstone design team 5-5">
     <meta name="author" content="Team name : wITh you">
-    <script src="assets/9ff9f6bf5f.js" crossorigin="anonymous"></script>
+    <script src="assets/fontawesome.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer="defer"></script>
-    <script src="index0.js" defer="defer"></script>
+    <!--<script src="index0.js" defer="defer"></script>-->
     <script src="index2.js" defer="defer"></script>
     <script src="canvas.js" defer="defer"></script>
+    <script src="change.js" defer="defer"></script>
     <script src="iframe_api"></script>
     <script src="\assets\jquery.min.js"></script>
     <script src="\assets\html2canvas.min.js"></script>
@@ -33,7 +34,7 @@
                 </div>
                 <div class="areaselectionbutton">
                     <div class="areaselectionbutton__icon">
-                        <i class="fas fa-check-square fa-2x" style="color:whitesmoke"></i>
+                        <span id="check_span" style="color: aqua;"><i class="far fa-check-square fa-2x" id="check" style="color:whitesmoke"></i></span>
                     </div>
                     <h3 class="areaselectionbutton__title" id="unseen2">영역 보이게/안보이게</h3>
                 </div>
@@ -46,7 +47,7 @@
                         <source src="videos/2-2.mp4" type="video/mp4" id="videoOne"></video>-->
                     <canvas id="canvas" style="pointer-events:none; margin-left: 1.2%; margin-bottom: 0%; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
                     <canvas id="mycanvas" style="pointer-events:none; margin-left: 1.2%; margin-top: 0.5%; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
-                    <iframe id="youtubeMP4" style="width:93%; height:103%; margin-left: 2%; margin-top: 0.5%;" src="https://www.youtube.com/embed/poRckH1hSwc?enablejsapi=1&rel=0" 
+                    <iframe id="youtubeMP4" style="width:93%; height:105%; margin-left: 2%; margin-top: 0.5%;" src="https://www.youtube.com/embed/poRckH1hSwc?enablejsapi=1&rel=0" 
                         class="" id="slid-video-player" scrolling="no" style="overflow: hidden;" allow="autoplay"></iframe>
 
                     <div class="videobuttons2">
@@ -97,7 +98,7 @@
                     title="click to open timestamp">
                     <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;" id="timestampbtn__icon"></i>
                 </div>
-                <button class="mypage" style="background-color: rgb(152, 151, 151); padding:5px; margin:0; position: absolute; height: inherit; width: 10%; right: -1%; display: inline-flex; justify-content:space-between;">
+                <button class="mypage" style="padding:5px; margin:0; position: absolute; height: inherit; width: 10%; right: -1%; display: inline-flex; justify-content:space-between;">
                     <i class="fas fa-question-circle fa-2x" id="questionbtn" style="margin-top: 10px; margin-left: 10%;">
                     </i>
                     <h3 class="mypage__title" style="margin-right: 25%; font-size: 16px;">내 문서함</h3>
@@ -122,5 +123,4 @@
 <script src="assets/firebase-firestore.js"></script>
 <script src="assets/firebase-auth.js"></script>
 <script src="assets/firebase-database.js"></script>
-<script src="change.js"></script>
-<script src="boundrect.js"></script>
+

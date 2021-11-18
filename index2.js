@@ -40,12 +40,9 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange() {
-    console.log("my state changed" + player.getPlayerState());
+    //console.log("my state changed" + player.getPlayerState());
     if(player.getPlayerState() == -1){
         document.getElementById("playbutton").hidden=true;
-        //canvas2.style.width = "0px";
-        //canvas2.style.height = "0px";
-        console.log(canvas2.style.width, canvas2.style.height);
     }
     else{
         if(player.getPlayerState() == 1){
@@ -55,8 +52,7 @@ function onPlayerStateChange() {
                 canvasVisible = true;
                 canvasClickable = false;
                 canvas3.style.pointerEvents = "none";
-                if(canvasVisible) drawCanvas();
-                else clearCanvas();
+                drawCanvas();
             }
         }
         else if(player.getPlayerState() == 2){
@@ -65,7 +61,7 @@ function onPlayerStateChange() {
         } 
         document.getElementById("playbutton").hidden=false;
         drawTimecanvas();
-        console.log(canvas2.width, canvas2.height);
+        //console.log(canvas2.width, canvas2.height);
     }
 }
 
@@ -73,7 +69,7 @@ function drawTimecanvas(){
     canvas2.width = $("#youtubeMP4").width();
     canvas2.height = $("#youtubeMP4").height()*0.03;
     canvas2.style.marginTop = String($("#youtubeMP4").height()*0.91)+"px";
-    console.log(selectedBorder)
+    //console.log(selectedBorder)
     //console.log("start");
     ctx.beginPath();
     var margin = 11;
@@ -94,7 +90,7 @@ function drawTimecanvas(){
         x = width*endPercent-2;
         w = width*endPercent+2;       
     }
-    console.log("drawTimecanvas",x,w);
+    //console.log("drawTimecanvas",x,w);
     ctx.fillStyle = "#FA807267";
     ctx.fillRect(margin+x, 0, w-x, canvas2.height);
     ctx.strokeStyle = "#FA8072"

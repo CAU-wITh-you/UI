@@ -144,11 +144,11 @@ function nohoverdescription() {
         .display = "none";
 }
 
-timestampbtnclicknum = 0;
+var timestampOpen = false;
 
 function clicktimestamp() {
-    timestampbtnclicknum += 1;
-    if (timestampbtnclicknum % 2 == 0) {
+    timestampOpen = !timestampOpen;
+    if (!timestampOpen) {
         document.getElementById("timestampbtn").title = "click to open timestamp";
         document.getElementById("timestampbtn").style.transform = "rotate(0deg)";
         document.getElementById("timestampbtn").style.backgroundColor = "var(--color-pink)";
@@ -162,7 +162,7 @@ function clicktimestamp() {
         document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
 
         document.getElementById("realtimestamp").style.display = "block";
-        makeTimestamp();
+        makeTimestamp(""); //열림
     }
 }
 
@@ -185,18 +185,26 @@ document.querySelector("#extensions > div.extensions__right > div.note > div").a
 
 var timestampNum = 0;
 
-function makeTimestamp(){
+function makeTimestamp(text){
     timestampNum++;
 
+    var textDiv = document.createElement("div");
+    textDiv.id = timestampNum;
     var carrotText = document.createElement("div");
     carrotText.className = "divtext";
-    carrotText.id = timestampNum;
+    carrotText.id = "t"+timestampNum;
+    carrotText.style.backgroundColor = "#FFFFFF"
     carrotText.contentEditable = "true";
+    carrotText.innerHTML = text;
+    textDiv.title = player.getCurrentTime();
+    textDiv.appendChild(carrotText);
+
     carrotText.addEventListener("input", function(e) {
-        document.getElementById("c"+e.target.id).style.height = String(e.target.offsetHeight)+"px";
-        div.style.backgroundColor = "#f6c0c0"
+        var thisId = e.target.id.slice(1,e.target.id.length);
+        document.getElementById("c"+thisId).style.height = String(document.getElementById("t"+thisId).offsetHeight)+"px";
+        document.getElementById("c"+thisId).style.backgroundColor = "#f6c0c0";
     }, false);
-    document.querySelector("#timestamptext").appendChild(carrotText);
+    document.querySelector("#timestamptext").appendChild(textDiv);
 
 
     var div = document.createElement("div");
@@ -214,19 +222,21 @@ function makeTimestamp(){
     document.querySelector("#realtimestamp").appendChild(div);
     
 
-    var d = $("#timestamptext")
+    var d = $("#timestamptext");
     d.scrollTop(d.prop("scrollHeight"));
 
     (function() {
         $("#timestamptext").scroll(function() {
-            console.log("scrolling");
-            console.log($("#realtimestamp"));
+            //console.log("scrolling");
+            //console.log($("#realtimestamp"));
             $("#realtimestamp").prop("scrollTop", this.scrollTop)
                     .prop("scrollLeft", this.scrollLeft);
             $("#timestamp_area").prop("scrollTop", this.scrollTop)
                     .prop("scrollLeft", this.scrollLeft);
         });
       })();
+      
+    return timestampNum;
 }
 
 /*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');

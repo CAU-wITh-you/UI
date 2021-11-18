@@ -1,3 +1,4 @@
+let videoUid;
 let lastTab;
 console.log("change.js");
 chrome.tabs.getCurrent(function (tab) {
@@ -9,12 +10,12 @@ chrome.tabs.getCurrent(function (tab) {
         console.log(tab);
         //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
         document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
-        console.log(document.getElementById("youtubeMP4")); 
+        console.log(document.getElementById("youtubeMP4"));
 
 
         var xhr = new XMLHttpRequest();
-        /*var data = {url: videoUrl};
-        xhr.open("POST", "http://ec2-52-14-144-75.us-east-2.compute.amazonaws.com:3000/mdownload", true);
+        var data = {url: videoUrl};
+        xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdownload", true);
         xhr.setRequestHeader('Content-Type', 'application/json'); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
@@ -22,13 +23,17 @@ chrome.tabs.getCurrent(function (tab) {
                 console.log("response!");
                 var resp = JSON.parse(xhr.responseText);
                 //var resp = xhr.responseText;
-                console.log(resp);
+                videoUid = resp.video_name;
+                console.log(videoUid);
                 //alert(resp);
             }
         }
-        xhr.send(JSON.stringify(data));*/
-        /*xhr.open("GET", "http://ec2-52-14-144-75.us-east-2.compute.amazonaws.com:3000/ocr/?x=0.5&y=0.5&w=0.5&h=0.5&t=10&n=07e54c0a28b54529a5a4c6f5836f7dc8", true);
-        xhr.onreadystatechange = function() {
+        xhr.send(JSON.stringify(data));
+        //http://ec2-52-14-144-75.us-east-2.compute.amazonaws.com:3000/ocr/?x=0.5&y=0.5&w=0.5&h=0.5&t=10&n=07e54c0a28b54529a5a4c6f5836f7dc8
+        //https://youtube.googleapis.com/youtube/v3/videos?id=KF6t61yuPCY&part=contentDetails&key=AIzaSyDE7ObLBGlJjHIxgEfroxyWpc10ft4u4Ls&type=playlist&regionCode=KR
+        //ec2-52-14-144-75.us-east-2.compute.amazonaws.com:443/ocr?x=0.5&y=0.5&w=0.5&h=0.5&t=18&n=c55c25a12710419a95a27723db21173f
+        /*xhr.open("GET", "ec2-18-117-151-129.us-east-2.compute.amazonaws.com/ocr?x=0.5&y=0.5&w=0.5&h=0.5&t=185&n=af6978f049ac4641a8e5144d9dcca8c1", true);
+        xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 // JSON.parse does not evaluate the attacker's scripts.
                 var resp = JSON.parse(xhr.responseText);
@@ -41,14 +46,13 @@ chrome.tabs.getCurrent(function (tab) {
 });
 
 
-/*chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     //console.log(tabId, changeInfo, tab);
     if (tab.url != lastTab) {
         lastTab = tab.url;
         location.reload();
-        //toggleMuteState(tabId);
     }
-});*/
+});
 
 /*function toggleMuteState(tabId) {
     chrome.tabs.get(tabId, async (tab) => {
