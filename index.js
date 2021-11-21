@@ -118,7 +118,7 @@ function clicktimestamp() {
         document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
 
         document.getElementById("realtimestamp").style.display = "block";
-        makeTimestampCode(""); //열림
+        makeTimestamp(""); //열림
     }
 }
 

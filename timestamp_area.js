@@ -1,4 +1,4 @@
-var timestampOpen = false;
+/*var timestampOpen = false;
 
 function clicktimestamp() {
     timestampOpen = !timestampOpen;
@@ -80,7 +80,7 @@ function makeTimestamp(text){
       })();
       
     return timestampNum;
-}
+}*/
 
 /*function makeTimestampCode(text){
     timestampNum++;
