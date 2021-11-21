@@ -7,8 +7,6 @@ canvas2.style.zIndex   = 8;
 canvas2.style.position = "absolute";
 canvas2.style.border   = "1px solid";
 
-console.log("bye index2");
-
 var player;
 
 function onYouTubeIframeAPIReady() {
@@ -141,3 +139,5 @@ document.querySelector("#beforebutton").addEventListener('click', function () {
 document.querySelector("#afterbutton").addEventListener('click', function () {
     player.seekTo(player.getCurrentTime()+5, true);
 });
+
+console.log("bye index2");
