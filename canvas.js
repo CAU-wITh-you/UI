@@ -53,44 +53,6 @@ function clearCanvas(){
     ctx3.clearRect(0, 0, width, height);
 }
 
-window.onresize = function(event){
-    console.log("resize!");
-
-    canvas3.height = $("#youtubeMP4").height()-10;
-    canvas3.width = $("#youtubeMP4").width();
-    x = $("#youtubeMP4").width()*x2;
-    y = ($("#youtubeMP4").height()-10)*y2;
-    w = $("#youtubeMP4").width()*w2;
-    h = ($("#youtubeMP4").height()-10)*h2;
-
-    height = $("#youtubeMP4").height()-10;
-    width = $("#youtubeMP4").width();
-    var variables = variableTrim(x, y, w, h);
-    x = variables.x;
-    y = variables.y;
-    w = variables.w;
-    h = variables.h;
-
-    if(canvasVisible){
-        ctx3.beginPath();
-        ctx3.clearRect(0, 0, width, height);
-        if(canvasClickable){
-            ctx3.fillStyle = "#00D8FF27";
-            ctx3.fillRect(x, y, w-x, h-y);    
-            ctx3.strokeStyle = "#6799FF";
-            ctx3.lineWidth = 2;
-        }
-        else{
-            ctx3.strokeStyle = "#6799FF"
-            ctx3.lineWidth = 3;
-        }
-        ctx3.rect(x, y, w-x, h-y);
-        ctx3.stroke();
-    }
-
-    drawTimecanvas();
-}
-
 function variableTrim(x, y, w, h, height, width){
     x = x < 0 ? 0 : x;
     x = x > width ? width : x;
@@ -109,6 +71,8 @@ let inside = false;
 let selectedBorder = 0;
 
 $(document).ready(function () {
+
+    adjustVideo();
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areadesignbutton")
     .addEventListener('click', function(e){
@@ -146,6 +110,7 @@ $(document).ready(function () {
     document.addEventListener('mousedown', function(e){
         //console.log(e);
         //console.log("start",x,y,w,h);
+        
         offset = getOffset(document.getElementById("youtubeMP4"));
         var myX = e.clientX - offset.left;
         var myY = e.clientY - offset.top;  
@@ -206,63 +171,7 @@ $(document).ready(function () {
 
     })
 
-    document.querySelector("#codeExtractBtn").addEventListener('click', function(e){
-        var ch = canvas3.height = $("#youtubeMP4").height();
-        var cw = canvas3.width = $("#youtubeMP4").width();
-        var t = player.getCurrentTime();
-        alert("x:"+String(x/cw)+" y:"+String(y/ch)+" w:"+String((w-x)/cw)+" h:"+String((h-y)/ch)
-        +"\ntime:"+String(player.getCurrentTime())
-        +"\nstart:"+String(startTime)+"/"+transSectoTime(startTime)
-        +"\nend:"+String(endTime)+"/"+transSectoTime(endTime));
-        drawCanvas();
 
-        var xhr = new XMLHttpRequest();
-        var data = {x: x/cw, y: y/ch, w: (w-x)/cw, h: (h-y)/ch, video_time: t, video_name: videoUid};
-        console.log(data);
-        document.getElementById("timestampbtn").title = "click to add new timestamp";
-        document.getElementById("timestampbtn").style.transform = "rotateY(180deg)";
-        document.getElementById("timestampbtn").style.backgroundColor = "var(--color-dark-pink)";
-        document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
-
-        document.getElementById("realtimestamp").style.display = "block";
-
-        var carrotId = makeTimestamp("로딩중");
-
-        xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/ocr", true);
-        xhr.setRequestHeader('Content-Type', 'application/json'); 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                // JSON.parse does not evaluate the attacker's scripts.
-                console.log("capture response!");
-                var resp = JSON.parse(xhr.responseText);
-                var result = resp.result.slice(1,resp.length);
-                //var resp = xhr.responseText;
-                console.log(resp);
-                console.log(result);
-                document.getElementById("t"+carrotId).style.fontFamily = "Arial";
-                document.getElementById("t"+carrotId).style.fontSize = "14px";
-                document.getElementById("t"+carrotId).style.whiteSpace = "pre";
-                document.getElementById("t"+carrotId).innerText = result;
-                var img = document.createElement("img");
-                img.src = resp.img_url;
-                img.id = "i"+carrotId;
-                img.style.height = "250px";
-                document.getElementById(carrotId).appendChild(img);
-                console.log(document.getElementById("i"+carrotId).height);
-                document.getElementById("c"+carrotId).style.height = String(document.getElementById("t"+carrotId).offsetHeight + 250)+"px";
-                document.getElementById("c"+carrotId).style.backgroundColor = "#f6c0c0";
-                document.getElementById("i"+carrotId).addEventListener('click', function () {
-                    console.log("click");
-                    player.seekTo(document.getElementById(carrotId).title, true);
-                });
-
-                var d = $("#timestamptext");
-                d.scrollTop(d.prop("scrollHeight"));
-                //alert(resp);
-            }
-        }
-        xhr.send(JSON.stringify(data));
-    });
 });
 
 function getSelectedBorder(myX, myY){
@@ -280,4 +189,69 @@ function getSelectedBorder(myX, myY){
 
     if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) return 9;
     return -1;
+}
+
+function adjustVideo(){
+    var heightDiff = $("#there").height()-$("#playerbuttons").height()-$("#there").width()*0.5625;
+    console.log(heightDiff);
+    document.getElementById("youtubeWrapper").style.marginTop = String(heightDiff*0.35)+"px";
+}
+
+function getOffset( el ) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { 
+        top: rect.top + scrollTop, left: rect.left + scrollLeft 
+    }
+}
+/*var delay = 300;
+var timer = null;
+
+//Javascript
+window.addEventListener('resize', function(){
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+		console.log('resize event!');
+        adjustVideo();
+	}, delay);
+});*/
+
+window.onresize = function(event){
+    //console.log("resize!");
+
+    canvas3.height = $("#youtubeMP4").height()-10;
+    canvas3.width = $("#youtubeMP4").width();
+    x = $("#youtubeMP4").width()*x2;
+    y = ($("#youtubeMP4").height()-10)*y2;
+    w = $("#youtubeMP4").width()*w2;
+    h = ($("#youtubeMP4").height()-10)*h2;
+
+    height = $("#youtubeMP4").height()-10;
+    width = $("#youtubeMP4").width();
+    var variables = variableTrim(x, y, w, h);
+    x = variables.x;
+    y = variables.y;
+    w = variables.w;
+    h = variables.h;
+
+    if(canvasVisible){
+        ctx3.beginPath();
+        ctx3.clearRect(0, 0, width, height);
+        if(canvasClickable){
+            ctx3.fillStyle = "#00D8FF27";
+            ctx3.fillRect(x, y, w-x, h-y);    
+            ctx3.strokeStyle = "#6799FF";
+            ctx3.lineWidth = 2;
+        }
+        else{
+            ctx3.strokeStyle = "#6799FF"
+            ctx3.lineWidth = 3;
+        }
+        ctx3.rect(x, y, w-x, h-y);
+        ctx3.stroke();
+    }
+
+    drawTimecanvas();
+    adjustVideo();
 }

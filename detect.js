@@ -1,6 +1,25 @@
 let videoSelected = false;
 //alert("detect.js");
 
+function getOffset( el ) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { 
+        top: rect.top + scrollTop, left: rect.left + scrollLeft 
+    }
+}
+
+function pos(){
+    var offset = getOffset(document.querySelector('video'));
+    return {
+            top:offset.top,
+            left:offset.left,
+            height:$("video").height(),
+            width:$("video").height(),
+    }	
+}
+
 if(document.querySelector('video') && videoSelected == false){
     var canvas1 = document.createElement("canvas");
     canvas1.setAttribute("id", "selectionVideo");
@@ -18,25 +37,6 @@ if(document.querySelector('video') && videoSelected == false){
     var width = $("video").width();
     console.log(height,width);
     
-    function getOffset( el ) {
-        var rect = el.getBoundingClientRect(),
-        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { 
-            top: rect.top + scrollTop, left: rect.left + scrollLeft 
-        }
-    }
-
-    function pos(){
-        var offset = getOffset(document.querySelector('video'));
-        return {
-                top:offset.top,
-                left:offset.left,
-                height:$("video").height(),
-                width:$("video").height(),
-        }	
-    }
-
     function initCanvas(){
         if($('video').position()){
             $("#selectionVideo").css({
@@ -75,8 +75,7 @@ if(document.querySelector('video') && videoSelected == false){
 
         if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
             videoSelected = true;
-            var video = document.querySelector("#movie_player > div.html5-video-container > video");
-            video.pause();
+
             if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
                 canvas1.remove();
                 lastHtml = $("#columns").html;

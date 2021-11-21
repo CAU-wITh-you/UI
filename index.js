@@ -1,74 +1,3 @@
-if(document.getElementById("youtubeMP4")){
-    var canvas1 = document.createElement("canvas");
-    canvas1.setAttribute("id", "selectionVideo");
-    
-    // this right here should be fixed
-    // for the youtube videos to work properly
-    
-    console.log("hello hyejin2")
-    
-    document.body.appendChild(canvas1);
-    var ctx = canvas1.getContext("2d");
-
-    var video = document.getElementById("youtubeMP4");
-    var height = $("#youtubeMP4").height();
-    var width = $("#youtubeMP4").width();
-    
-    function getOffset( el ) {
-        var rect = el.getBoundingClientRect(),
-        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { 
-            top: rect.top + scrollTop, left: rect.left + scrollLeft 
-        }
-    }
-
-    function pos(){
-            var offset = getOffset(document.getElementById("youtubeMP4"));
-            return {
-                top:offset.top,
-                left:offset.left,
-                height:$("#youtubeMP4").height(),
-                width:$("#youtubeMP4").height(),
-        }	
-    }
-
-    function initCanvas(){
-        if($('#youtubeMP4').position()){
-            $("#selectionVideo").css({
-                position: 'absolute',
-                'z-index': 990,
-                top: pos().top+'px',
-                left: pos().left+'px',
-                height:height,
-                width: width
-            });
-            $("#selectionVideo").attr("height", height);
-            $("#selectionVideo").attr("width", width);		
-            
-            console.log("start");
-            ctx.beginPath();
-            ctx.fillStyle = "#51E7FF27";
-            ctx.fillRect(0, 0, canvas1.width, canvas1.height);
-            ctx.strokeStyle = "#51E7FF"
-            ctx.lineWidth = 5;
-            ctx.rect(0, 0, canvas1.width, canvas1.height);
-            ctx.stroke();
-            ctx.font = '48px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillStyle = 'blue';
-            //ctx.fillText('동영상을 선택해주세요', canvas1.width/2, canvas1.height/2);
-            console.log("end")
-        }
-    }
-       
-    $(document).ready(function(){
-        
-        //initCanvas();
-        //boundRect();
-    });
-}
-
 //client info에 저장
 var color = "pink"
 
@@ -144,6 +73,33 @@ function nohoverdescription() {
         .display = "none";
 }
 
+
+
+/*document.getElementById('questionbtn').addEventListener('click', function () {
+    timeStamp.push(document.getElementById("youtubeMP4").currentTime);
+    console.log(timeStamp);
+});*/
+
+/* 버튼 클릭 이벤트 */
+//document.getElementById('playbtn').addEventListener('click', toggleImgplay);
+document.getElementById('startbtn').addEventListener('click', toggleImgstart);
+//document.getElementById('codebtn').addEventListener('click', toggleImgcode);
+document.getElementById('endbtn').addEventListener('click', toggleImgend);
+document.getElementById('timestampbtn').addEventListener('click', clicktimestamp);
+//document.querySelector("#extensions > div.extensions__right > div.note > div").addEventListener('click', clicktimestamp);
+
+//<i class="fas fa-carrot fa-2x" id="1"></i>
+
+
+//1초단위
+function transSectoTime(nowTime) {
+    var hour = parseInt(nowTime / 3600);
+    var minute = parseInt((nowTime - 3600 * hour) / 60);
+    var second = nowTime - 3600 * hour - 60 * minute;
+    return hour + ":" + minute + ":" + parseInt(second);
+}
+
+
 var timestampOpen = false;
 
 function clicktimestamp() {
@@ -162,31 +118,15 @@ function clicktimestamp() {
         document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
 
         document.getElementById("realtimestamp").style.display = "block";
-        makeTimestamp(""); //열림
+        makeTimestampCode(""); //열림
     }
 }
-
-document.getElementById('questionbtn').addEventListener('click', function () {
-    timeStamp.push(document.getElementById("youtubeMP4").currentTime);
-    console.log(timeStamp);
-});
-
-/* 버튼 클릭 이벤트 */
-//document.getElementById('playbtn').addEventListener('click', toggleImgplay);
-document.getElementById('startbtn').addEventListener('click', toggleImgstart);
-//document.getElementById('codebtn').addEventListener('click', toggleImgcode);
-document.getElementById('endbtn').addEventListener('click', toggleImgend);
-document.getElementById('timestampbtn').addEventListener('click', clicktimestamp);
-document.querySelector("#extensions > div.extensions__right > div.note > div").addEventListener('click', clicktimestamp);
-
-//<i class="fas fa-carrot fa-2x" id="1"></i>
-
-
 
 var timestampNum = 0;
 
 function makeTimestamp(text){
     timestampNum++;
+    var currentTime = player.getCurrentTime();
 
     var textDiv = document.createElement("div");
     textDiv.id = timestampNum;
@@ -196,7 +136,7 @@ function makeTimestamp(text){
     carrotText.style.backgroundColor = "#FFFFFF"
     carrotText.contentEditable = "true";
     carrotText.innerHTML = text;
-    textDiv.title = player.getCurrentTime();
+    textDiv.value = currentTime;
     textDiv.appendChild(carrotText);
 
     carrotText.addEventListener("input", function(e) {
@@ -214,12 +154,17 @@ function makeTimestamp(text){
     console.log("carrot");
     carrot.className = "fas fa-carrot fa-2x";
     carrot.style.display="block";
-    var now = transSectoTime(player.getCurrentTime());
+    var now = transSectoTime(currentTime);
     carrot.title = now;
-    div.style.height = String(carrotText.offsetHeight)+"px";
+    carrot.value = currentTime;
+    div.style.height = String(textDiv.offsetHeight)+"px";
     div.style.backgroundColor = "#f6c0c0"
     div.appendChild(carrot);
     document.querySelector("#realtimestamp").appendChild(div);
+
+    carrot.addEventListener('click', function (e) {
+        player.seekTo(e.target.value, true);
+    });
     
 
     var d = $("#timestamptext");
@@ -238,6 +183,7 @@ function makeTimestamp(text){
       
     return timestampNum;
 }
+
 
 /*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
 for (var i = 0; i < timestampArea.length; i++) {
@@ -258,21 +204,14 @@ for (var i = 0; i < timestampArea.length; i++) {
     });
 }*/
 
-//1초단위
-function transSectoTime(nowTime) {
-    var hour = parseInt(nowTime / 3600);
-    var minute = parseInt((nowTime - 3600 * hour) / 60);
-    var second = nowTime - 3600 * hour - 60 * minute;
-    return hour + ":" + minute + ":" + parseInt(second);
-}
 
-for (var j = 1; j <= timeStampnum; j++) {
+/*for (var j = 1; j <= timeStampnum; j++) {
     document.getElementById(String(j)).addEventListener('click', function () {
         nowscr = document.getElementById('videoOne').src;
         document.getElementById('videoOne').src + "#" + t + "="[timeStamp[j - 1]];
         console.log("hihere");
     });
-}
+}*/
 
 
 

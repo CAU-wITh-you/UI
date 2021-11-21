@@ -10,12 +10,19 @@
     <meta name="author" content="Team name : wITh you">
     <script src="assets/fontawesome.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="\assets\style.css">
+    <link rel="stylesheet" href="\assets\cdn_default.css">
+    <script src="\assets\cdn_highlight.js"></script>
+    <link rel="stylesheet" href="\assets\codemirror.css">
+    <script src="\assets\codemirror.js"></script>
+    <script src="timestamp_area.js" defer="defer"></script>
     <script src="index.js" defer="defer"></script>
     <!--<script src="index0.js" defer="defer"></script>-->
-    <script src="index2.js" defer="defer"></script>
-    <script src="canvas.js" defer="defer"></script>
     <script src="change.js" defer="defer"></script>
+    <script src="player.js" defer="defer"></script>    
+    <script src="canvas.js" defer="defer"></script>
+    <script src="ocr_capture.js" defer="defer"></script>
+    <script src="ocr_timespan.js" defer="defer"></script>
     <script src="iframe_api"></script>
     <script src="\assets\jquery.min.js"></script>
     <script src="\assets\html2canvas.min.js"></script>
@@ -42,15 +49,23 @@
             <div class="video" id="there">
                 <div id="youtubeSelection"></div>
                 <!--video 불러오기-->
-                <div class="videoarea" id="youtubeArea" style="text-align: center;" >
+                <div class="videoarea" id="youtubeArea" style="padding-top: 0%; display: grid;">
                     <!--<video style="width:80%; height:90%;", id="youtubeMP4" controls="controls" currentTime="">
                         <source src="videos/2-2.mp4" type="video/mp4" id="videoOne"></video>-->
-                    <canvas id="canvas" style="pointer-events:none; margin-left: 1.2%; margin-bottom: 0%; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
-                    <canvas id="mycanvas" style="pointer-events:none; margin-left: 1.2%; margin-top: 0.5%; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
-                    <iframe id="youtubeMP4" style="width:93%; height:105%; margin-left: 2%; margin-top: 0.5%;" src="https://www.youtube.com/embed/poRckH1hSwc?enablejsapi=1&rel=0" 
-                        class="" id="slid-video-player" scrolling="no" style="overflow: hidden;" allow="autoplay"></iframe>
+                    <!--<iframe id="youtubeMP4" style="width:93%; height:105%; margin-left: 2%; margin-top: 0.5%;" src="https://www.youtube.com/embed/poRckH1hSwc?enablejsapi=1&rel=0" 
+                        class="" id="slid-video-player" scrolling="no" style="overflow: hidden;" allow="autoplay"></iframe>-->
+                    <div id="youtubeWrapper" style="width:95%; height:105%; margin-left: 3%;">
+                        <canvas id="canvas" style="z-index: 8; pointer-events:none; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
+                        <canvas id="mycanvas" style="z-index: 8; pointer-events:none; position: absolute; border: 1px solid; color: rgba(165, 102, 255, 0.153);"></canvas>
+                        
+                        <div class="videoWrapper">
+                            <!-- Copy & Pasted from YouTube -->
+                            <iframe id="youtubeMP4" width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
 
-                    <div class="videobuttons2">
+
+                    <div class="videobuttons2" id="playerbuttons">
                         <button type="button" id="beforebutton" class="video__btn">
                             <img src="buttons/5minbeforebutton-pink.png" id="5minbeforeBtn"
                                 style="width:50px; height:50px;">
