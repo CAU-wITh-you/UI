@@ -146,7 +146,7 @@ function makeTimestamp(text){
     }, false);
     document.querySelector("#timestamptext").appendChild(textDiv);
 
-
+    
     var div = document.createElement("div");
     //div.style.border = "1px solid blue";
     div.id = "c"+timestampNum;
