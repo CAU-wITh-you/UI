@@ -124,40 +124,61 @@ function clicktimestamp() {
 
 var timestampNum = 0;
 
-function makeTimestamp(text){
+function makeTimestamp(text) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
 
     var textDiv = document.createElement("div");
     textDiv.id = timestampNum;
+
+    var carrotIcon = document.createElement("i");
+    carrotIcon.className = "far fa-play-circle fa-2x";
+    carrotIcon.style.marginLeft = "10px";
+    carrotIcon.style.marginTop = "15px";
+    carrotIcon.style.marginBottom = "15px";
+    carrotIcon.style.width = "6%";
+    carrotIcon.style.display = "flex";
+
     var carrotText = document.createElement("div");
     carrotText.className = "divtext";
-    carrotText.id = "t"+timestampNum;
-    carrotText.style.backgroundColor = "#FFFFFF"
+    carrotText.id = "t" + timestampNum;
+    carrotText.style.display = "flex";
+    carrotText.style.backgroundColor = "var(--color-codebackground-gray)";
+    carrotText.style.color = "#f6c0c0";
     carrotText.contentEditable = "true";
-    carrotText.innerHTML = text;
+    carrotText.style.marginLeft = "10px";
+    carrotText.style.marginRight = "10px";
+    carrotText.style.marginTop = "15px";
+    carrotText.style.marginBottpm = "15px";
+    carrotText.style.width = "80%";
+    carrotText.style.border = "1px solid black";
+    carrotText.style.textAlign = "left";
+    carrotText.style.verticalAlign = "middle";
+    carrotText.innerHTML = "[Code]" + "</br>";
     textDiv.value = currentTime;
+    textDiv.appendChild(carrotIcon);
     textDiv.appendChild(carrotText);
 
-    carrotText.addEventListener("input", function(e) {
-        var thisId = e.target.id.slice(1,e.target.id.length);
-        document.getElementById("c"+thisId).style.height = String(document.getElementById("t"+thisId).offsetHeight)+"px";
-        document.getElementById("c"+thisId).style.backgroundColor = "#f6c0c0";
+    carrotText.addEventListener("input", function (e) {
+        var thisId = e.target.id.slice(1, e.target.id.length);
+        document.getElementById("c" + thisId).style.height = String(document.getElementById("t" + thisId).offsetHeight) + "px";
+        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
     document.querySelector("#timestamptext").appendChild(textDiv);
 
-    
+
     var div = document.createElement("div");
     //div.style.border = "1px solid blue";
-    div.id = "c"+timestampNum;
+    div.id = "c" + timestampNum;
     var carrot = document.createElement("i");
     console.log("carrot");
     carrot.className = "fas fa-carrot fa-2x";
-    carrot.style.display="block";
+    carrot.style.display = "block";
+    carrot.style.marginTop = "15px";
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;
-    div.style.height = String(textDiv.offsetHeight)+"px";
+    div.style.height = String(textDiv.offsetHeight) + "px";
     div.style.backgroundColor = "#f6c0c0"
     div.appendChild(carrot);
     document.querySelector("#realtimestamp").appendChild(div);
@@ -165,25 +186,81 @@ function makeTimestamp(text){
     carrot.addEventListener('click', function (e) {
         player.seekTo(e.target.value, true);
     });
-    
+
 
     var d = $("#timestamptext");
     d.scrollTop(d.prop("scrollHeight"));
 
-    (function() {
-        $("#timestamptext").scroll(function() {
+    (function () {
+        $("#timestamptext").scroll(function () {
             //console.log("scrolling");
             //console.log($("#realtimestamp"));
             $("#realtimestamp").prop("scrollTop", this.scrollTop)
-                    .prop("scrollLeft", this.scrollLeft);
+                .prop("scrollLeft", this.scrollLeft);
             $("#timestamp_area").prop("scrollTop", this.scrollTop)
-                    .prop("scrollLeft", this.scrollLeft);
+                .prop("scrollLeft", this.scrollLeft);
         });
-      })();
-      
+    })();
+
     return timestampNum;
 }
 
+function makeCodearea(text) {
+    timestampNum++;
+    var currentTime = player.getCurrentTime();
+
+    var textDiv = document.createElement("div");
+    textDiv.id = timestampNum;
+    var carrotText = document.createElement("div");
+    carrotText.className = "divtext";
+    carrotText.id = "t" + timestampNum;
+    carrotText.style.backgroundColor = "var(--color-codebackground-gray)";
+    carrotText.style.color = "#f6c0c0";
+    carrotText.contentEditable = "true";
+    carrotText.style.marginLeft = "20px";
+    carrotText.style.marginRight = "20px";
+    carrotText.style.marginTop = "20px";
+    carrotText.style.marginBottpm = "20px";
+    carrotText.style.width = "90%";
+    carrotText.innerHTML = text;
+    textDiv.value = currentTime;
+    textDiv.textContent = "[CODE]";
+    textDiv.appendChild(carrotText);
+    carrotText.addEventListener("input", function (e) {
+        var thisId = e.target.id.slice(1, e.target.id.length);
+        document.getElementById("c" + thisId).style.height = String(document.getElementById("t" + thisId).offsetHeight) + "px";
+        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
+    }, false);
+    document.querySelector("#timestamptext").appendChild(textDiv);
+}
+function makeCodearea(text) {
+    timestampNum++;
+    var currentTime = player.getCurrentTime();
+
+    var textDiv = document.createElement("div");
+    textDiv.id = timestampNum;
+    var carrotText = document.createElement("div");
+    carrotText.className = "divtext";
+    carrotText.id = "t" + timestampNum;
+    carrotText.style.backgroundColor = "var(--color-codebackground-gray)";
+    carrotText.style.color = "#f6c0c0";
+    carrotText.contentEditable = "true";
+    carrotText.style.marginLeft = "20px";
+    carrotText.style.marginRight = "20px";
+    carrotText.style.marginTop = "20px";
+    carrotText.style.marginBottpm = "20px";
+    carrotText.style.width = "90%";
+    carrotText.innerHTML = text;
+    textDiv.value = currentTime;
+    textDiv.appendChild(carrotText);
+
+    carrotText.addEventListener("input", function (e) {
+        var thisId = e.target.id.slice(1, e.target.id.length);
+        document.getElementById("c" + thisId).style.height = String(document.getElementById("t" + thisId).offsetHeight) + "px";
+        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
+    }, false);
+    document.querySelector("#timestamptext").appendChild(textDiv);
+}
 
 /*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
 for (var i = 0; i < timestampArea.length; i++) {
@@ -239,7 +316,7 @@ for (var i = 0; i < timestampArea.length; i++) {
     var el = document.getElementById("target");
     el.href = canvas1.toDataURL("image/jpeg");
     el.download = '파일명.jpg';
-    el.click();  
+    el.click();
 }*/
 
 //document.getElementById('codeExtractBtn').addEventListener('click', capture);

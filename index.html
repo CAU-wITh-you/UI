@@ -90,7 +90,7 @@
                         title="startpoint"
                         style="width:40px; height:80px;">
                 </button>
-                <button type=" button" id="codeExtractBtn" class="code__btn">
+                <button type="button" id="codeExtractBtn" class="code__btn">
                     <img src="buttons/codebutton-pink.png"
                         alt="codeExtractBtn"
                         class="not_select"
@@ -107,7 +107,7 @@
                 </button>
             </div>
         </div>
-        <div class=" extensions__right">
+        <div class="extensions__right">
             <div class="notebuttons1">
                 <div class="timestampopen__icon" style="vertical-align: middle" id="timestampbtn"
                     title="click to open timestamp">
@@ -121,12 +121,30 @@
             </div>
             <div class="note" style="display: flex;">
                 <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden">
-                    <div class="timestamp" id="realtimestamp">
+                    <div class="timestamp" id="realtimestamp"></div>
+                </div>
+                <div class="noteareas">
+                    <div class="notebutton" id="notebtn">
+                        <div class="codeplusbtn", id="codeplusbtn">
+                            <i class="fas fa-plus" id="codeplusbtn__icon" style="font-size:3px;"></i>
+                            <h3 class="btn__title" id="codeplusbtn__title">코드</h3>
+                        </div>
+                        <div class="textplusbtn", id="textplusbtn">
+                            <i class="fas fa-minus" id="textplusbtn__icon" style="font-size:3px;"></i>
+                            <h3 class="btn__title" id="textplusbtn__title">텍스트</h3>
+                        </div>
+                    </div>
+                    <div class="notearea" id="timestamptext" scroll=auto >
+                        <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
+                        <!--<div class="divtext" contentEditable>Hello World</div>-->
                     </div>
                 </div>
-                <div class="notearea" id="timestamptext" scroll=auto style="overflow-x:hidden">
-                    <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
-                    <!--<div class="divtext" contentEditable>Hello World</div>-->
+            </div>
+            <div class="notebuttons3">
+                <div class="capturebtn__border" id="capturebtn__border">
+                    <span style="color : whitesmoke;"></span>
+                        <i class="fas fa-camera" id="capturebtn__icon" style="font-size:25px;"></i>
+                    </span>
                 </div>
             </div>
         </div>
