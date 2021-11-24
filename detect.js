@@ -87,7 +87,9 @@ if(document.querySelector('video') && videoSelected == false){
 
     
     $(document).ready(function(){
-        
+
+        var mycode = chrome.runtime.getURL('index.html').split('/')[2];
+        console.log(mycode)   
         initCanvas();
         //boundRect();
 

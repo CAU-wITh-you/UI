@@ -1,0 +1,11 @@
+#one {
+    display: inline-block;
+    width: 20%;
+    background-color: blue;
+}
+
+.divtext0 {
+    display: inline-block;
+    width: 50%;
+    background-color: gray;
+}
