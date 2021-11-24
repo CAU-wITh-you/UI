@@ -28,13 +28,13 @@
       "matches": [
       "<all_urls>"
         ],  
-      "js": ["./assets/jquery.min.js","./assets/html2canvas.min.js", "./assets/jquery-3.3.1.min.js", "boundrect.js"],
+      "js": ["./assets/jquery.min.js","./assets/html2canvas.min.js", "./assets/jquery-3.3.1.min.js", "./assets/jquery-3.6.0.js","./assets/jquery-ui.js","boundrect.js"],
       "all-frames": true
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": [ "index.html", "hello_world.html", "index.js", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js", "https://html2canvas.hertzen.com/dist/html2canvas.min.js" ],
+      "resources": [ "index.html", "mypage.html","hello_world.html", "index.js", "http://news.google.com/", "https://code.jquery.com/jquery-latest.min.js", "https://html2canvas.hertzen.com/dist/html2canvas.min.js" ],
       "matches": [ "<all_urls>" ]
     }
   ]

@@ -123,7 +123,6 @@ function clicktimestamp() {
 }
 
 var timestampNum = 0;
-
 function makeTimestamp(text) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
@@ -187,21 +186,6 @@ function makeTimestamp(text) {
         player.seekTo(e.target.value, true);
     });
 
-
-    var d = $("#timestamptext");
-    d.scrollTop(d.prop("scrollHeight"));
-
-    (function () {
-        $("#timestamptext").scroll(function () {
-            //console.log("scrolling");
-            //console.log($("#realtimestamp"));
-            $("#realtimestamp").prop("scrollTop", this.scrollTop)
-                .prop("scrollLeft", this.scrollLeft);
-            $("#timestamp_area").prop("scrollTop", this.scrollTop)
-                .prop("scrollLeft", this.scrollLeft);
-        });
-    })();
-
     return timestampNum;
 }
 
@@ -209,57 +193,71 @@ function makeCodearea(text) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
 
-    var textDiv = document.createElement("div");
-    textDiv.id = timestampNum;
-    var carrotText = document.createElement("div");
-    carrotText.className = "divtext";
-    carrotText.id = "t" + timestampNum;
-    carrotText.style.backgroundColor = "var(--color-codebackground-gray)";
-    carrotText.style.color = "#f6c0c0";
-    carrotText.contentEditable = "true";
-    carrotText.style.marginLeft = "20px";
-    carrotText.style.marginRight = "20px";
-    carrotText.style.marginTop = "20px";
-    carrotText.style.marginBottpm = "20px";
-    carrotText.style.width = "90%";
-    carrotText.innerHTML = text;
-    textDiv.value = currentTime;
-    textDiv.textContent = "[CODE]";
-    textDiv.appendChild(carrotText);
-    carrotText.addEventListener("input", function (e) {
+    var codeLi = document.createElement("li");
+    codeLi.className = "ui-state-default";
+    codeLi.id = timestampNum;
+
+    var codeDiv = document.createElement("div");
+    codeDiv.className = "divcode";
+
+    var runbtnSpan = document.createElement("span");
+    runbtnSpan.id = "divcode__run";
+    var runbtnI = document.createElement("i");
+    runbtnI.className = "far fa-play-circle";
+    runbtnI.style.fontSize = "30px";
+    runbtnI.style.color = "whitesmoke";
+    runbtnSpan.appendChild(runbtnI);
+
+    var codetextDiv = document.createElement("divcodetext");
+
+    codeDiv.appendChild(runbtnSpan);
+    codeDiv.appendChild(codetextDiv);
+
+    var resultDiv = document.createElement("div");
+    resultDiv.className = "divresult";
+
+    codeLi.appendChild(codeDiv);
+    codeLi.appendChild(resultDiv);
+
+    codetextDiv.id = "t" + timestampNum;
+    codetextDiv.contentEditable = "true";
+    codetextDiv.innerHTML = text;
+    codeLi.value = currentTime;
+
+    codeLi.appendChild(codeDiv);
+    codeLi.appendChild(resultDiv);
+
+    codetextDiv.addEventListener("input", function (e) {
         var thisId = e.target.id.slice(1, e.target.id.length);
         document.getElementById("c" + thisId).style.height = String(document.getElementById("t" + thisId).offsetHeight) + "px";
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
-    document.querySelector("#timestamptext").appendChild(textDiv);
-}
-function makeCodearea(text) {
-    timestampNum++;
-    var currentTime = player.getCurrentTime();
 
-    var textDiv = document.createElement("div");
-    textDiv.id = timestampNum;
-    var carrotText = document.createElement("div");
-    carrotText.className = "divtext";
-    carrotText.id = "t" + timestampNum;
-    carrotText.style.backgroundColor = "var(--color-codebackground-gray)";
-    carrotText.style.color = "#f6c0c0";
-    carrotText.contentEditable = "true";
-    carrotText.style.marginLeft = "20px";
-    carrotText.style.marginRight = "20px";
-    carrotText.style.marginTop = "20px";
-    carrotText.style.marginBottpm = "20px";
-    carrotText.style.width = "90%";
-    carrotText.innerHTML = text;
-    textDiv.value = currentTime;
-    textDiv.appendChild(carrotText);
+    document.querySelector("#sortable").appendChild(codeLi);
 
-    carrotText.addEventListener("input", function (e) {
-        var thisId = e.target.id.slice(1, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(document.getElementById("t" + thisId).offsetHeight) + "px";
-        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
-    }, false);
-    document.querySelector("#timestamptext").appendChild(textDiv);
+
+    var div = document.createElement("div");
+    //div.style.border = "1px solid blue";
+    div.id = "c" + timestampNum;
+    var carrot = document.createElement("i");
+    console.log("carrot");
+    carrot.className = "fas fa-carrot fa-2x";
+    carrot.style.display = "block";
+    carrot.style.marginTop = "15px";
+    var now = transSectoTime(currentTime);
+    carrot.title = now;
+    carrot.value = currentTime;
+    div.style.height = String(textDiv.offsetHeight) + "px";//여기
+    div.style.backgroundColor = "#f6c0c0"
+    div.appendChild(carrot);
+    document.querySelector("#realtimestamp").appendChild(div);
+
+    carrot.addEventListener('click', function (e) {
+        player.seekTo(e.target.value, true);
+    });
+
+    return timestampNum;
+
 }
 
 /*var timestampArea = document.getElementsByClassName('maketimestamp_note__area');
