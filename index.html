@@ -29,11 +29,7 @@
     <script src="\assets\jquery-3.3.1.min.js" defer="defer"></script>
     <script src="\assets\jquery-3.6.0.js" defer="defer"></script>
     <script src="\assets\jquery-ui.js" defer="defer"></script>
-    <script>
-        $(function () {
-            $("#sortable").sortable();
-        });
-    </script>
+    <script src="\assets\jquery-min.js" defer="defer"></script>
 </head>
 
 <body>
@@ -139,16 +135,28 @@
                             <i class="fas fa-minus" id="textplusbtn__icon" style="font-size:3px;"></i>
                             <h3 class="btn__title" id="textplusbtn__title">텍스트</h3>
                         </div>
+                        <div class="notebutton__right">
+                            <div class="clockplusbtn" , id="clockbtn">
+                                <span>
+                                    <i class="fas fa-clock" id="clockbtn__icon" style="font-size:20px;"></i>
+                                </span>
+                            </div>
+                            <div class="deletebtn" , id="deletebtn">
+                                <span>
+                                    <i class="fas fa-trash" id="deletebtn__icon" style="font-size:20px;"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <!--<div class="notearea" id="timestamptext" scroll=auto > -->
                     <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
                     <!--<div class="divtext" contentEditable>Hello World</div>-->
-                    <ul id="sortable">
-                        
+                    <ul id="sortable" style="overflow-x:hidden; overflow-y:scroll;">
+                    <!--
                         <li class="ui-state-default">
                             <div class="divcode">
                                 <span id="divcode__run">
-                                    <i class="far fa-play-circle" style="font-size:30px; color:whitesmoke"></i>
+                                    <i class="far fa-play-circle" id="runbtn" style="font-size:30px; color:whitesmoke"></i>
                                 </span>
                                 <div class="divcodetext"></div>
                             </div>
@@ -162,13 +170,13 @@
                                 <div class="divtext0"></div>
                             </div>
                         </li>
-                    
+                    -->
                     </ul>
                 </div>
             </div>
             <div class="notebuttons3">
                 <div class="capturebtn__border" id="capturebtn__border">
-                    <span style="color : whitesmoke;"></span>
+                    <span id="capture__span", style="color : whitesmoke;">
                     <i class="fas fa-camera" id="capturebtn__icon" style="font-size:25px;"></i>
                     </span>
                 </div>
