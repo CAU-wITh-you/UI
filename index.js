@@ -333,7 +333,7 @@ document.getElementById("textplusbtn__title").addEventListener('click', function
 
 //순서 바꾸는 함수
 var orderchange = false;
-document.getElementById("questionbtn").addEventListener('click', function () {
+document.getElementById("sortbtn").addEventListener('click', function () {
     orderchange = !orderchange;
     if (orderchange == false) {
         $("#sortable").sortable();
@@ -342,11 +342,27 @@ document.getElementById("questionbtn").addEventListener('click', function () {
         $("#sortable").sortable("disable");
     }
 });
-
-document.getElementById("runbtn").addEventListener("click", function () {
-    document.getElementById("runbtn").style.color = "var(--color-dark-pink)";
-});
-
-document.getElementById("runbtn").addEventListener("mouseover", function () {
-    document.getElementById("savebtn").style.color = "var(--color-dark-pink)";
-});
+var openedit = false;
+function changebutton() {
+    openedit = !openedit
+    if (openedit == false) {
+        document.getElementById("capturebtn").style.display = "none";
+        document.getElementById("clockbtn").style.display = "none";
+        document.getElementById("editbtn").style.display = "none";
+        document.getElementById("sortbtn").style.display = "flex";
+        document.getElementById("deletebtn").style.display = "flex";
+        document.getElementById("backbtn").style.display = "flex";
+        console.log('open');
+    }
+    else {
+        document.getElementById("capturebtn").style.display = "flex";
+        document.getElementById("clockbtn").style.display = "flex";
+        document.getElementById("editbtn").style.display = "flex";
+        document.getElementById("sortbtn").style.display = "none";
+        document.getElementById("deletebtn").style.display = "none";
+        document.getElementById("backbtn").style.display = "none";
+        console.log('close');
+    }
+}
+document.getElementById("editbtn").addEventListener('click', changebutton);
+document.getElementById("backbtn").addEventListener('click', changebutton);

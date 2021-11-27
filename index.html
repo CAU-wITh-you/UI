@@ -111,10 +111,13 @@
                     title="click to open timestamp">
                     <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;" id="timestampbtn__icon"></i>
                 </div>
-                <button class="mypage"
-                    style="padding:5px; margin:0; position: absolute; height: inherit; width: 13%; right: -1%; display: inline-flex; justify-content:space-between;">
-                    <i class="fas fa-question-circle fa-2x" id="questionbtn"
-                        style="margin-top: 10px; margin-left: 10%;">
+                <div class="selectLanguage" id="languagebtn">
+                    <div class="language" id="realselectionbtn">언어선택</div>
+                    <div class="language" id="language__C">C</div>
+                    <div class="language" id="language__Cpp">C++</div>
+                </div>
+                <button class="mypage">
+                    <i class="fas fa-question-circle fa-2x" id="questionbtn">
                     </i>
                     <a href="mypage.html" id=mypagehtml style="margin-right: 25%;">
                         <h3 class="mypage__title" id="mypage">내 문서함</h3>
@@ -136,14 +139,34 @@
                             <h3 class="btn__title" id="textplusbtn__title">텍스트</h3>
                         </div>
                         <div class="notebutton__right">
+                            <div class="capturebtn" , id="capturebtn">
+                                <span>
+                                    <i class="fas fa-camera" id="capturebtn__icon" style="font-size:20px;"></i>
+                                </span>
+                            </div>
                             <div class="clockplusbtn" , id="clockbtn">
                                 <span>
                                     <i class="fas fa-clock" id="clockbtn__icon" style="font-size:20px;"></i>
                                 </span>
                             </div>
-                            <div class="deletebtn" , id="deletebtn">
+                            <div class="editbtn" , id="editbtn">
+                                <span>
+                                    <i class="fas fa-edit" id="editbtn__icon" style="font-size:20px;"></i>
+                                </span>
+                            </div>
+                            <div class="editbtn__sort" , id="sortbtn">
+                                <span>
+                                    <i class="fas fa-sort" id="sortbtn__icon" style="font-size:25px;"></i>
+                                </span>
+                            </div>
+                            <div class="editbtn__delete" , id="deletebtn">
                                 <span>
                                     <i class="fas fa-trash" id="deletebtn__icon" style="font-size:20px;"></i>
+                                </span>
+                            </div>
+                            <div class="editbtn__back" , id="backbtn">
+                                <span>
+                                    <i class="fas fa-times-circle" id="backbtn__icon" style="font-size:20px;"></i>
                                 </span>
                             </div>
                         </div>
@@ -152,7 +175,7 @@
                     <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
                     <!--<div class="divtext" contentEditable>Hello World</div>-->
                     <ul id="sortable" style="overflow-x:hidden; overflow-y:scroll;">
-                    <!--
+                        <!--
                         <li class="ui-state-default">
                             <div class="divcode">
                                 <span id="divcode__run">
@@ -172,13 +195,6 @@
                         </li>
                     -->
                     </ul>
-                </div>
-            </div>
-            <div class="notebuttons3">
-                <div class="capturebtn__border" id="capturebtn__border">
-                    <span id="capture__span", style="color : whitesmoke;">
-                    <i class="fas fa-camera" id="capturebtn__icon" style="font-size:25px;"></i>
-                    </span>
                 </div>
             </div>
         </div>
