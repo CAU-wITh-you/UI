@@ -132,6 +132,7 @@ function makeCodearea(text) {
     var codeLi = document.createElement("li");
     codeLi.className = "ui-state-default";
     codeLi.style.backgroundColor = "var(--color-background-gray)";
+    codeLi.id = timestampNum;
     codeLi.value = currentTime;
 
     var codeDiv = document.createElement("div");
@@ -177,8 +178,9 @@ function makeCodearea(text) {
     codeLi.appendChild(codeDiv);
     codeLi.appendChild(resultDiv);
 
-    codetextDiv.addEventListener("input", function (e) {
-        var thisId = e.target.id.slice(1, e.target.id.length);
+    codetext.addEventListener("input", function (e) {
+        console.log(e.target.id);
+        var thisId = e.target.id.slice(5, e.target.id.length);
         document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
@@ -193,11 +195,11 @@ function makeCodearea(text) {
     console.log("carrot");
     carrot.className = "fab fa-cuttlefish fa-2x";
     carrot.style.display = "block";
-    carrot.style.marginTop = "15px";
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;
-    div.style.height = String(codeLi.offsetHeight) + "px";
+    console.log(document.getElementById(timestampNum).offsetHeight);
+    div.style.height = "330px";
     div.style.backgroundColor = "var(--color-pink)";
     div.appendChild(carrot);
     document.querySelector("#realtimestamp").appendChild(div);
@@ -222,6 +224,7 @@ function makeCodearea(text) {
     nowcode = "c-code" + timestampNum;
     console.log(nowcode);
     console.log(typeof (nowcode));
+
     var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
         lineNumbers: true,
         matchBrackets: true,
@@ -242,13 +245,16 @@ function makeTextarea(text) {
 
     var textDiv = document.createElement("div");
     textDiv.className = "divtext";
-    textDiv.id = "t1" + timestampNum;
     textDiv.style.backgroundColor = "var(--color-background-gray)";
-    textDiv.style.width = "98%";
+    textDiv.style.width = "-webkit-fill-available";
     textDiv.style.border = "1px solid var(--color-background-gray)";
+    textDiv.style.paddingBottom = "0px";
+    textDiv.style.paddingLeft = "34px";
 
-    var texttextDiv = document.createElement("divtexttext");
+    var texttextDiv = document.createElement("div");
+    texttextDiv.className = "divtexttext"
     texttextDiv.contentEditable = "true";
+    texttextDiv.id = "t1" + timestampNum;
     texttextDiv.style.display = "flex";
     texttextDiv.style.backgroundColor = "black";
     texttextDiv.style.width = "100%";
@@ -259,18 +265,18 @@ function makeTextarea(text) {
     texttextDiv.style.verticalAlign = "middle";
     texttextDiv.style.fontFamily = 'Malgun Gothic';
     texttextDiv.style.fontSize = "15px";
+    texttextDiv.style.overflow = "hidden";
+    texttextDiv.style.wordBreak = "break-all";
     texttextDiv.innerHTML = text;
 
     textDiv.appendChild(texttextDiv);
     textLi.appendChild(textDiv);
 
     texttextDiv.addEventListener("input", function (e) {
-        texttextDiv.innerHTML = texttextDiv.innerHTML.replace(/\n\r?/g, '<br />');
-        var thisId = e.target.id.slice(1, e.target.id.length);
-        //console.log(String(integer(document.getElementById("t3" + thisId).offsetHeight) + "px"));
-        //console.log(String(integer(document.getElementById("t3" + thisId).clientHeight) + "px"));
-        //console.log(String(integer(document.getElementById("t3" + thisId).height) + "px"));
-        document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) - 10 + "px");
+        //texttextDiv.innerHTML = texttextDiv.innerHTML.replace(/\n\r?/g, '<br />');
+        
+        var thisId = e.target.id.slice(2, e.target.id.length);
+        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight)+ "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
 
@@ -284,7 +290,6 @@ function makeTextarea(text) {
     console.log("carrot");
     carrot.className = "fas fa-tenge fa-2x";
     carrot.style.display = "block";
-    carrot.style.marginTop = "15px";
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;

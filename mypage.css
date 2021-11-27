@@ -1,315 +1,315 @@
 :root {
-    --color-pink: #f6c0c0;
-    --color-dark-pink: #d8505a;
-    --color-yellow: #f1cd8b;
-    --color-dark-yellow: #fbc35f;
-    --color-blue: #96b0de;
-    --color-dark-blue: #6d91d1;
-    --color-purple: #d5b8ea;
-    --color-dark-purple: #b482da;
-    --color-border: #caced4;
+  --color-pink: #f6c0c0;
+  --color-dark-pink: #d8505a;
+  --color-yellow: #f1cd8b;
+  --color-dark-yellow: #fbc35f;
+  --color-blue: #96b0de;
+  --color-dark-blue: #6d91d1;
+  --color-purple: #d5b8ea;
+  --color-dark-purple: #b482da;
+  --color-border: #caced4;
 }
 
 .edit__container {
-    display: flex;
-    height: 10%;
-    width: 100%;
-    border-bottom: 1px solid gray;
-    background-color: white;
+  display: flex;
+  height: 10%;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  background-color: white;
 }
 
 .file__container {
-    display: flex;
-    height: 90%;
-    width: 100%;
+  display: flex;
+  height: 90%;
+  width: 100%;
 }
 
 .edit__container__left {
-    display: flex;
-    width: 10%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  width: 10%;
+  justify-content: center;
+  align-items: center;
 }
 
 .edit__container__middle {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  align-items: center;
 }
 
 .edit__container__right {
-    display: flex;
-    width: 10%;
-    justify-content: right;
-    align-items: center;
+  display: flex;
+  width: 10%;
+  justify-content: right;
+  align-items: center;
 }
 
 .editfolder {
-    display: flex;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 .editfolder__btn {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    border: none;
-    background: none;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: none;
+  background: none;
+  font-size: 20px;
 }
 
 .mypage__title {
-    color: black;
+  color: black;
+  display: inline;
 }
 
 .addfolder {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .folder__name {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .mypage__title {
-    display: flex;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 .colors {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .pickcolor__icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .yellowcolor__icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .bluecolor__icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .purplecolor__icon {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .pickcolor__icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .yellowcolor__icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .bluecolor__icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .purplecolor__icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
-
 .folders {
-    float: right;
-    border-right: 1px solid gray;
-    height: 100%;
-    background-color: whitesmoke;
+  float: right;
+  border-right: 1px solid gray;
+  height: 100%;
+  background-color: whitesmoke;
 }
 
 .default {
-    width: 280px;
-    height: 650px;
-    overflow: auto;
+  width: 280px;
+  height: 650px;
+  overflow: auto;
 }
 
 .folder {
-    display: flex;
-    height: 50px;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  text-align: center;
 }
 
 .folder:hover {
-    background-color: rgb(219, 219, 219);
-    border-radius: 10px;
+  background-color: rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 .aboutdiv:hover {
-    background-color: rgb(219, 219, 219);
-    border-radius: 10px;
+  background-color: rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 .divider__folder:hover {
-    background-color: rgb(219, 219, 219);
-    border-radius: 10px;
+  background-color: rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 .default::-webkit-scrollbar {
-    width: 5px;
-    /*스크롤바의 너비*/
+  width: 5px;
+  /*스크롤바의 너비*/
 }
 
 .default::-webkit-scrollbar-thumb {
-    background-color: var(--color-pink);
-    /*스크롤바의 색상*/
+  background-color: var(--color-pink);
+  /*스크롤바의 색상*/
 }
 
 .default::-webkit-scrollbar-track {
-    background-color: whitesmoke;
-    /*스크롤바 트랙 색상*/
+  background-color: whitesmoke;
+  /*스크롤바 트랙 색상*/
 }
 
 .textfile {
-    float: right;
-    width: 80%;
-    height: 100%;
+  float: right;
+  width: 80%;
+  height: 100%;
 }
 
 #allnote {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
 }
 
 .allnote__icon {
-    display: flex;
-    width: 15%;
-    justify-content: center;
+  display: flex;
+  width: 15%;
+  justify-content: center;
 }
 
 .allnote__title {
-    display: flex;
-    width: 65%;
+  display: flex;
+  width: 65%;
 }
 
 .allnote__num {
-    display: flex;
-    justify-content: center;
-    width: 20%;
+  display: flex;
+  justify-content: center;
+  width: 20%;
 }
 
 #recentnote {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
 }
 
 .recentnote__icon {
-    display: flex;
-    width: 15%;
-    justify-content: center;
+  display: flex;
+  width: 15%;
+  justify-content: center;
 }
 
 .recentnote__title {
-    display: flex;
-    width: 65%;
+  display: flex;
+  width: 65%;
 }
 
 .recentnote__num {
-    display: flex;
-    justify-content: center;
-    width: 20%;
+  display: flex;
+  justify-content: center;
+  width: 20%;
 }
 
 #notinfoler {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
 }
 
 .notinfoler__icon {
-    display: flex;
-    width: 15%;
-    justify-content: center;
+  display: flex;
+  width: 15%;
+  justify-content: center;
 }
 
 .notinfoler__title {
-    display: flex;
-    width: 65%;
+  display: flex;
+  width: 65%;
 }
 
 .notinfoler__num {
-    display: flex;
-    justify-content: center;
-    width: 20%;
+  display: flex;
+  justify-content: center;
+  width: 20%;
 }
 
 .divider {
-    height: 50px;
-    width: 100%;
+  height: 50px;
+  width: 100%;
 }
 
 .aboutdiv {
-    display: flex;
-    height: 50px;
-    width: 100%;
+  display: flex;
+  height: 50px;
+  width: 100%;
 }
 
 .divider__folder {
-    display: block;
-    height: 50px;
+  display: block;
+  height: 50px;
 }
 
 .divider__icon {
-    display: flex;
-    width: 15%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  align-items: center;
 }
 
 .divider__title {
-    display: flex;
-    width: 65%;
-    align-items: center;
+  display: flex;
+  width: 65%;
+  align-items: center;
 }
 
 .divider i {
-    display: flex;
-    width: 15%;
-    justify-content: center;
+  display: flex;
+  width: 15%;
+  justify-content: center;
 }
 
 .divider__folder {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .divider__folder__icon {
-    margin-left: 10px;
-    display: flex;
-    width: 15%;
-    justify-content: center;
-    align-items: center;
+  margin-left: 10px;
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  align-items: center;
 }
 
 .divider__folder__title {
-    margin-left: 10px;
-    display: flex;
-    width: 65%;
-    align-items: center;
+  margin-left: 10px;
+  display: flex;
+  width: 65%;
+  align-items: center;
 }
 
 .divider__folder__num {
-    display: flex;
-    justify-content: center;
-    width: 20%;
+  display: flex;
+  justify-content: center;
+  width: 20%;
 }
 
 .textfilearea {
-    background-color: whitesmoke;
-    height: 650px;
-    width: 100%;
+  background-color: whitesmoke;
+  height: 650px;
+  width: 100%;
 }

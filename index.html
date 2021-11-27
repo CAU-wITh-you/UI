@@ -118,10 +118,10 @@
                     title="click to open timestamp">
                     <i class="fas fa-caret-right fa-3x" style="margin-top: 10px;" id="timestampbtn__icon"></i>
                 </div>
-                <div class="selectLanguage" id="languagebtn">
-                    <div class="language" id="realselectionbtn">언어선택</div>
-                    <div class="language" id="language__C">C</div>
-                    <div class="language" id="language__Cpp">C++</div>
+                <div class="selectLanguage" id="languagebtn" style="display: flex; align-items: center;">
+                    <div class="language" id="realselectionbtn" style="padding-top: 4%;">언어선택</div>
+                    <div class="language" id="language__C" style="padding-top: 4%;">C</div>
+                    <div class="language" id="language__Cpp" style="padding-top: 4%;">C++</div>
                 </div>
                 <button class="mypage">
                     <i class="fas fa-question-circle fa-2x" id="questionbtn">
@@ -133,7 +133,9 @@
             </div>
             <div class="note" style="display: flex;">
                 <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden">
-                    <div class="timestamp" id="realtimestamp"></div>
+                    <div class="timestamp" id="realtimestamp">
+                        <div id="c0" style="height: 6.5%; background-color: var(--color-pink);"></div>
+                    </div>
                 </div>
                 <div class="noteareas">
                     <div class="notebutton" id="notebtn">

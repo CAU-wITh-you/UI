@@ -8,16 +8,6 @@ chrome.runtime.onInstalled.addListener(() => {
   //$("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100%; z-index:10; position:absolute; left:-0%"></iframe>`);
 });
 */
-try {
-  importScripts("./assets/jquery.min.js",
-                "./assets/html2canvas.min.js",
-                "./assets/jquery-3.3.1.min.js",
-                "./assets/jquery-3.6.0.js",
-                "./assets/jquery-ui.js",);
-} catch (e) {
-  console.log(e);
-}
-
 function hello() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var currTab = tabs[0];
