@@ -7,6 +7,12 @@ canvas2.style.zIndex   = 8;
 canvas2.style.position = "absolute";
 canvas2.style.border   = "1px solid";
 
+
+var tag = document.createElement('script');
+tag.src = "iframe_api.js";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 var player;
 
 function onYouTubeIframeAPIReady() {
@@ -39,7 +45,7 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange() {
-    //console.log("my state changed" + player.getPlayerState());
+    console.log("my state changed" + player.getPlayerState());
     if(player.getPlayerState() == -1){
         document.getElementById("playbutton").hidden=true;
     }

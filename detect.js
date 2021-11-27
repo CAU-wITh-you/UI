@@ -75,11 +75,23 @@ if(document.querySelector('video') && videoSelected == false){
 
         if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
             videoSelected = true;
-
+            
             if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
+                
                 canvas1.remove();
-                lastHtml = $("#columns").html;
-                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);   
+                document.querySelector("#movie_player > div.html5-video-container > video").pause();
+                document.querySelector('#secondary').innerHTML = ``;
+                document.querySelector('#primary').innerHTML = ``;
+                var iframe = document.createElement("iframe");
+                iframe.id = "withYou";
+                iframe.src = chrome.runtime.getURL("index.html");
+                iframe.style.width = "100%";
+                iframe.style.height = "670px";
+                iframe.style.zIndex = "10";
+                iframe.style.position = "absolute"
+                iframe.style.overflow="hidden";
+                document.getElementById("columns").appendChild(iframe);
+                //$("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
             }
         }
     
@@ -88,37 +100,9 @@ if(document.querySelector('video') && videoSelected == false){
     
     $(document).ready(function(){
 
-        var mycode = chrome.runtime.getURL('index.html').split('/')[2];
-        console.log(mycode)   
         initCanvas();
         //boundRect();
 
-        window.onpageshow = function(event) {
-            if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-                // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
-                alert("히스토리백!!!!");
-            }
-        }
-        
-        window.onresize = function(event){
-            if(!videoSelected){
-                console.log("resize!");
-                console.log("start");
-                ctx.beginPath();
-                ctx.clearRect(0, 0, canvas1.width, canvas1.height);
-                ctx.fillStyle = "#00D8FF27";
-                ctx.fillRect(0, 0, $("video").width(), $("video").height());
-                ctx.strokeStyle = "#6799FF";
-                ctx.lineWidth = 5;
-                ctx.rect(0, 0, $("video").width(), $("video").height());
-                ctx.stroke();
-                ctx.font = '48px HSYuji-Regular';
-                ctx.textAlign = 'center';
-                ctx.fillStyle = "#6799FF";
-                ctx.fillText('동영상을 선택해주세요', $("video").width()/2, $("video").height()/2);
-                console.log("end")    
-            }
-        }
     });
 }
 

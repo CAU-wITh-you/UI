@@ -48,11 +48,19 @@ chrome.tabs.getCurrent(function (tab) {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     //console.log(tabId, changeInfo, tab);
+
     if (tab.url != lastTab) {
         lastTab = tab.url;
-        location.reload();
-        //toggleMuteState(tabId);
+        var videoUrl = new URL(tab.url);
+        var videoId = videoUrl.searchParams.get("v");
+        console.log(videoUrl);
+        if(videoId){
+            console.log(videoId);
+            document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
+            console.log(document.getElementById("youtubeMP4"));        
+        }
     }
+        
 });
 
 /*function toggleMuteState(tabId) {

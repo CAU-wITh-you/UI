@@ -1,3 +1,13 @@
+
+var canvas2 = document.getElementById('canvas');
+var ctx = canvas2.getContext("2d");
+
+console.log("hello index2");
+canvas2.style.zIndex   = 8;
+canvas2.style.position = "absolute";
+canvas2.style.border   = "1px solid";
+
+
 function drawTimecanvas(){
     canvas2.width = $("#youtubeMP4").width();
     canvas2.height = $("#youtubeMP4").height()*0.035;
