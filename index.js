@@ -337,9 +337,17 @@ document.getElementById("sortbtn").addEventListener('click', function () {
     orderchange = !orderchange;
     if (orderchange == false) {
         $("#sortable").sortable();
+        console.log('open');
     }
     else {
-        $("#sortable").sortable("disable");
+        $("#sortable").sortable({
+            sort: function () {
+                if ($(this).hasClass("cancel")) {
+                    $(this).sortable("cancel");
+                }
+            }
+        });
+        console.log('close');
     }
 });
 var openedit = false;
@@ -366,3 +374,22 @@ function changebutton() {
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
 document.getElementById("backbtn").addEventListener('click', changebutton);
+
+
+var cEditor = CodeMirror.fromTextArea(document.getElementById("c-code"), {
+    lineNumbers: true,
+    matchBrackets: true,
+    mode: "text/x-csrc",
+    theme: "material-darker"
+});
+$('.CodeMirror').resizable({
+    resize: function () {
+        editor.setSize($(this).width(), $(this).height());
+    }
+});
+var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
+    lineNumbers: true,
+    matchBrackets: true,
+    mode: "text/x-c++src",
+    theme: "ambiance"
+});
