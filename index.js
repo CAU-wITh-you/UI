@@ -267,16 +267,16 @@ function makeTextarea(text) {
     texttextDiv.style.fontSize = "15px";
     texttextDiv.style.overflow = "hidden";
     texttextDiv.style.wordBreak = "break-all";
+    texttextDiv.style.display = "inline-block";
+    texttextDiv.style.whiteSpace = "pre-wrap";
     texttextDiv.innerHTML = text;
 
     textDiv.appendChild(texttextDiv);
     textLi.appendChild(textDiv);
 
     texttextDiv.addEventListener("input", function (e) {
-        //texttextDiv.innerHTML = texttextDiv.innerHTML.replace(/\n\r?/g, '<br />');
-        
         var thisId = e.target.id.slice(2, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight)+ "px");
+        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight)+10+ "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
 
