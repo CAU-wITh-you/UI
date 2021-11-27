@@ -138,31 +138,26 @@ function makeCodearea(text) {
     codeDiv.className = "divcode";
     codeDiv.id = "t1" + timestampNum;
     codeDiv.style.backgroundColor = "var(--color-background-gray)";
-    codeDiv.style.width = "98%";
+    codeDiv.style.width = "99%";
 
     var runbtnSpan = document.createElement("span");
     runbtnSpan.id = "divcode__run";
     var runbtnI = document.createElement("i");
     runbtnI.className = "far fa-play-circle";
     runbtnI.id = "runbtn";
-    runbtnI.style.fontSize = "25px";
+    runbtnI.style.fontSize = "20px";
     runbtnI.style.color = "whitesmoke";
     runbtnSpan.appendChild(runbtnI);
 
     var codetextDiv = document.createElement("divcodetext");
-    codetextDiv.style.display = "flex";
-    codetextDiv.style.backgroundColor = "black";
     codetextDiv.style.width = "100%";
-    codetextDiv.style.border = "3px solid black";
-    codetextDiv.style.border = "0px";
-    codetextDiv.style.color = "whitesmoke";
-    codetextDiv.style.textAlign = "left";
-    codetextDiv.style.verticalAlign = "middle";
-    codetextDiv.style.fontFamily = 'Malgun Gothic';
-    codetextDiv.style.fontSize = "15px";
-    codetextDiv.contentEditable = "true";
-    codetextDiv.innerHTML = text;
+    codetextDiv.style.height = "100%";
 
+    codetext = document.createElement("textarea");
+    codetext.id = "c-code" + timestampNum;
+    codetext.style.width = "90%";
+
+    codetextDiv.appendChild(codetext);
     var resultDiv = document.createElement("div");
     resultDiv.id = "t2" + timestampNum;
     resultDiv.className = "divresult";
@@ -224,7 +219,15 @@ function makeCodearea(text) {
                 .prop("scrollLeft", this.scrollLeft);
         });
     })();
-
+    nowcode = "c-code" + timestampNum;
+    console.log(nowcode);
+    console.log(typeof (nowcode));
+    var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/x-csrc",
+        theme: "material-darker"
+    });
     //return timestampNum;
 }
 
@@ -244,16 +247,6 @@ function makeTextarea(text) {
     textDiv.style.width = "98%";
     textDiv.style.border = "1px solid var(--color-background-gray)";
 
-    var savebtnSpan = document.createElement("span");
-    savebtnSpan.id = "divtext__save";
-    var savebtnI = document.createElement("i");
-    savebtnI.id = "savebtn";
-    savebtnI.className = "far fa-save";
-    savebtnI.style.fontSize = "25px";
-    savebtnI.style.color = "whitesmoke";
-    savebtnI.id = "t3" + timestampNum;
-    savebtnSpan.appendChild(savebtnI);
-
     var texttextDiv = document.createElement("divtexttext");
     texttextDiv.contentEditable = "true";
     texttextDiv.style.display = "flex";
@@ -268,8 +261,6 @@ function makeTextarea(text) {
     texttextDiv.style.fontSize = "15px";
     texttextDiv.innerHTML = text;
 
-
-    textDiv.appendChild(savebtnSpan);
     textDiv.appendChild(texttextDiv);
     textLi.appendChild(textDiv);
 
@@ -331,25 +322,35 @@ document.getElementById("textplusbtn__title").addEventListener('click', function
     makeTextarea("");
 });
 
+
+function sortableEnable() {
+    $("ul").sortable();
+    $("ul").sortable("option", "disabled", false);
+    $("li").attr("contentEditable", "false");
+    $("li").css("cursor", "move");
+}
+function sortableDisable() {
+    $("ul").sortable("disable");
+    $("li").attr("contentEditable", "true");
+    $("li").css("cursor", "default");
+}
+
 //순서 바꾸는 함수
 var orderchange = false;
 document.getElementById("sortbtn").addEventListener('click', function () {
     orderchange = !orderchange;
-    if (orderchange == false) {
-        $("#sortable").sortable();
-        console.log('open');
+    if (orderchange == true) {
+        sortableEnable();
     }
     else {
-        $("#sortable").sortable({
-            sort: function () {
-                if ($(this).hasClass("cancel")) {
-                    $(this).sortable("cancel");
-                }
-            }
-        });
-        console.log('close');
+        sortableDisable();
     }
 });
+document.getElementById("backbtn").addEventListener('click', function () {
+    orderchange = false;
+    sortableDisable();
+});
+
 var openedit = false;
 function changebutton() {
     openedit = !openedit
@@ -360,7 +361,7 @@ function changebutton() {
         document.getElementById("sortbtn").style.display = "flex";
         document.getElementById("deletebtn").style.display = "flex";
         document.getElementById("backbtn").style.display = "flex";
-        console.log('open');
+        //console.log('open');
     }
     else {
         document.getElementById("capturebtn").style.display = "flex";
@@ -369,24 +370,12 @@ function changebutton() {
         document.getElementById("sortbtn").style.display = "none";
         document.getElementById("deletebtn").style.display = "none";
         document.getElementById("backbtn").style.display = "none";
-        console.log('close');
+        //console.log('close');
     }
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
 document.getElementById("backbtn").addEventListener('click', changebutton);
 
-
-var cEditor = CodeMirror.fromTextArea(document.getElementById("c-code"), {
-    lineNumbers: true,
-    matchBrackets: true,
-    mode: "text/x-csrc",
-    theme: "material-darker"
-});
-$('.CodeMirror').resizable({
-    resize: function () {
-        editor.setSize($(this).width(), $(this).height());
-    }
-});
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
     lineNumbers: true,
     matchBrackets: true,

@@ -76,10 +76,12 @@ video::-webkit-media-controls-fullscreen-button {
   width: 100%;
   height: 100%;
 }
-#extensions{
-  margin : 0px;
+
+#extensions {
+  margin: 0px;
   border: 0px;
 }
+
 .extensions__left {
   float: left;
   width: 60%;
@@ -434,7 +436,7 @@ video::-webkit-media-controls-fullscreen-button {
 .maketimestamp_note__area {
   display: flex;
   clear: both;
-  width: 35px;
+  width: 5.7%;
   height: 100%;
   background-color: var(--color-dark-pink);
   float: left;
@@ -442,8 +444,8 @@ video::-webkit-media-controls-fullscreen-button {
 
 .noteareas {
   display: block;
-  height: 94.4%;
-  width: 100%;
+  height: 94.3%;
+  width: 94.3%;
 }
 
 .timestamp {
