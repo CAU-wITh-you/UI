@@ -28,6 +28,15 @@
     <script src="index.js" defer="defer"></script>
     <script src="ocr_capture.js" defer="defer"></script>
     <script src="ocr_timespan.js" defer="defer"></script>
+
+    <link rel=stylesheet href="codemirror/doc/docs.css">
+    <link rel=stylesheet href="codemirror/theme/material-darker.css">
+    <link rel=stylesheet href="codemirror/lib/codemirror.css">
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css">
+    <script src="codemirror/addon/hint/show-hint.js"></script>
+    <script src="codemirror/mode/clike/clike.js"></script>
 </head>
 
 <body>
@@ -173,31 +182,32 @@
                     <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
                     <!--<div class="divtext" contentEditable>Hello World</div>-->
                     <ul id="sortable" style="overflow-x:hidden; overflow-y:scroll;">
-                        <!--
                         <li class="ui-state-default">
                             <div class="divcode">
                                 <span id="divcode__run">
-                                    <i class="far fa-play-circle" id="runbtn" style="font-size:30px; color:whitesmoke"></i>
+                                    <i class="far fa-play-circle" id="runbtn"
+                                        style="font-size:20px; color:whitesmoke"></i>
                                 </span>
-                                <div class="divcodetext"></div>
+                                <div class="divcodetext">
+                                    <textarea id="c-code"></textarea>
+                                </div>
                             </div>
                             <div class="divresult">[OUTPUT]</div>
+                            <textarea id="result" style="background-color: gray;">dfsdf</textarea>
                         </li>
+
                         <li class="ui-state-default">
-                            <div class="divtext">
-                                <span id="divtext__save">
-                                <i class="far fa-save" id="savebtn" style="font-size:30px; color:whitesmoke;"></i>
-                                </span>
-                                <div class="divtext0"></div>
+                            <div class="divtext" style="background-color: gray; width: 100%; border: 1px gray;">
+                                <textarea id="text"
+                                    style="background-color: gray; width: 100%; border: 1px gray;"></textarea>
                             </div>
                         </li>
-                    -->
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    <a id="target" style="display : none;"></a>
+    <a id=" target" style="display : none;"></a>
 
 </body>
 
