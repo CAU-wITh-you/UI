@@ -122,7 +122,6 @@ function clicktimestamp() {
 }
 
 function compile(carrotId){
-    
 
     var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();  
     alert("compile", code);
@@ -149,7 +148,7 @@ function compile(carrotId){
             //var resp = xhr.responseText;
             console.log(resp);
             //console.log(result);
-            document.querySelector(`#t2${carrotId}`).innerHTML = resp.output;
+            document.querySelector(`#t2${carrotId}`).innerText = '  [OUTPUT] : '+resp.output;
             //alert(resp);
         }
     }
@@ -197,18 +196,41 @@ function makeCodearea(text) {
     resultDiv.className = "divresult";
     resultDiv.style.display = "block";
     resultDiv.style.width = "100%";
-    resultDiv.style.height = "20px";
+    //resultDiv.style.height = "20px";
     resultDiv.style.backgroundColor = "gray";
     resultDiv.style.color = "whitesmoke";
+    resultDiv.style.display = "inline-block";
     resultDiv.innerText = "  [OUTPUT] : ";
     resultDiv.style.textAlign = "left";
     resultDiv.style.fontFamily = 'Malgun Gothic';
     resultDiv.style.fontSize = "15px";
     resultDiv.style.verticalAlign = "middle";
+    resultDiv.style.marginLeft = "5px";
+
+    var inputDiv = document.createElement("div");
+    inputDiv.className = "divtexttext"
+    inputDiv.contentEditable = "true";
+    inputDiv.id = "t1" + timestampNum;
+    inputDiv.style.display = "flex";
+    inputDiv.style.backgroundColor = "black";
+    inputDiv.style.width = "100%";
+    inputDiv.style.border = "3px solid black";
+    inputDiv.style.border = "0px";
+    inputDiv.style.color = "whitesmoke";
+    inputDiv.style.textAlign = "left";
+    inputDiv.style.verticalAlign = "middle";
+    inputDiv.style.fontFamily = 'Malgun Gothic';
+    inputDiv.style.fontSize = "15px";
+    inputDiv.style.overflow = "hidden";
+    inputDiv.style.wordBreak = "break-all";
+    inputDiv.style.display = "inline-block";
+    inputDiv.style.whiteSpace = "pre-wrap";
+    resultDiv.style.marginLeft = "5px";
 
     codeDiv.appendChild(runbtnSpan);
     codeDiv.appendChild(codetextDiv);
     codeLi.appendChild(codeDiv);
+    codeLi.appendChild(inputDiv);
     codeLi.appendChild(resultDiv);
 
     codetext.addEventListener("input", function (e) {
@@ -518,6 +540,7 @@ document.getElementById("sortbtn").addEventListener('click', orderchangefunc);
 //휴지통
 function deletionfunc() {
     clickdeletionbtn = !clickdeletionbtn;
+    console.log(clickdeletionbtn);
     if (clickdeletionbtn == true) {
         if (orderchange == true) {
             alert("순서바꿈 버튼을 해제하세요");
@@ -526,29 +549,31 @@ function deletionfunc() {
             document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
             for (i = 1; i <= timestampNum; i++) {
                 document.getElementById("li" + i).addEventListener('click', function () {
-                    var jbResult = confirm("정말삭제하시겠습니까?");
-                    console.log(this);
-                    console.log(this.childElementCount);
-                    if (jbResult) {
-                        console.log('delete');
-                        var realparent = this.parentNode;
-                        var parent = document.getElementById("realtimestamp");
-                        console.log(parent.childNodes);
-                        //var now = document.getElementById("c" + i);
-                        this.remove();
-                        var child = parent.removeChild(parent.childNodes[i]);
-                        console.log(child);
-                        //console.log(parent.childNodes);
-                        //console.log(parent.childNodes[i + 2]);
-                        //parent.removeChild(parent.childNodes[i + 2]);
-                        //updatetextTime();
-                        timestampNum -= 1;
+                    if(clickdeletionbtn){
+                        var jbResult = confirm("정말삭제하시겠습니까?");
+                        console.log(this);
+                        console.log(this.childElementCount);
+                        if (jbResult) {
+                            console.log('delete');
+                            var realparent = this.parentNode;
+                            var parent = document.getElementById("realtimestamp");
+                            console.log(parent.childNodes);
+                            //var now = document.getElementById("c" + i);
+                            this.remove();
+                            var child = parent.removeChild(parent.childNodes[i]);
+                            console.log(child);
+                            //console.log(parent.childNodes);
+                            //console.log(parent.childNodes[i + 2]);
+                            //parent.removeChild(parent.childNodes[i + 2]);
+                            //updatetextTime();
+                            timestampNum -= 1;
+                        }
+                        else {
+                            console.log('nodelete');
+                            return;
+                        }
+                        i = timestampNum + 1;
                     }
-                    else {
-                        console.log('nodelete');
-                        return;
-                    }
-                    i = timestampNum + 1;
                 });
             }
         }
