@@ -25,7 +25,7 @@
     <script src="player.js" defer="defer"></script>
     <script src="canvas.js" defer="defer"></script>
     <script src="timestamp_area.js" defer="defer"></script>
-    <script src="index.js" defer="defer"></script>
+    <script src="index2.js" defer="defer"></script>
     <script src="ocr_capture.js" defer="defer"></script>
     <script src="ocr_timespan.js" defer="defer"></script>
 
@@ -133,13 +133,16 @@
                 </button>
             </div>
             <div class="note" style="display: flex;">
-                <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden">
+                <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden; position: absolute; z-index: -1;">
                     <div class="timestamp" id="realtimestamp">
                         <div id="c0" style="height: 6.5%; background-color: var(--color-pink);"></div>
                     </div>
                 </div>
+                <div style="overflow:hidden; position: absolute; z-index: -1; background-color: var(--color-background-gray); width: 100%; height: 100%; margin-left: 35px;">
+                    
+                </div>
                 <div class="noteareas">
-                    <div class="notebutton" id="notebtn">
+                    <div class="notebutton" id="notebtn" style="margin-left: 35px; width: -webkit-fill-available">
                         <div class="codeplusbtn" , id="codeplusbtn">
                             <i class="fas fa-plus" id="codeplusbtn__icon" style="font-size:3px;"></i>
                             <h3 class="btn__title" id="codeplusbtn__title">코드</h3>
@@ -184,7 +187,7 @@
                     <!--<div class="notearea" id="timestamptext" scroll=auto > -->
                     <!--<textarea style="position: absolute; width: 38%; height: 90%; font-size: 18px;"></textarea>-->
                     <!--<div class="divtext" contentEditable>Hello World</div>-->
-                    <ul id="sortable" style="overflow-x:hidden; overflow-y:scroll;">
+                    <ul id="sortable" style="overflow-x:hidden; overflow-y:scroll; width: -webkit-fill-available">
                         <!--
                         <li class="ui-state-default" style="width: 99%; height: auto;">
                             <div class="divcode">
