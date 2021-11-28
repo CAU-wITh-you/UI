@@ -91,7 +91,7 @@ if(document.querySelector('video') && videoSelected == false){
                 iframe.style.position = "absolute"
                 iframe.style.overflow="hidden";
                 document.getElementById("columns").appendChild(iframe);*/
-                $("#columns").html(`<iframe src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+                $("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
             }
         }
     
