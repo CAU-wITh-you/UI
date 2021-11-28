@@ -435,13 +435,12 @@ function changebutton() {
     }
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
-document.getElementById("backbtn").addEventListener('click', changebutton);
 
 //순서 바꾸는 함수
 var orderchange = false;
 var clickdeletionbtn = false;
 
-document.getElementById("sortbtn").addEventListener('click', function () {
+function orderchangefunc() {
     orderchange = !orderchange;
     if (orderchange == true) {
         if (clickdeletionbtn == true) {
@@ -464,9 +463,11 @@ document.getElementById("sortbtn").addEventListener('click', function () {
         console.log(document.getElementById("sortable").childNodes);
         console.log(document.getElementById("realtimestamp").childNodes);
     }
-});
+}
+document.getElementById("sortbtn").addEventListener('click', orderchangefunc);
 
-document.getElementById("deletebtn").addEventListener('click', function () {
+//휴지통
+function deletionfunc() {
     clickdeletionbtn = !clickdeletionbtn;
     if (clickdeletionbtn == true) {
         if (orderchange == true) {
@@ -514,6 +515,15 @@ document.getElementById("deletebtn").addEventListener('click', function () {
         document.getElementById("deletebtn__icon").style.color = "whitesmoke";
         console.log("clickdeletebtn");
     }
+}
+
+document.getElementById("deletebtn").addEventListener('click', deletionfunc);
+document.getElementById("backbtn").addEventListener('click', function () {
+    orderchange = true;
+    orderchangefunc();
+    clickdeletionbtn = true;
+    eletionfunc();
+    changebutton();
 });
 
 var selectLanguage = false;
