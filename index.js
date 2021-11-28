@@ -382,6 +382,7 @@ function sortableDisable() {
     $("li").attr("contentEditable", "true");
     $("li").css("cursor", "default");
 }
+
 function updatetextTime() {
     var parentEl = document.getElementById("sortable");
     var childEl = parentEl.children;
@@ -393,7 +394,10 @@ function updatetextTime() {
         console.log(i, tabIndex);
         if (i != tabIndex + 1) {
             //id 변경
-            if (document.getElementById("li" + i).childElementCount == 2) {//코드
+            if (tabIndex == -1) {
+                changearr.push(['0', i, -1]);
+            }
+            else if (document.getElementById("li" + i).childElementCount == 2) {//코드
                 changearr.push(['2', i, tabIndex]);//코드, i, 바꿀거
             }
             else {
@@ -404,48 +408,47 @@ function updatetextTime() {
     console.log("변경후 순서");
     console.log(changearr);
     for (i = 0; i < changearr.length; i++) {
-        if (changearr[i][0] == 2) {
-            document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-            document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-            document.getElementById("c-code" + changearr[i][1]).id = "c-code" + (changearr[i][2] + 1);
-            document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
-            //console.log(document.getElementById("c" + changearr[i][1]).id);
-            document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-            //console.log(document.getElementById("c" + changearr[i][1]).id);
+        if (changearr[i][2] != -1) {
+            if (changearr[i][0] == 2) {
+                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
+                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
+                document.getElementById("c-code" + changearr[i][1]).id = "c-code" + (changearr[i][2] + 1);
+                document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
+                //console.log(document.getElementById("c" + changearr[i][1]).id);
+                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
+                //console.log(document.getElementById("c" + changearr[i][1]).id);
+            }
+            else {//텍스트
+                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
+                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
+                //console.log(document.getElementById("c" + changearr[i][1]).id);
+                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
+                //console.log(document.getElementById("c" + changearr[i][1]).id);
+            }
         }
-        else {//텍스트
-            document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-            document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-            //console.log(document.getElementById("c" + changearr[i][1]).id);
-            document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-            //console.log(document.getElementById("c" + changearr[i][1]).id);
+        else {
+            console.log(i);
+            console.log("없음");
         }
     }
 }
 function updateTimestamp() {
+    var textparent = document.getElementById("sortable");
+    var timeparent = document.getElementById("realtimestamp");
     for (i = 1; i <= timestampNum; i++) {
-        var nowtext = document.getElementById("li" + i);
+        var nowtext = textparent.childNodes[i + 2];
+        var nowtime = timeparent.childNodes[i + 2];
         if (nowtext.childElementCount == 1) {//텍스트영역
-            document.getElementById("c" + i).style.height = String(nowtext.offsetHeight) + "px";
+            nowtime.setAttribute("style", "height: " + String(nowtext.offsetHeight) + "px" + ";");
             console.log("텍스트 영역 정렬");
         }
         else if (nowtext.childElementCount == 2) {//코드영역
-            document.getElementById("c" + i).style.height = "330px";
+            nowtime.setAttribute("style", "height: 330px;");
             console.log("코드 영역 정렬");
         }
-
-        /*
-        if (nowTimestamp.firstChild.className == "fas fa-tenge fa-2x") {//텍스트 영역
-            nowtext = document.getElementById("li" + i);
-            nowTimestamp.style.height = String(nowtext.offsetHeight) + "px";
-            console.log("텍스트 영역 정렬");
-        }
-        else if (nowTimestamp.firstChild.className == "fab fa-cuttlefish fa-2x") {//코드 영역
-            nowTimestamp.style.height = "330px";
-            console.log("코드 영역 정렬");
-        }
-        */
     }
+    console.log(textparent.childNodes);
+    console.log(timeparent.childNodes);
 
 }
 
@@ -455,6 +458,8 @@ document.getElementById("backbtn").addEventListener('click', function () {
 });
 
 var openedit = false;
+var orderchange = false;
+var clickdeletionbtn = false;
 function changebutton() {
     openedit = !openedit
     if (openedit == false) {
@@ -464,6 +469,11 @@ function changebutton() {
         document.getElementById("sortbtn").style.display = "flex";
         document.getElementById("deletebtn").style.display = "flex";
         document.getElementById("backbtn").style.display = "flex";
+        document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("sortbtn__icon").style.color = "whitesmoke";
+        document.getElementById("deletebtn__icon").style.color = "whitesmoke";
+        orderchange = false;
+        clickdeletionbtn = false;
         //console.log('open');
     }
     else {
@@ -477,13 +487,9 @@ function changebutton() {
     }
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
-document.getElementById("backbtn").addEventListener('click', changebutton);
 
 //순서 바꾸는 함수
-var orderchange = false;
-var clickdeletionbtn = false;
-
-document.getElementById("sortbtn").addEventListener('click', function () {
+function orderchangefunc() {
     orderchange = !orderchange;
     if (orderchange == true) {
         if (clickdeletionbtn == true) {
@@ -499,16 +505,18 @@ document.getElementById("sortbtn").addEventListener('click', function () {
     }
     else {
         document.getElementById("sortbtn__icon").style.color = "whitesmoke";
-        updatetextTime();
-        //updateTimestamp();
+        //updatetextTime();
+        updateTimestamp();
         sortableDisable();
         console.log("sortable out");
         console.log(document.getElementById("sortable").childNodes);
         console.log(document.getElementById("realtimestamp").childNodes);
     }
-});
+}
+document.getElementById("sortbtn").addEventListener('click', orderchangefunc);
 
-document.getElementById("deletebtn").addEventListener('click', function () {
+//휴지통
+function deletionfunc() {
     clickdeletionbtn = !clickdeletionbtn;
     if (clickdeletionbtn == true) {
         if (orderchange == true) {
@@ -523,25 +531,18 @@ document.getElementById("deletebtn").addEventListener('click', function () {
                     console.log(this.childElementCount);
                     if (jbResult) {
                         console.log('delete');
-                        var parent = document.getElementById("#realtimestamp");
-                        var child = document.getElementById("c" + i);
-                        parent.removeChild(child);
+                        var realparent = this.parentNode;
+                        var parent = document.getElementById("realtimestamp");
+                        console.log(parent.childNodes);
+                        //var now = document.getElementById("c" + i);
                         this.remove();
+                        var child = parent.removeChild(parent.childNodes[i]);
+                        console.log(child);
+                        //console.log(parent.childNodes);
+                        //console.log(parent.childNodes[i + 2]);
+                        //parent.removeChild(parent.childNodes[i + 2]);
+                        //updatetextTime();
                         timestampNum -= 1;
-                        for (j = i + 1; j <= timestampNum; j++) {
-                            if (this.childElementCount == 2) {
-                                document.getElementById("li" + j).id = "li" + j - 1;
-                                document.getElementById("t1" + j).id = "t1" + j - 1;
-                                document.getElementById("c-code" + j).id = "c-code" + j - 1;
-                                document.getElementById("t2" + j).id = "t2" + j - 1;
-                                document.getElementById("c" + j).id = "c" + j - 1;
-                            }
-                            else {
-                                document.getElementById("li" + j) = "li" + j - 1;
-                                document.getElementById("t1" + j) = "t1" + j - 1;
-                                document.getElementById("c" + j) = "c" + j - 1;
-                            }
-                        }
                     }
                     else {
                         console.log('nodelete');
@@ -556,6 +557,11 @@ document.getElementById("deletebtn").addEventListener('click', function () {
         document.getElementById("deletebtn__icon").style.color = "whitesmoke";
         console.log("clickdeletebtn");
     }
+}
+
+document.getElementById("deletebtn").addEventListener('click', deletionfunc);
+document.getElementById("backbtn").addEventListener('click', function () {
+    changebutton();
 });
 
 var selectLanguage = false;
