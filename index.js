@@ -395,21 +395,48 @@ function updatetextTime() {
 function updateTimestamp() {
     var textparent = document.getElementById("sortable");
     var timeparent = document.getElementById("realtimestamp");
+    //timestamp 순서 조정
     for (i = 1; i <= timestampNum; i++) {
-        var nowtext = textparent.childNodes[i + 2];
-        var nowtime = timeparent.childNodes[i + 2];
-        if (nowtext.childElementCount == 1) {//텍스트영역
-            nowtime.setAttribute("style", "height: " + String(nowtext.offsetHeight) + "px" + ";");
-            console.log("텍스트 영역 정렬");
+        var nowtimeid = timeparent.childNodes[i + 2].getAttribute("id");//"c"+i
+        var textparentid = textparent.childNodes[i + 2].getAttribute("id");//"li"+i
+        if (nowtimeid[1] == textparentid[2]) {
+            console.log(i);
+            console.log("같음");
         }
-        else if (nowtext.childElementCount == 2) {//코드영역
-            nowtime.setAttribute("style", "height: 330px;");
-            console.log("코드 영역 정렬");
-        }
-    }
-    console.log(textparent.childNodes);
-    console.log(timeparent.childNodes);
+        else {
+            var tempnode = timeparent.childNodes[i + 2];
+            for (j = 1; j <= timestampNum; j++) {
+                selectnode = timeparent.childNodes[j + 2];
+                if (selectnode[1] == textparent[2]) {
+                    timeparent.childNodes[i + 2] = selectnode;
+                    console.log("switch");
+                    console.log(timeparent.childNodes[i + 2])
+                    console.log(selectnode);
 
+                    timeparent.childNodes[j + 2] = tempnode;
+                    console.log(i);
+                    console.log('다름');
+                    break;
+                }
+            }
+        }
+        //간격 조정
+        for (i = 1; i <= timestampNum; i++) {
+            var nowtext = textparent.childNodes[i + 2];
+            var nowtime = timeparent.childNodes[i + 2];
+            if (nowtext.childElementCount == 1) {//텍스트영역
+                nowtime.setAttribute("style", "height: " + String(nowtext.offsetHeight) + "px" + ";");
+                console.log("텍스트 영역 정렬");
+            }
+            else if (nowtext.childElementCount == 2) {//코드영역
+                nowtime.setAttribute("style", "height: 330px;");
+                console.log("코드 영역 정렬");
+            }
+        }
+        console.log(textparent.childNodes);
+        console.log(timeparent.childNodes);
+
+    }
 }
 
 document.getElementById("backbtn").addEventListener('click', function () {
