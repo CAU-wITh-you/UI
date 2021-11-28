@@ -5,7 +5,7 @@ var color = "pink"
 var timeStamp = [];
 var timeStampnum = 0;
 var startclicknum = 0
-
+var language = null;
 function toggleImgstart() {
     startclicknum += 1;
     if (startclicknum % 2 == 0) {
@@ -88,7 +88,37 @@ document.getElementById('timestampbtn').addEventListener('click', clicktimestamp
 //document.querySelector("#extensions > div.extensions__right > div.note > div").addEventListener('click', clicktimestamp);
 
 //<i class="fas fa-carrot fa-2x" id="1"></i>
+// 언어 선택
+var selectLanguage = false;
+document.getElementById("realselectionbtn").addEventListener('click', function () {
+    console.log("enter");
+    selectLanguage = !selectLanguage;
+    if (selectLanguage == true) {
+        document.getElementById("language__C").style.display = "block";
+        document.getElementById("language__Cpp").style.display = "block";
+        document.getElementById("language__C").addEventListener('click', function () {
+            console.log("c언어 선택");
+            selectLanguage = true;
+            language = "C";
+            document.getElementById("language__Cpp").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
+        });
+        document.getElementById("language__Cpp").addEventListener('click', function () {
+            console.log("cpp언어 선택");
+            selectLanguage = true;
+            language = "Cpp";
+            document.getElementById("language__C").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
+        });
 
+    }
+    else {
+        document.getElementById("language__C").style.display = "none";
+        document.getElementById("language__Cpp").style.display = "none";
+    }
+});
 
 //1초단위
 function transSectoTime(nowTime) {
@@ -159,146 +189,142 @@ function compile(carrotId){
 var timestampNum = 0;
 
 function makeCodearea(text) {
-    timestampNum++;
-    var currentTime = player.getCurrentTime();
+    if (language == null) {
+        alert("언어를 선택하세요");
+    }
+    else {
+        timestampNum++;
+        var currentTime = player.getCurrentTime();
 
-    var codeLi = document.createElement("li");
-    codeLi.className = "ui-state-default";
-    codeLi.style.backgroundColor = "var(--color-background-gray)";
-    codeLi.id = "li" + timestampNum;
-    codeLi.value = currentTime;
+        var codeLi = document.createElement("li");
+        codeLi.className = "ui-state-default";
+        codeLi.style.backgroundColor = "var(--color-background-gray)";
+        codeLi.id = "li" + timestampNum;
+        codeLi.value = currentTime;
 
-    var codeDiv = document.createElement("div");
-    codeDiv.className = "divcode";
-    codeDiv.id = "t1" + timestampNum;
-    codeDiv.style.backgroundColor = "var(--color-background-gray)";
-    codeDiv.style.width = "99%";
+        var codeDiv = document.createElement("div");
+        codeDiv.className = "divcode";
+        codeDiv.id = "t1" + timestampNum;
+        codeDiv.style.backgroundColor = "var(--color-background-gray)";
+        codeDiv.style.width = "99%";
 
-    var runbtnSpan = document.createElement("span");
-    runbtnSpan.id = "divcode__run";
-    var runbtnI = document.createElement("i");
-    runbtnI.className = "far fa-play-circle";
-    runbtnI.id = "runbtn" + timestampNum;
-    runbtnI.style.fontSize = "20px";
-    runbtnI.style.color = "whitesmoke";
-    runbtnSpan.appendChild(runbtnI);
+        var runbtnSpan = document.createElement("span");
+        runbtnSpan.id = "divcode__run";
+        var runbtnI = document.createElement("i");
+        runbtnI.className = "far fa-play-circle";
+        runbtnI.id = "runbtn";
+        runbtnI.style.fontSize = "20px";
+        runbtnI.style.color = "whitesmoke";
+        runbtnSpan.appendChild(runbtnI);
 
-    var codetextDiv = document.createElement("divcodetext");
-    codetextDiv.style.width = "100%";
-    codetextDiv.style.height = "100%";
+        var codetextDiv = document.createElement("divcodetext");
+        codetextDiv.style.width = "100%";
+        codetextDiv.style.height = "100%";
 
-    codetext = document.createElement("textarea");
-    codetext.id = "c-code" + timestampNum;
-    codetext.style.width = "90%";
+        codetext = document.createElement("textarea");
+        if (language == "C") {
+            codetext.id = "c-code" + timestampNum;
+        }
+        else if (language == "Cpp") {
+            codetext.id = "cpp-code" + timestampNum;
+        }
+        codetext.style.width = "90%";
 
-    codetextDiv.appendChild(codetext);
-    var resultDiv = document.createElement("div");
-    resultDiv.id = "t2" + timestampNum;
-    resultDiv.className = "divresult";
-    resultDiv.style.display = "block";
-    resultDiv.style.width = "100%";
-    //resultDiv.style.height = "20px";
-    resultDiv.style.backgroundColor = "gray";
-    resultDiv.style.color = "whitesmoke";
-    resultDiv.style.display = "inline-block";
-    resultDiv.innerText = "  [OUTPUT] : ";
-    resultDiv.style.textAlign = "left";
-    resultDiv.style.fontFamily = 'Malgun Gothic';
-    resultDiv.style.fontSize = "15px";
-    resultDiv.style.verticalAlign = "middle";
-    resultDiv.style.marginLeft = "5px";
-    resultDiv.style.paddingLeft = "10px";
+        codetextDiv.appendChild(codetext);
+        var resultDiv = document.createElement("div");
+        resultDiv.id = "t2" + timestampNum;
+        resultDiv.className = "divresult";
+        resultDiv.style.display = "block";
+        resultDiv.style.width = "100%";
+        resultDiv.style.height = "20px";
+        resultDiv.style.backgroundColor = "gray";
+        resultDiv.style.color = "whitesmoke";
+        resultDiv.innerText = "  [OUTPUT] : ";
+        resultDiv.style.textAlign = "left";
+        resultDiv.style.fontFamily = 'Malgun Gothic';
+        resultDiv.style.fontSize = "15px";
+        resultDiv.style.verticalAlign = "middle";
 
-    var inputDiv = document.createElement("div");
-    inputDiv.className = "divtexttext"
-    inputDiv.contentEditable = "true";
-    inputDiv.id = "t3" + timestampNum;
-    inputDiv.style.display = "flex";
-    inputDiv.style.backgroundColor = "black";
-    inputDiv.style.width = "100%";
-    inputDiv.style.border = "3px solid black";
-    inputDiv.style.border = "0px";
-    inputDiv.style.color = "whitesmoke";
-    inputDiv.style.textAlign = "left";
-    inputDiv.style.verticalAlign = "middle";
-    inputDiv.style.fontFamily = 'Malgun Gothic';
-    inputDiv.style.fontSize = "15px";
-    inputDiv.style.overflow = "hidden";
-    inputDiv.style.wordBreak = "break-all";
-    inputDiv.style.display = "inline-block";
-    inputDiv.style.whiteSpace = "pre-wrap";
-    inputDiv.style.marginLeft = "5px";
-    inputDiv.style.paddingLeft = "10px";
+        codeDiv.appendChild(runbtnSpan);
+        codeDiv.appendChild(codetextDiv);
+        codeLi.appendChild(codeDiv);
+        codeLi.appendChild(resultDiv);
 
-    codeDiv.appendChild(runbtnSpan);
-    codeDiv.appendChild(codetextDiv);
-    codeLi.appendChild(codeDiv);
-    codeLi.appendChild(inputDiv);
-    codeLi.appendChild(resultDiv);
+        codetext.addEventListener("input", function (e) {
+            console.log(e.target.id);
+            var thisId = e.target.id.slice(5, e.target.id.length);
+            document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px");
+            //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
+        }, false);
 
-    codetext.addEventListener("input", function (e) {
-        console.log(e.target.id);
-        var thisId = e.target.id.slice(5, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px");
-        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
-    }, false);
-
-    runbtnI.addEventListener('click', function(e){
-        console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
-        var thisId = e.target.id.slice(6, e.target.id.length);
-        compile(thisId);
-    });
-
-    document.querySelector("#sortable").appendChild(codeLi);
+        document.querySelector("#sortable").appendChild(codeLi);
 
 
-    var div = document.createElement("div");
-    //div.style.border = "1px solid blue";
-    div.id = "c" + timestampNum;
-    var carrot = document.createElement("i");
-    console.log("carrot");
-    carrot.className = "fab fa-cuttlefish fa-2x";
-    carrot.style.display = "block";
-    var now = transSectoTime(currentTime);
-    carrot.title = now;
-    carrot.value = currentTime;
-    console.log(document.getElementById("li" + timestampNum).offsetHeight);
-    div.style.height = "330px";
-    div.style.backgroundColor = "var(--color-pink)";
-    div.appendChild(carrot);
-    document.querySelector("#realtimestamp").appendChild(div);
+        var div = document.createElement("div");
+        //div.style.border = "1px solid blue";
+        div.id = "c" + timestampNum;
+        var carrot = document.createElement("i");
+        console.log("carrot");
+        carrot.className = "fab fa-cuttlefish fa-2x";
+        carrot.style.display = "block";
+        var now = transSectoTime(currentTime);
+        carrot.title = now;
+        carrot.value = currentTime;
+        console.log(document.getElementById("li" + timestampNum).offsetHeight);
+        div.style.height = "330px";
+        div.style.backgroundColor = "var(--color-pink)";
+        div.appendChild(carrot);
+        document.querySelector("#realtimestamp").appendChild(div);
 
-    carrot.addEventListener('click', function (e) {
-        player.seekTo(e.target.value, true);
-    });
-
-    var d = $("#sortable");
-    d.scrollTop(d.prop("scrollHeight"));
-
-    (function () {
-        $("#sortable").scroll(function () {
-            //console.log("scrolling");
-            //console.log($("#realtimestamp"));
-            $("#realtimestamp").prop("scrollTop", this.scrollTop)
-                .prop("scrollLeft", this.scrollLeft);
-            $("#timestamp_area").prop("scrollTop", this.scrollTop)
-                .prop("scrollLeft", this.scrollLeft);
+        carrot.addEventListener('click', function (e) {
+            player.seekTo(e.target.value, true);
         });
-    })();
-    nowcode = "c-code" + timestampNum;
-    console.log(nowcode);
-    console.log(typeof (nowcode));
 
-    var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        mode: "text/x-csrc",
-        theme: "material-darker"
-    });
+        var d = $("#sortable");
+        d.scrollTop(d.prop("scrollHeight"));
 
-    document.querySelector(`#t1${timestampNum} > divcodetext > div`).CodeMirror.setValue(text);
-    return timestampNum;
+        (function () {
+            $("#sortable").scroll(function () {
+                //console.log("scrolling");
+                //console.log($("#realtimestamp"));
+                $("#realtimestamp").prop("scrollTop", this.scrollTop)
+                    .prop("scrollLeft", this.scrollLeft);
+                $("#timestamp_area").prop("scrollTop", this.scrollTop)
+                    .prop("scrollLeft", this.scrollLeft);
+            });
+        })();
+        if (language == "C") {
+            nowcode = "c-code" + timestampNum;
+            console.log(nowcode);
+            console.log(typeof (nowcode));
+        }
+        else if (language == "Cpp") {
+            nowcode = "cpp-code" + timestampNum;
+            console.log(nowcode);
+            console.log(typeof (nowcode));
+        }
+
+        if (language == "C") {
+            var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+                lineNumbers: true,
+                matchBrackets: true,
+                autoCloseBrackets: true,
+                mode: "text/x-csrc",
+                theme: "material-darker"
+            });
+        }
+        else if (language == "Cpp") {
+            var cppEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+                lineNumbers: true,
+                matchBrackets: true,
+                autoCloseBrackets: true,
+                mode: "text/x-c++src",
+                theme: "material-darker"
+            });
+        }
+        document.querySelector(`#t1${timestampNum} > divcodetext > div`).CodeMirror.setValue(text);
+        return timestampNum;
+    }
 }
 
 function makeTextarea(text) {
@@ -568,39 +594,4 @@ function deletionfunc() {
 document.getElementById("deletebtn").addEventListener('click', deletionfunc);
 document.getElementById("backbtn").addEventListener('click', function () {
     changebutton();
-});
-
-var selectLanguage = false;
-document.getElementById("realselectionbtn").addEventListener('click', function () {
-    console.log("enter");
-    selectLanguage = !selectLanguage;
-    if (selectLanguage == true) {
-        document.getElementById("language__C").style.display = "block";
-        document.getElementById("language__Cpp").style.display = "block";
-    }
-    else {
-        document.getElementById("language__C").style.display = "none";
-        document.getElementById("language__Cpp").style.display = "none";
-    }
-});
-
-document.getElementById("language__C").addEventListener('click', function () {
-    console.log("enter");
-    selectLanguage = true;
-    if (selectLanguage == true) {
-        document.getElementById("language__C").style.display = "block";
-        document.getElementById("language__Cpp").style.display = "block";
-    }
-    else {
-        document.getElementById("language__C").style.display = "none";
-        document.getElementById("language__Cpp").style.display = "none";
-    }
-});
-
-var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
-    lineNumbers: true,
-    matchBrackets: true,
-    autoCloseBrackets: true,
-    mode: "text/x-c++src",
-    theme: "ambiance"
 });
