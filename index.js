@@ -405,73 +405,51 @@ function sortableDisable() {
     $("li").css("cursor", "default");
 }
 
-function updatetextTime() {
-    var parentEl = document.getElementById("sortable");
-    var childEl = parentEl.children;
-    var tabIndex;
-    //parent=document.getElementById("sortable");
-    var changearr = [];
-    for (i = 1; i <= timestampNum; i++) {
-        tabIndex = Array.from(childEl).indexOf(document.getElementById("li" + i));
-        console.log(i, tabIndex);
-        if (i != tabIndex + 1) {
-            //id 변경
-            if (tabIndex == -1) {
-                changearr.push(['0', i, -1]);
-            }
-            else if (document.getElementById("li" + i).childElementCount == 2) {//코드
-                changearr.push(['2', i, tabIndex]);//코드, i, 바꿀거
-            }
-            else {
-                changearr.push(['1', i, tabIndex]);//코드, i, 바꿀거
-            }
-        }
-    }
-    console.log("변경후 순서");
-    console.log(changearr);
-    for (i = 0; i < changearr.length; i++) {
-        if (changearr[i][2] != -1) {
-            if (changearr[i][0] == 2) {
-                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-                document.getElementById("c-code" + changearr[i][1]).id = "c-code" + (changearr[i][2] + 1);
-                document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-            }
-            else {//텍스트
-                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-            }
-        }
-        else {
-            console.log(i);
-            console.log("없음");
-        }
-    }
-}
 function updateTimestamp() {
     var textparent = document.getElementById("sortable");
     var timeparent = document.getElementById("realtimestamp");
+    //timestamp 순서 조정
     for (i = 1; i <= timestampNum; i++) {
-        var nowtext = textparent.childNodes[i + 2];
-        var nowtime = timeparent.childNodes[i + 2];
-        if (nowtext.childElementCount == 1) {//텍스트영역
-            nowtime.setAttribute("style", "height: " + String(nowtext.offsetHeight) + "px" + ";");
-            console.log("텍스트 영역 정렬");
+        var nowtimeid = timeparent.childNodes[i + 2].getAttribute("id");//"c"+i
+        var textparentid = textparent.childNodes[i + 2].getAttribute("id");//"li"+i
+        if (nowtimeid[1] == textparentid[2]) {
+            console.log(i);
+            console.log("같음");
         }
-        else if (nowtext.childElementCount == 2) {//코드영역
-            nowtime.setAttribute("style", "height: 330px;");
-            console.log("코드 영역 정렬");
-        }
-    }
-    console.log(textparent.childNodes);
-    console.log(timeparent.childNodes);
+        else {
+            var tempnode = timeparent.childNodes[i + 2];
+            for (j = 1; j <= timestampNum; j++) {
+                selectnode = timeparent.childNodes[j + 2];
+                if (selectnode[1] == textparent[2]) {
+                    timeparent.childNodes[i + 2] = selectnode;
+                    console.log("switch");
+                    console.log(timeparent.childNodes[i + 2])
+                    console.log(selectnode);
 
+                    timeparent.childNodes[j + 2] = tempnode;
+                    console.log(i);
+                    console.log('다름');
+                    break;
+                }
+            }
+        }
+        //간격 조정
+        for (i = 1; i <= timestampNum; i++) {
+            var nowtext = textparent.childNodes[i + 2];
+            var nowtime = timeparent.childNodes[i + 2];
+            if (nowtext.childElementCount == 1) {//텍스트영역
+                nowtime.setAttribute("style", "height: " + String(nowtext.offsetHeight) + "px" + ";");
+                console.log("텍스트 영역 정렬");
+            }
+            else if (nowtext.childElementCount == 2) {//코드영역
+                nowtime.setAttribute("style", "height: 330px;");
+                console.log("코드 영역 정렬");
+            }
+        }
+        console.log(textparent.childNodes);
+        console.log(timeparent.childNodes);
+
+    }
 }
 
 document.getElementById("backbtn").addEventListener('click', function () {
@@ -527,7 +505,6 @@ function orderchangefunc() {
     }
     else {
         document.getElementById("sortbtn__icon").style.color = "whitesmoke";
-        //updatetextTime();
         updateTimestamp();
         sortableDisable();
         console.log("sortable out");
