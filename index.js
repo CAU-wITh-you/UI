@@ -409,25 +409,6 @@ function updateTimestamp() {
 
 }
 
-//순서 바꾸는 함수
-var orderchange = false;
-document.getElementById("sortbtn").addEventListener('click', function () {
-    orderchange = !orderchange;
-    if (orderchange == true) {
-        console.log("sortable 진입");
-        console.log(document.getElementById("sortable").childNodes);
-        console.log(document.getElementById("realtimestamp").childNodes);
-        sortableEnable();
-    }
-    else {
-        updatetextTime();
-        //updateTimestamp();
-        sortableDisable();
-        console.log("sortable out");
-        console.log(document.getElementById("sortable").childNodes);
-        console.log(document.getElementById("realtimestamp").childNodes);
-    }
-});
 document.getElementById("backbtn").addEventListener('click', function () {
     orderchange = false;
     sortableDisable();
@@ -458,44 +439,77 @@ function changebutton() {
 document.getElementById("editbtn").addEventListener('click', changebutton);
 document.getElementById("backbtn").addEventListener('click', changebutton);
 
-clickdeletionbtn = false;
+//순서 바꾸는 함수
+var orderchange = false;
+var clickdeletionbtn = false;
+
+document.getElementById("sortbtn").addEventListener('click', function () {
+    orderchange = !orderchange;
+    if (orderchange == true) {
+        if (clickdeletionbtn == true) {
+            alert('휴지통 버튼을 해제하세요');
+        }
+        else {
+            document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
+            console.log("sortable 진입");
+            console.log(document.getElementById("sortable").childNodes);
+            console.log(document.getElementById("realtimestamp").childNodes);
+            sortableEnable();
+        }
+    }
+    else {
+        document.getElementById("sortbtn__icon").style.color = "whitesmoke";
+        updatetextTime();
+        //updateTimestamp();
+        sortableDisable();
+        console.log("sortable out");
+        console.log(document.getElementById("sortable").childNodes);
+        console.log(document.getElementById("realtimestamp").childNodes);
+    }
+});
+
 document.getElementById("deletebtn").addEventListener('click', function () {
     clickdeletionbtn = !clickdeletionbtn;
     if (clickdeletionbtn == true) {
-        document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
-        for (i = 1; i <= timestampNum; i++) {
-            document.getElementById("li" + i).addEventListener('click', function () {
-                var jbResult = confirm("정말삭제하시겠습니까?");
-                console.log(this);
-                console.log(this.childElementCount);
-                if (jbResult) {
-                    console.log('delete');
-                    this.remove();
-                    var parent = document.getElementById("#realtimestamp");
-                    var child = document.getElementById("c" + i);
-                    parent.removeChild(child);
-                    timestampNum -= 1;
-                    for (j = i + 1; j <= timestampNum; j++) {
-                        if (this.childElementCount == 2) {
-                            document.getElementById("li" + j).id = "li" + j - 1;
-                            document.getElementById("t1" + j).id = "t1" + j - 1;
-                            document.getElementById("c-code" + j).id = "c-code" + j - 1;
-                            document.getElementById("t2" + j).id = "t2" + j - 1;
-                            document.getElementById("c" + j).id = "c" + j - 1;
-                        }
-                        else {
-                            document.getElementById("li" + j) = "li" + j - 1;
-                            document.getElementById("t1" + j) = "t1" + j - 1;
-                            document.getElementById("c" + j) = "c" + j - 1;
+        if (orderchange == true) {
+            alert("순서바꿈 버튼을 해제하세요");
+        }
+        else {
+            document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
+            for (i = 1; i <= timestampNum; i++) {
+                document.getElementById("li" + i).addEventListener('click', function () {
+                    var jbResult = confirm("정말삭제하시겠습니까?");
+                    console.log(this);
+                    console.log(this.childElementCount);
+                    if (jbResult) {
+                        console.log('delete');
+                        var parent = document.getElementById("#realtimestamp");
+                        var child = document.getElementById("c" + i);
+                        parent.removeChild(child);
+                        this.remove();
+                        timestampNum -= 1;
+                        for (j = i + 1; j <= timestampNum; j++) {
+                            if (this.childElementCount == 2) {
+                                document.getElementById("li" + j).id = "li" + j - 1;
+                                document.getElementById("t1" + j).id = "t1" + j - 1;
+                                document.getElementById("c-code" + j).id = "c-code" + j - 1;
+                                document.getElementById("t2" + j).id = "t2" + j - 1;
+                                document.getElementById("c" + j).id = "c" + j - 1;
+                            }
+                            else {
+                                document.getElementById("li" + j) = "li" + j - 1;
+                                document.getElementById("t1" + j) = "t1" + j - 1;
+                                document.getElementById("c" + j) = "c" + j - 1;
+                            }
                         }
                     }
-                }
-                else {
-                    console.log('nodelete');
-                    return;
-                }
-                i = timestampNum + 1;
-            });
+                    else {
+                        console.log('nodelete');
+                        return;
+                    }
+                    i = timestampNum + 1;
+                });
+            }
         }
     }
     else {
@@ -516,7 +530,8 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
         document.getElementById("language__C").style.display = "none";
         document.getElementById("language__Cpp").style.display = "none";
     }
-})
+});
+
 document.getElementById("language__C").addEventListener('click', function () {
     console.log("enter");
     selectLanguage = true;
@@ -528,9 +543,7 @@ document.getElementById("language__C").addEventListener('click', function () {
         document.getElementById("language__C").style.display = "none";
         document.getElementById("language__Cpp").style.display = "none";
     }
-})
-
-
+});
 
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
     lineNumbers: true,
