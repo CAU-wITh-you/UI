@@ -183,6 +183,7 @@ function makeCodearea(text) {
 
     var codeDiv = document.createElement("div");
     codeDiv.className = "divcode";
+    codeDiv.contentEditable = "false";
     codeDiv.id = "t1" + timestampNum;
     codeDiv.style.backgroundColor = "var(--color-background-gray)";
     codeDiv.style.marginLeft = "35px";
