@@ -121,6 +121,40 @@ function clicktimestamp() {
     }
 }
 
+function compile(carrotId){
+    
+
+    var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();  
+    alert("compile", code);
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        clientId : 'ee0532ecd7fd6bfdab3b8449e971ab28',
+        clientSecret : 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
+        script : code,
+        stdin : '',
+        language : 'c',
+        versionIndex : '0'
+    };
+    console.log(data);
+
+    xhr.open("POST", "https://api.jdoodle.com/v1/execute", true);
+    xhr.setRequestHeader('Content-Type', 'application/json'); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            // JSON.parse does not evaluate the attacker's scripts.
+            console.log("compile response!");
+            var resp = JSON.parse(xhr.responseText);
+            //var result = resp.result.slice(1,resp.length);
+            //var resp = xhr.responseText;
+            console.log(resp);
+            //console.log(result);
+            document.querySelector(`#t2${carrotId}`).innerHTML = resp.output;
+            //alert(resp);
+        }
+    }
+    xhr.send(JSON.stringify(data));
+}
 
 var timestampNum = 0;
 
@@ -144,7 +178,7 @@ function makeCodearea(text) {
     runbtnSpan.id = "divcode__run";
     var runbtnI = document.createElement("i");
     runbtnI.className = "far fa-play-circle";
-    runbtnI.id = "runbtn";
+    runbtnI.id = "runbtn" + timestampNum;
     runbtnI.style.fontSize = "20px";
     runbtnI.style.color = "whitesmoke";
     runbtnSpan.appendChild(runbtnI);
@@ -183,6 +217,12 @@ function makeCodearea(text) {
         document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
+
+    runbtnI.addEventListener('click', function(e){
+        console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
+        var thisId = e.target.id.slice(6, e.target.id.length);
+        compile(thisId);
+    });
 
     document.querySelector("#sortable").appendChild(codeLi);
 
@@ -319,7 +359,7 @@ function makeTextarea(text) {
         });
     })();
 
-    //return timestampNum;
+    return timestampNum;
 }
 
 
