@@ -28,6 +28,9 @@ $(document).ready(function(){
             document.querySelector('#withYou').remove();
             window.location.reload();
         }
+    }
+});    
+
         /*document.querySelector("#movie_player > div.html5-video-container > video").pause();
         document.querySelector('#secondary').innerHTML = ``;
         document.querySelector('#primary').innerHTML = ``;        /
@@ -41,9 +44,6 @@ $(document).ready(function(){
                 //console.log(document.getElementById("youtubeMP4"));
             }
         }, 2000);*/
-    }
-});    
-
 
 /*setTimeout(function(){
     if(document.querySelector('#withYou')){

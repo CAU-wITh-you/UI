@@ -74,7 +74,6 @@ function nohoverdescription() {
 }
 
 
-
 /*document.getElementById('questionbtn').addEventListener('click', function () {
     timeStamp.push(document.getElementById("youtubeMP4").currentTime);
     console.log(timeStamp);
@@ -228,10 +227,13 @@ function makeCodearea(text) {
     var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
         lineNumbers: true,
         matchBrackets: true,
+        autoCloseBrackets: true,
         mode: "text/x-csrc",
         theme: "material-darker"
     });
-    //return timestampNum;
+
+    document.querySelector(`#t1${timestampNum} > divcodetext > div`).CodeMirror.setValue(text);
+    return timestampNum;
 }
 
 function makeTextarea(text) {
@@ -556,6 +558,7 @@ document.getElementById("language__C").addEventListener('click', function () {
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
     lineNumbers: true,
     matchBrackets: true,
+    autoCloseBrackets: true,
     mode: "text/x-c++src",
     theme: "ambiance"
 });

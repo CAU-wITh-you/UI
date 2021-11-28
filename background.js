@@ -29,7 +29,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         var videoId = videoUrl.searchParams.get("v");
         if(videoId){
           console.log('change', changeInfo.url);
-          hello()
+          hello();
         }
     }
 });

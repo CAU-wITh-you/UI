@@ -16,7 +16,7 @@
 
 <style>
   .CodeMirror { height: auto; border: 1px solid #ddd; }
-  .CodeMirror-scroll { max-height: 200px; }
+  .CodeMirror-scroll { max-height: 200px;   overflow-y: hidden; overflow-x: auto;}
   .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
   .banner { background: #ffc; padding: 6px; border-bottom: 2px solid silver; text-align: center }
 </style>
@@ -87,7 +87,8 @@
     var editor = CodeMirror.fromTextArea(document.getElementById("demotext"), {
       lineNumbers: true,
       mode: "text/html",
-      matchBrackets: true
+      matchBrackets: true,
+      autoCloseBrackets: true
     });
   </script>
 
