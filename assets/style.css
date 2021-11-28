@@ -241,9 +241,12 @@ video::-webkit-media-controls-fullscreen-button {
 .selectLanguage {
   height: 100%;
   float: left;
-  width: 50%;
+  width: 40%;
   vertical-align: middle;
   text-align: center;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
 
 .language {
@@ -254,9 +257,12 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 #realselectionbtn {
+  padding-top: 4%;
+  border-left: 10px;
   float: left;
   height: 50%;
   width: 30%;
+  font-family: "HSYuji-Regular";
 }
 
 #realselectionbtn:hover {
@@ -266,8 +272,10 @@ video::-webkit-media-controls-fullscreen-button {
 
 #language__C {
   float: left;
+  padding-top: 4%;
   width: 10%;
   height: 50%;
+  font-family: "HSYuji-Regular";
 }
 
 #language__C:hover {
@@ -277,8 +285,10 @@ video::-webkit-media-controls-fullscreen-button {
 
 #language__Cpp {
   float: left;
+  padding-top: 4%;
   width: 20%;
   height: 50%;
+  font-family: "HSYuji-Regular";
 }
 
 #language__Cpp:hover {
@@ -291,19 +301,10 @@ video::-webkit-media-controls-fullscreen-button {
   margin: 0;
   position: absolute;
   height: inherit;
-  width: 13%;
+  width: 10%;
   right: -1%;
   display: inline-flex;
   justify-content: space-between;
-}
-
-#mypagehtml {
-  width: 40%;
-  height: 100%;
-  float: right;
-  text-align: right;
-  margin-right: 10px;
-  vertical-align: middle;
 }
 
 #questionbtn {
@@ -314,6 +315,15 @@ video::-webkit-media-controls-fullscreen-button {
 
 #questionbtn:hover {
   transform: scale(1.1);
+}
+
+#mypagehtml {
+  margin-right: 25px;
+  width: 70%;
+  height: 100%;
+  float: right;
+  text-align: right;
+  vertical-align: middle;
 }
 
 #mypage.mypage__title {

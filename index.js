@@ -131,7 +131,7 @@ function makeCodearea(text) {
     var codeLi = document.createElement("li");
     codeLi.className = "ui-state-default";
     codeLi.style.backgroundColor = "var(--color-background-gray)";
-    codeLi.id = timestampNum;
+    codeLi.id = "li" + timestampNum;
     codeLi.value = currentTime;
 
     var codeDiv = document.createElement("div");
@@ -197,7 +197,7 @@ function makeCodearea(text) {
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;
-    console.log(document.getElementById(timestampNum).offsetHeight);
+    console.log(document.getElementById("li" + timestampNum).offsetHeight);
     div.style.height = "330px";
     div.style.backgroundColor = "var(--color-pink)";
     div.appendChild(carrot);
@@ -244,6 +244,7 @@ function makeTextarea(text) {
     textLi.className = "ui-state-default";
     textLi.style.backgroundColor = "var(--color-background-gray)";
     textLi.value = currentTime;
+    textLi.id = "li" + timestampNum;
 
     var textDiv = document.createElement("div");
     textDiv.className = "divtext";
@@ -278,7 +279,7 @@ function makeTextarea(text) {
 
     texttextDiv.addEventListener("input", function (e) {
         var thisId = e.target.id.slice(2, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight)+10+ "px");
+        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight) + 10 + "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
 
@@ -341,16 +342,90 @@ function sortableDisable() {
     $("li").attr("contentEditable", "true");
     $("li").css("cursor", "default");
 }
+function updatetextTime() {
+    var parentEl = document.getElementById("sortable");
+    var childEl = parentEl.children;
+    var tabIndex;
+    //parent=document.getElementById("sortable");
+    var changearr = [];
+    for (i = 1; i <= timestampNum; i++) {
+        tabIndex = Array.from(childEl).indexOf(document.getElementById("li" + i));
+        console.log(i, tabIndex);
+        if (i != tabIndex + 1) {
+            //id 변경
+            if (document.getElementById("li" + i).childElementCount == 2) {//코드
+                changearr.push(['2', i, tabIndex]);//코드, i, 바꿀거
+            }
+            else {
+                changearr.push(['1', i, tabIndex]);//코드, i, 바꿀거
+            }
+        }
+    }
+    console.log("변경후 순서");
+    console.log(changearr);
+    for (i = 0; i < changearr.length; i++) {
+        if (changearr[i][0] == 2) {
+            document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
+            document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
+            document.getElementById("c-code" + changearr[i][1]).id = "c-code" + (changearr[i][2] + 1);
+            document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
+            //console.log(document.getElementById("c" + changearr[i][1]).id);
+            document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
+            console.log(document.getElementById("c" + changearr[i][1]).id);
+        }
+        else {//텍스트
+            document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
+            document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
+            //console.log(document.getElementById("c" + changearr[i][1]).id);
+            document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
+            //console.log(document.getElementById("c" + changearr[i][1]).id);
+        }
+    }
+}
+function updateTimestamp() {
+    for (i = 1; i <= timestampNum; i++) {
+        var nowtext = document.getElementById("li" + i);
+        if (nowtext.childElementCount == 1) {//텍스트영역
+            document.getElementById("c" + i).style.height = String(nowtext.offsetHeight) + "px";
+            console.log("텍스트 영역 정렬");
+        }
+        else if (nowtext.childElementCount == 2) {//코드영역
+            document.getElementById("c" + i).style.height = "330px";
+            console.log("코드 영역 정렬");
+        }
+
+        /*
+        if (nowTimestamp.firstChild.className == "fas fa-tenge fa-2x") {//텍스트 영역
+            nowtext = document.getElementById("li" + i);
+            nowTimestamp.style.height = String(nowtext.offsetHeight) + "px";
+            console.log("텍스트 영역 정렬");
+        }
+        else if (nowTimestamp.firstChild.className == "fab fa-cuttlefish fa-2x") {//코드 영역
+            nowTimestamp.style.height = "330px";
+            console.log("코드 영역 정렬");
+        }
+        */
+    }
+
+}
 
 //순서 바꾸는 함수
 var orderchange = false;
 document.getElementById("sortbtn").addEventListener('click', function () {
     orderchange = !orderchange;
     if (orderchange == true) {
+        console.log("sortable 진입");
+        console.log(document.getElementById("sortable").childNodes);
+        console.log(document.getElementById("realtimestamp").childNodes);
         sortableEnable();
     }
     else {
+        updatetextTime();
+        //updateTimestamp();
         sortableDisable();
+        console.log("sortable out");
+        console.log(document.getElementById("sortable").childNodes);
+        console.log(document.getElementById("realtimestamp").childNodes);
     }
 });
 document.getElementById("backbtn").addEventListener('click', function () {
@@ -382,6 +457,53 @@ function changebutton() {
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
 document.getElementById("backbtn").addEventListener('click', changebutton);
+
+clickdeletionbtn = false;
+document.getElementById("deletebtn").addEventListener('click', function () {
+    clickdeletionbtn = !clickdeletionbtn;
+    if (clickdeletionbtn == true) {
+        document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
+        for (i = 1; i <= timestampNum; i++) {
+            document.getElementById("li" + i).addEventListener('click', function () {
+                var jbResult = confirm("정말삭제하시겠습니까?");
+                console.log(this);
+                console.log(this.childElementCount);
+                if (jbResult) {
+                    console.log('delete');
+                    this.remove();
+                    var parent = document.getElementById("#realtimestamp");
+                    var child = document.getElementById("c" + i);
+                    parent.removeChild(child);
+                    timestampNum -= 1;
+                    for (j = i + 1; j <= timestampNum; j++) {
+                        if (this.childElementCount == 2) {
+                            document.getElementById("li" + j).id = "li" + j - 1;
+                            document.getElementById("t1" + j).id = "t1" + j - 1;
+                            document.getElementById("c-code" + j).id = "c-code" + j - 1;
+                            document.getElementById("t2" + j).id = "t2" + j - 1;
+                            document.getElementById("c" + j).id = "c" + j - 1;
+                        }
+                        else {
+                            document.getElementById("li" + j) = "li" + j - 1;
+                            document.getElementById("t1" + j) = "t1" + j - 1;
+                            document.getElementById("c" + j) = "c" + j - 1;
+                        }
+                    }
+                }
+                else {
+                    console.log('nodelete');
+                    return;
+                }
+                i = timestampNum + 1;
+            });
+        }
+    }
+    else {
+        document.getElementById("deletebtn__icon").style.color = "whitesmoke";
+        console.log("clickdeletebtn");
+    }
+});
+
 
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
     lineNumbers: true,
