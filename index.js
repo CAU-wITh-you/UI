@@ -369,7 +369,7 @@ function updatetextTime() {
             document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
             //console.log(document.getElementById("c" + changearr[i][1]).id);
             document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-            console.log(document.getElementById("c" + changearr[i][1]).id);
+            //console.log(document.getElementById("c" + changearr[i][1]).id);
         }
         else {//텍스트
             document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
@@ -501,6 +501,33 @@ document.getElementById("deletebtn").addEventListener('click', function () {
         console.log("clickdeletebtn");
     }
 });
+
+var selectLanguage = false;
+document.getElementById("realselectionbtn").addEventListener('click', function () {
+    console.log("enter");
+    selectLanguage = !selectLanguage;
+    if (selectLanguage == true) {
+        document.getElementById("language__C").style.display = "block";
+        document.getElementById("language__Cpp").style.display = "block";
+    }
+    else {
+        document.getElementById("language__C").style.display = "none";
+        document.getElementById("language__Cpp").style.display = "none";
+    }
+})
+document.getElementById("language__C").addEventListener('click', function () {
+    console.log("enter");
+    selectLanguage = true;
+    if (selectLanguage == true) {
+        document.getElementById("language__C").style.display = "block";
+        document.getElementById("language__Cpp").style.display = "block";
+    }
+    else {
+        document.getElementById("language__C").style.display = "none";
+        document.getElementById("language__Cpp").style.display = "none";
+    }
+})
+
 
 
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {

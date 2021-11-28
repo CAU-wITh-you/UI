@@ -271,6 +271,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 #language__C {
+  display: none;
   float: left;
   padding-top: 4%;
   width: 10%;
@@ -284,6 +285,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 #language__Cpp {
+  display: none;
   float: left;
   padding-top: 4%;
   width: 20%;
