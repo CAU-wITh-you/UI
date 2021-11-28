@@ -343,55 +343,6 @@ function sortableDisable() {
     $("li").css("cursor", "default");
 }
 
-function updatetextTime() {
-    var parentEl = document.getElementById("sortable");
-    var childEl = parentEl.children;
-    var tabIndex;
-    //parent=document.getElementById("sortable");
-    var changearr = [];
-    for (i = 1; i <= timestampNum; i++) {
-        tabIndex = Array.from(childEl).indexOf(document.getElementById("li" + i));
-        console.log(i, tabIndex);
-        if (i != tabIndex + 1) {
-            //id 변경
-            if (tabIndex == -1) {
-                changearr.push(['0', i, -1]);
-            }
-            else if (document.getElementById("li" + i).childElementCount == 2) {//코드
-                changearr.push(['2', i, tabIndex]);//코드, i, 바꿀거
-            }
-            else {
-                changearr.push(['1', i, tabIndex]);//코드, i, 바꿀거
-            }
-        }
-    }
-    console.log("변경후 순서");
-    console.log(changearr);
-    for (i = 0; i < changearr.length; i++) {
-        if (changearr[i][2] != -1) {
-            if (changearr[i][0] == 2) {
-                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-                document.getElementById("c-code" + changearr[i][1]).id = "c-code" + (changearr[i][2] + 1);
-                document.getElementById("t2" + changearr[i][1]).id = "t2" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-            }
-            else {//텍스트
-                document.getElementById("li" + changearr[i][1]).id = "li" + (changearr[i][2] + 1);
-                document.getElementById("t1" + changearr[i][1]).id = "t1" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-                document.getElementById("c" + changearr[i][1]).id = "c" + (changearr[i][2] + 1);
-                //console.log(document.getElementById("c" + changearr[i][1]).id);
-            }
-        }
-        else {
-            console.log(i);
-            console.log("없음");
-        }
-    }
-}
 function updateTimestamp() {
     var textparent = document.getElementById("sortable");
     var timeparent = document.getElementById("realtimestamp");
@@ -492,7 +443,6 @@ function orderchangefunc() {
     }
     else {
         document.getElementById("sortbtn__icon").style.color = "whitesmoke";
-        //updatetextTime();
         updateTimestamp();
         sortableDisable();
         console.log("sortable out");
