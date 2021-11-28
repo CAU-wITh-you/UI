@@ -124,14 +124,15 @@ function clicktimestamp() {
 function compile(carrotId){
 
     var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();  
-    alert("compile", code);
+    var input = document.querySelector(`#t3${carrotId}`).innerText;
+    alert("compile", input);
 
     var xhr = new XMLHttpRequest();
     var data = {
         clientId : 'ee0532ecd7fd6bfdab3b8449e971ab28',
         clientSecret : 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
         script : code,
-        stdin : '',
+        stdin : input,
         language : 'c',
         versionIndex : '0'
     };
@@ -206,11 +207,12 @@ function makeCodearea(text) {
     resultDiv.style.fontSize = "15px";
     resultDiv.style.verticalAlign = "middle";
     resultDiv.style.marginLeft = "5px";
+    resultDiv.style.paddingLeft = "10px";
 
     var inputDiv = document.createElement("div");
     inputDiv.className = "divtexttext"
     inputDiv.contentEditable = "true";
-    inputDiv.id = "t1" + timestampNum;
+    inputDiv.id = "t3" + timestampNum;
     inputDiv.style.display = "flex";
     inputDiv.style.backgroundColor = "black";
     inputDiv.style.width = "100%";
@@ -225,7 +227,8 @@ function makeCodearea(text) {
     inputDiv.style.wordBreak = "break-all";
     inputDiv.style.display = "inline-block";
     inputDiv.style.whiteSpace = "pre-wrap";
-    resultDiv.style.marginLeft = "5px";
+    inputDiv.style.marginLeft = "5px";
+    inputDiv.style.paddingLeft = "10px";
 
     codeDiv.appendChild(runbtnSpan);
     codeDiv.appendChild(codetextDiv);
@@ -525,9 +528,10 @@ function deletionfunc() {
         else {
             document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
             for (i = 1; i <= timestampNum; i++) {
-                document.getElementById("li" + i).addEventListener('click', function () {
+                document.getElementById("li" + i).addEventListener('click', function (e) {
                     if(clickdeletionbtn){
                         var jbResult = confirm("정말삭제하시겠습니까?");
+                        console.log(e.target.id)
                         console.log(this);
                         console.log(this.childElementCount);
                         if (jbResult) {
@@ -543,7 +547,7 @@ function deletionfunc() {
                             //console.log(parent.childNodes[i + 2]);
                             //parent.removeChild(parent.childNodes[i + 2]);
                             //updatetextTime();
-                            timestampNum -= 1;
+                            //timestampNum -= 1;
                         }
                         else {
                             console.log('nodelete');
