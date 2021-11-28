@@ -132,7 +132,7 @@ function makeCodearea(text) {
     var codeLi = document.createElement("li");
     codeLi.className = "ui-state-default";
     codeLi.style.backgroundColor = "var(--color-background-gray)";
-    codeLi.id = timestampNum;
+    codeLi.id = "li" + timestampNum;
     codeLi.value = currentTime;
 
     var codeDiv = document.createElement("div");
@@ -198,7 +198,7 @@ function makeCodearea(text) {
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;
-    console.log(document.getElementById(timestampNum).offsetHeight);
+    console.log(document.getElementById("li" + timestampNum).offsetHeight);
     div.style.height = "330px";
     div.style.backgroundColor = "var(--color-pink)";
     div.appendChild(carrot);
@@ -242,6 +242,7 @@ function makeTextarea(text) {
     textLi.className = "ui-state-default";
     textLi.style.backgroundColor = "var(--color-background-gray)";
     textLi.value = currentTime;
+    textLi.id = "li" + timestampNum;
 
     var textDiv = document.createElement("div");
     textDiv.className = "divtext";
@@ -276,7 +277,7 @@ function makeTextarea(text) {
 
     texttextDiv.addEventListener("input", function (e) {
         var thisId = e.target.id.slice(2, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight)+10+ "px");
+        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight) + 10 + "px");
         //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
     }, false);
 
@@ -380,6 +381,53 @@ function changebutton() {
 }
 document.getElementById("editbtn").addEventListener('click', changebutton);
 document.getElementById("backbtn").addEventListener('click', changebutton);
+
+clickdeletionbtn = false;
+document.getElementById("deletebtn").addEventListener('click', function () {
+    clickdeletionbtn = !clickdeletionbtn;
+    if (clickdeletionbtn == true) {
+        document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
+        for (i = 1; i <= timestampNum; i++) {
+            document.getElementById("li" + i).addEventListener('click', function () {
+                var jbResult = confirm("정말삭제하시겠습니까?");
+                console.log(this);
+                console.log(this.childElementCount);
+                if (jbResult) {
+                    console.log('delete');
+                    this.remove();
+                    var parent = document.getElementById("#realtimestamp");
+                    var child = document.getElementById("c" + i);
+                    parent.removeChild(child);
+                    timestampNum -= 1;
+                    for (j = i + 1; j <= timestampNum; j++) {
+                        if (this.childElementCount == 2) {
+                            document.getElementById("li" + j).id = "li" + j - 1;
+                            document.getElementById("t1" + j).id = "t1" + j - 1;
+                            document.getElementById("c-code" + j).id = "c-code" + j - 1;
+                            document.getElementById("t2" + j).id = "t2" + j - 1;
+                            document.getElementById("c" + j).id = "c" + j - 1;
+                        }
+                        else {
+                            document.getElementById("li" + j) = "li" + j - 1;
+                            document.getElementById("t1" + j) = "t1" + j - 1;
+                            document.getElementById("c" + j) = "c" + j - 1;
+                        }
+                    }
+                }
+                else {
+                    console.log('nodelete');
+                    return;
+                }
+                i = timestampNum + 1;
+            });
+        }
+    }
+    else {
+        document.getElementById("deletebtn__icon").style.color = "whitesmoke";
+        console.log("clickdeletebtn");
+    }
+});
+
 
 var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
     lineNumbers: true,
