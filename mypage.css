@@ -26,7 +26,7 @@
 
 .edit__container__left {
   display: flex;
-  width: 10%;
+  width: 7%;
   justify-content: center;
   align-items: center;
 }
@@ -65,9 +65,40 @@
   display: inline;
 }
 
+.editfolder {
+  display: flex;
+}
+
+.editfolder:hover {
+  transform: scale(1.1);
+}
+
 .addfolder {
   display: flex;
   align-items: center;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.addfolder:hover {
+  transform: scale(1.1);
+}
+
+#plusbtn {
+  display: none;
+}
+
+.deletefolder {
+  display: flex;
+  align-items: center;
+}
+
+.deletefolder:hover {
+  transform: scale(1.1);
+}
+
+#deletebtn {
+  display: none;
 }
 
 .folder__name {

@@ -166,8 +166,8 @@ function clicktimestamp() {
         document.getElementById("realtimestamp").style.display = "none";
 
         for (i = 1; i <= timestampNum; i++) {
-            var carrot = document.getElementById('time'+i);
-            if(carrot){
+            var carrot = document.getElementById('time' + i);
+            if (carrot) {
                 carrot.style.display = "none";
             }
         }
@@ -180,8 +180,8 @@ function clicktimestamp() {
         document.getElementById("realtimestamp").style.display = "block";
         document.getElementById("realtimestamp").style.backgroundColor = "var(--color-pink)";
         for (i = 1; i <= timestampNum; i++) {
-            var carrot = document.getElementById('time'+i);
-            if(carrot){
+            var carrot = document.getElementById('time' + i);
+            if (carrot) {
                 carrot.style.display = "block";
             }
         }
@@ -225,7 +225,7 @@ function compile(carrotId) {
 
 var timestampNum = 0;
 
-function makeImgarea(url){
+function makeImgarea(url) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
 
@@ -244,17 +244,17 @@ function makeImgarea(url){
 
     var img = document.createElement("img");
     img.src = url;
-    img.id = "i"+timestampNum;
+    img.id = "i" + timestampNum;
     img.style.width = "100%";
 
     var carrot = document.createElement("i");
     console.log("carrot");
     carrot.className = "fas fa-file-image";
-    carrot.id = "time"+timestampNum;
+    carrot.id = "time" + timestampNum;
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
     carrot.style.marginLeft = "5px";
-    if(timestampOpen == false) carrot.style.display = "none";
+    if (timestampOpen == false) carrot.style.display = "none";
 
     var now = transSectoTime(currentTime);
     carrot.title = now;
@@ -274,7 +274,7 @@ function makeImgarea(url){
     d.scrollTop(d.prop("scrollHeight"));
 
     imgLi.addEventListener('click', function (e) {
-        if(clickdeletionbtn){
+        if (clickdeletionbtn) {
             var jbResult = confirm("정말삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
@@ -325,7 +325,12 @@ function makeCodearea(text) {
     codetextDiv.style.height = "100%";
 
     codetext = document.createElement("textarea");
-    codetext.id = "c-code" + timestampNum;
+    if (language == "c") {
+        codetext.id = "c-code" + timestampNum;
+    }
+    else if (language == "cpp") {
+        codetext.id = "cpp-code" + timestampNum;
+    }
     codetext.style.width = "90%";
 
     codetextDiv.appendChild(codetext);
@@ -373,13 +378,13 @@ function makeCodearea(text) {
 
 
     var carrot = document.createElement("i");
-    carrot.id = "time"+timestampNum;
+    carrot.id = "time" + timestampNum;
     console.log("carrot");
     carrot.className = "fab fa-cuttlefish fa-2x";
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
     carrot.style.marginLeft = "5px";
-    if(timestampOpen == false) carrot.style.display = "none";
+    if (timestampOpen == false) carrot.style.display = "none";
 
     var now = transSectoTime(currentTime);
     carrot.title = now;
@@ -393,7 +398,7 @@ function makeCodearea(text) {
     codeLi.appendChild(resultDiv);
 
 
-    runbtnI.addEventListener('click', function(e){
+    runbtnI.addEventListener('click', function (e) {
         console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
         var thisId = e.target.id.slice(6, e.target.id.length);
         compile(thisId);
@@ -410,7 +415,7 @@ function makeCodearea(text) {
     d.scrollTop(d.prop("scrollHeight"));
 
     codeLi.addEventListener('click', function (e) {
-        if(clickdeletionbtn){
+        if (clickdeletionbtn) {
             var jbResult = confirm("정말삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
@@ -506,11 +511,11 @@ function makeTextarea(text) {
     var carrot = document.createElement("i");
     console.log("carrot");
     carrot.className = "fas fa-tenge fa-2x";
-    carrot.id = "time"+timestampNum;
+    carrot.id = "time" + timestampNum;
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
     carrot.style.marginLeft = "5px";
-    if(timestampOpen == false) carrot.style.display = "none";
+    if (timestampOpen == false) carrot.style.display = "none";
 
     var now = transSectoTime(currentTime);
     carrot.title = now;
@@ -534,7 +539,7 @@ function makeTextarea(text) {
     d.scrollTop(d.prop("scrollHeight"));
 
     textLi.addEventListener('click', function (e) {
-        if(clickdeletionbtn){
+        if (clickdeletionbtn) {
             var jbResult = confirm("정말삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
@@ -561,7 +566,7 @@ function nonemakeCodearea(text) {
     codeLi.className = "ui-state-default";
     //codeLi.style.backgroundColor = "var(--color-background-gray)";
     codeLi.id = "li" + timestampNum;
-    
+
     var codeDiv = document.createElement("div");
     codeDiv.className = "divcode";
     codeDiv.contentEditable = "false";
@@ -583,7 +588,12 @@ function nonemakeCodearea(text) {
     codetextDiv.style.height = "100%";
 
     codetext = document.createElement("textarea");
-    codetext.id = "c-code" + timestampNum;
+    if (language == "c") {
+        codetext.id = "c-code" + timestampNum;
+    }
+    else if (language == "cpp") {
+        codetext.id = "cpp-code" + timestampNum;
+    }
     codetext.style.width = "90%";
 
     codetextDiv.appendChild(codetext);
@@ -636,7 +646,7 @@ function nonemakeCodearea(text) {
     codeLi.appendChild(resultDiv);
 
 
-    runbtnI.addEventListener('click', function(e){
+    runbtnI.addEventListener('click', function (e) {
         console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
         var thisId = e.target.id.slice(6, e.target.id.length);
         compile(thisId);
@@ -648,7 +658,7 @@ function nonemakeCodearea(text) {
     d.scrollTop(d.prop("scrollHeight"));
 
     codeLi.addEventListener('click', function (e) {
-        if(clickdeletionbtn){
+        if (clickdeletionbtn) {
             var jbResult = confirm("정말삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
@@ -702,7 +712,7 @@ function nonemakeCodearea(text) {
 
 function nonemakeTextarea(text) {
     timestampNum++;
-    
+
     var textLi = document.createElement("li");
     textLi.className = "ui-state-default";
     //textLi.style.backgroundColor = "var(--color-background-gray)";
@@ -749,7 +759,7 @@ function nonemakeTextarea(text) {
     d.scrollTop(d.prop("scrollHeight"));
 
     textLi.addEventListener('click', function (e) {
-        if(clickdeletionbtn){
+        if (clickdeletionbtn) {
             var jbResult = confirm("정말삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
@@ -771,7 +781,7 @@ function nonemakeTextarea(text) {
 
 var clock = true;
 document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
-document.getElementById("clockbtn").addEventListener('click', function(){
+document.getElementById("clockbtn").addEventListener('click', function () {
     //alert("clock");
     clock = !clock;
     if (clock == true) {
@@ -793,7 +803,7 @@ document.getElementById("codeplusbtn").addEventListener('click', function () {
     }
 });
 
-document.querySelector("#textplusbtn").addEventListener('click', function (){
+document.querySelector("#textplusbtn").addEventListener('click', function () {
     //alert("text "+clock);
     console.log(clock);
     if (clock == true) {
