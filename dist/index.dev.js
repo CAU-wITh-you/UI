@@ -9,17 +9,27 @@ var timeStamp = [];
 var timeStampnum = 0;
 var startclicknum = 0;
 var language = null;
-document.getElementById("exitbutton__icon").addEventListener("mouseover", function () {
+document.getElementById('exitbutton').addEventListener('click', exitfunc);
+
+function exitfunc() {
+  console.log("extension 종료");
+}
+
+document.getElementById("exitbutton__icon").addEventListener("mouseover", exitover);
+
+function exitover() {
+  console.log("hover");
   document.getElementById("exitbutton__icon").className = "fas fa-door-open";
   document.getElementById("exitbutton__icon").style.color = "var(--color-dark-pink)";
-});
-document.getElementById("exitbutton__icon").addEventListener("mouseout", function () {
+}
+
+document.getElementById("exitbutton__icon").addEventListener("mouseout", exitout);
+
+function exitout() {
+  console.log("out");
   document.getElementById("exitbutton__icon").className = "fas fa-door-closed";
   document.getElementById("exitbutton__icon").style.color = "black";
-});
-document.getElementById("exitbutton__icon").addEventListener("onclick", function () {
-  console.log("extension 종료");
-});
+}
 
 function toggleImgstart() {
   startclicknum += 1;
@@ -138,6 +148,39 @@ function clicktimestamp() {
     document.getElementById("realtimestamp").style.display = "block";
     document.getElementById("realtimestamp").style.backgroundColor = "var(--color-pink)";
   }
+}
+
+function compile(carrotId) {
+  var code = document.querySelector("#t1".concat(carrotId, " > divcodetext > div")).CodeMirror.getValue();
+  var input = document.querySelector("#t3".concat(carrotId)).innerText;
+  alert("compile", input);
+  var xhr = new XMLHttpRequest();
+  var data = {
+    clientId: 'ee0532ecd7fd6bfdab3b8449e971ab28',
+    clientSecret: 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
+    script: code,
+    stdin: input,
+    language: 'c',
+    versionIndex: '0'
+  };
+  console.log(data);
+  xhr.open("POST", "https://api.jdoodle.com/v1/execute", true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+      // JSON.parse does not evaluate the attacker's scripts.
+      console.log("compile response!");
+      var resp = JSON.parse(xhr.responseText); //var result = resp.result.slice(1,resp.length);
+      //var resp = xhr.responseText;
+
+      console.log(resp); //console.log(result);
+
+      document.querySelector("#t2".concat(carrotId)).innerText = '  [OUTPUT] : ' + resp.output; //alert(resp);
+    }
+  };
+
+  xhr.send(JSON.stringify(data));
 }
 
 var timestampNum = 0;
@@ -333,21 +376,10 @@ function makeTextarea(text) {
       $("#realtimestamp").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
       $("#timestamp_area").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
     });
-  })(); //return timestampNum;
+  })();
 
+  return timestampNum;
 }
-
-var clock = false;
-document.getElementById("clockbtn").addEventListener('click', function () {
-  console.log("클럭 버튼");
-  clock = !clock;
-
-  if (clock == true) {
-    document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
-  } else {
-    document.getElementById("clockbtn__icon").style.color = "whitesmoke";
-  }
-});
 
 function nonemakeCodearea(text) {
   if (language == null) {
@@ -509,6 +541,17 @@ function nonemakeTextarea(text) {
 
 }
 
+var clock = false;
+document.getElementById("clockplusbtn").addEventListener('click', function () {
+  console.log("클럭 버튼");
+  clock = !clock;
+
+  if (clock == true) {
+    document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
+  } else {
+    document.getElementById("clockbtn__icon").style.color = "whitesmoke";
+  }
+});
 document.getElementById("codeplusbtn__title").addEventListener('click', function () {
   if (clock == true) {
     makeCodearea("");
@@ -625,71 +668,74 @@ function changebutton() {
 document.getElementById("editbtn").addEventListener('click', changebutton); //순서 바꾸는 함수
 
 function orderchangefunc() {
-  orderchange = !orderchange;
+  if (clickdeletionbtn == true) {
+    alert('휴지통 버튼을 해제하세요');
+  } else {
+    orderchange = !orderchange;
 
-  if (orderchange == true) {
-    if (clickdeletionbtn == true) {
-      alert('휴지통 버튼을 해제하세요');
-    } else {
+    if (orderchange == true) {
       document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
       console.log("sortable 진입");
       console.log(document.getElementById("sortable").childNodes);
       console.log(document.getElementById("realtimestamp").childNodes);
       sortableEnable();
+    } else {
+      document.getElementById("sortbtn__icon").style.color = "whitesmoke";
+      updateTimestamp();
+      sortableDisable();
+      console.log("sortable out");
+      console.log(document.getElementById("sortable").childNodes);
+      console.log(document.getElementById("realtimestamp").childNodes);
     }
-  } else {
-    document.getElementById("sortbtn__icon").style.color = "whitesmoke";
-    updateTimestamp();
-    sortableDisable();
-    console.log("sortable out");
-    console.log(document.getElementById("sortable").childNodes);
-    console.log(document.getElementById("realtimestamp").childNodes);
   }
 }
 
 document.getElementById("sortbtn").addEventListener('click', orderchangefunc); //휴지통
 
 function deletionfunc() {
-  clickdeletionbtn = !clickdeletionbtn;
+  if (orderchange == true) {
+    alert("순서바꿈 버튼을 해제하세요");
+  } else {
+    console.log(clickdeletionbtn);
+    clickdeletionbtn = !clickdeletionbtn;
 
-  if (clickdeletionbtn == true) {
-    if (orderchange == true) {
-      alert("순서바꿈 버튼을 해제하세요");
-    } else {
+    if (clickdeletionbtn == true) {
       document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
 
       for (i = 1; i <= timestampNum; i++) {
-        document.getElementById("li" + i).addEventListener('click', function () {
-          var jbResult = confirm("정말삭제하시겠습니까?");
-          console.log(this);
-          console.log(this.childElementCount);
+        document.getElementById("li" + i).addEventListener('click', function (e) {
+          if (clickdeletionbtn) {
+            var jbResult = confirm("정말삭제하시겠습니까?");
+            console.log(e.target.id);
+            console.log(this);
+            console.log(this.childElementCount);
 
-          if (jbResult) {
-            console.log('delete');
-            var realparent = this.parentNode;
-            var parent = document.getElementById("realtimestamp");
-            console.log(parent.childNodes); //var now = document.getElementById("c" + i);
+            if (jbResult) {
+              console.log('delete');
+              var realparent = this.parentNode;
+              var parent = document.getElementById("realtimestamp");
+              console.log(parent.childNodes); //var now = document.getElementById("c" + i);
 
-            this.remove();
-            var child = parent.removeChild(parent.childNodes[i]);
-            console.log(child); //console.log(parent.childNodes);
-            //console.log(parent.childNodes[i + 2]);
-            //parent.removeChild(parent.childNodes[i + 2]);
-            //updatetextTime();
+              this.remove();
+              var child = parent.removeChild(parent.childNodes[i]);
+              console.log(child); //console.log(parent.childNodes);
+              //console.log(parent.childNodes[i + 2]);
+              //parent.removeChild(parent.childNodes[i + 2]);
+              //updatetextTime();
+              //timestampNum -= 1;
+            } else {
+              console.log('nodelete');
+              return;
+            }
 
-            timestampNum -= 1;
-          } else {
-            console.log('nodelete');
-            return;
+            i = timestampNum + 1;
           }
-
-          i = timestampNum + 1;
         });
       }
+    } else {
+      document.getElementById("deletebtn__icon").style.color = "whitesmoke";
+      console.log("clickdeletebtn");
     }
-  } else {
-    document.getElementById("deletebtn__icon").style.color = "whitesmoke";
-    console.log("clickdeletebtn");
   }
 }
 

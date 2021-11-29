@@ -7,17 +7,22 @@ var timeStampnum = 0;
 var startclicknum = 0
 var language = null;
 
-document.getElementById("exitbutton__icon").addEventListener("mouseover", function () {
+document.getElementById('exitbutton').addEventListener('click', exitfunc);
+function exitfunc() {
+    console.log("extension 종료");
+}
+document.getElementById("exitbutton__icon").addEventListener("mouseover", exitover);
+function exitover() {
+    console.log("hover");
     document.getElementById("exitbutton__icon").className = "fas fa-door-open";
     document.getElementById("exitbutton__icon").style.color = "var(--color-dark-pink)";
-});
-document.getElementById("exitbutton__icon").addEventListener("mouseout", function () {
+}
+document.getElementById("exitbutton__icon").addEventListener("mouseout", exitout);
+function exitout() {
+    console.log("out");
     document.getElementById("exitbutton__icon").className = "fas fa-door-closed";
     document.getElementById("exitbutton__icon").style.color = "black";
-});
-document.getElementById("exitbutton__icon").addEventListener("onclick", function () {
-    console.log("extension 종료");
-});
+}
 
 function toggleImgstart() {
     startclicknum += 1;
@@ -163,26 +168,26 @@ function clicktimestamp() {
     }
 }
 
-function compile(carrotId){
+function compile(carrotId) {
 
-    var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();  
+    var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();
     var input = document.querySelector(`#t3${carrotId}`).innerText;
     alert("compile", input);
 
     var xhr = new XMLHttpRequest();
     var data = {
-        clientId : 'ee0532ecd7fd6bfdab3b8449e971ab28',
-        clientSecret : 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
-        script : code,
-        stdin : input,
-        language : 'c',
-        versionIndex : '0'
+        clientId: 'ee0532ecd7fd6bfdab3b8449e971ab28',
+        clientSecret: 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
+        script: code,
+        stdin: input,
+        language: 'c',
+        versionIndex: '0'
     };
     console.log(data);
 
     xhr.open("POST", "https://api.jdoodle.com/v1/execute", true);
-    xhr.setRequestHeader('Content-Type', 'application/json'); 
-    xhr.onreadystatechange = function() {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             // JSON.parse does not evaluate the attacker's scripts.
             console.log("compile response!");
@@ -191,7 +196,7 @@ function compile(carrotId){
             //var resp = xhr.responseText;
             console.log(resp);
             //console.log(result);
-            document.querySelector(`#t2${carrotId}`).innerText = '  [OUTPUT] : '+resp.output;
+            document.querySelector(`#t2${carrotId}`).innerText = '  [OUTPUT] : ' + resp.output;
             //alert(resp);
         }
     }
@@ -425,17 +430,6 @@ function makeTextarea(text) {
     return timestampNum;
 }
 
-var clock = false;
-document.getElementById("clockbtn").addEventListener('click', function () {
-    console.log("클럭 버튼");
-    clock = !clock;
-    if (clock == true) {
-        document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
-    }
-    else {
-        document.getElementById("clockbtn__icon").style.color = "whitesmoke";
-    }
-})
 
 
 function nonemakeCodearea(text) {
@@ -621,7 +615,17 @@ function nonemakeTextarea(text) {
 
     //return timestampNum;
 }
-
+var clock = false;
+document.getElementById("clockplusbtn").addEventListener('click', function () {
+    console.log("클럭 버튼");
+    clock = !clock;
+    if (clock == true) {
+        document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
+    }
+    else {
+        document.getElementById("clockbtn__icon").style.color = "whitesmoke";
+    }
+});
 document.getElementById("codeplusbtn__title").addEventListener('click', function () {
     if (clock == true) {
         makeCodearea("");
@@ -737,43 +741,43 @@ document.getElementById("editbtn").addEventListener('click', changebutton);
 
 //순서 바꾸는 함수
 function orderchangefunc() {
-    orderchange = !orderchange;
-    if (orderchange == true) {
-        if (clickdeletionbtn == true) {
-            alert('휴지통 버튼을 해제하세요');
-        }
-        else {
+    if (clickdeletionbtn == true) {
+        alert('휴지통 버튼을 해제하세요');
+    }
+    else {
+        orderchange = !orderchange;
+        if (orderchange == true) {
             document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
             console.log("sortable 진입");
             console.log(document.getElementById("sortable").childNodes);
             console.log(document.getElementById("realtimestamp").childNodes);
             sortableEnable();
         }
-    }
-    else {
-        document.getElementById("sortbtn__icon").style.color = "whitesmoke";
-        updateTimestamp();
-        sortableDisable();
-        console.log("sortable out");
-        console.log(document.getElementById("sortable").childNodes);
-        console.log(document.getElementById("realtimestamp").childNodes);
+        else {
+            document.getElementById("sortbtn__icon").style.color = "whitesmoke";
+            updateTimestamp();
+            sortableDisable();
+            console.log("sortable out");
+            console.log(document.getElementById("sortable").childNodes);
+            console.log(document.getElementById("realtimestamp").childNodes);
+        }
     }
 }
 document.getElementById("sortbtn").addEventListener('click', orderchangefunc);
 
 //휴지통
 function deletionfunc() {
-    clickdeletionbtn = !clickdeletionbtn;
-    console.log(clickdeletionbtn);
-    if (clickdeletionbtn == true) {
-        if (orderchange == true) {
-            alert("순서바꿈 버튼을 해제하세요");
-        }
-        else {
+    if (orderchange == true) {
+        alert("순서바꿈 버튼을 해제하세요");
+    }
+    else {
+        console.log(clickdeletionbtn);
+        clickdeletionbtn = !clickdeletionbtn;
+        if (clickdeletionbtn == true) {
             document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
             for (i = 1; i <= timestampNum; i++) {
                 document.getElementById("li" + i).addEventListener('click', function (e) {
-                    if(clickdeletionbtn){
+                    if (clickdeletionbtn) {
                         var jbResult = confirm("정말삭제하시겠습니까?");
                         console.log(e.target.id)
                         console.log(this);
@@ -802,10 +806,10 @@ function deletionfunc() {
                 });
             }
         }
-    }
-    else {
-        document.getElementById("deletebtn__icon").style.color = "whitesmoke";
-        console.log("clickdeletebtn");
+        else {
+            document.getElementById("deletebtn__icon").style.color = "whitesmoke";
+            console.log("clickdeletebtn");
+        }
     }
 }
 
