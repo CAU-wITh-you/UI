@@ -9,6 +9,17 @@ var timeStamp = [];
 var timeStampnum = 0;
 var startclicknum = 0;
 var language = null;
+document.getElementById("exitbutton__icon").addEventListener("mouseover", function () {
+  document.getElementById("exitbutton__icon").className = "fas fa-door-open";
+  document.getElementById("exitbutton__icon").style.color = "var(--color-dark-pink)";
+});
+document.getElementById("exitbutton__icon").addEventListener("mouseout", function () {
+  document.getElementById("exitbutton__icon").className = "fas fa-door-closed";
+  document.getElementById("exitbutton__icon").style.color = "black";
+});
+document.getElementById("exitbutton__icon").addEventListener("onclick", function () {
+  console.log("extension 종료");
+});
 
 function toggleImgstart() {
   startclicknum += 1;
@@ -326,11 +337,191 @@ function makeTextarea(text) {
 
 }
 
+var clock = false;
+document.getElementById("clockbtn").addEventListener('click', function () {
+  console.log("클럭 버튼");
+  clock = !clock;
+
+  if (clock == true) {
+    document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
+  } else {
+    document.getElementById("clockbtn__icon").style.color = "whitesmoke";
+  }
+});
+
+function nonemakeCodearea(text) {
+  if (language == null) {
+    alert("언어를 선택하세요");
+  } else {
+    timestampNum++;
+    var currentTime = player.getCurrentTime();
+    var codeLi = document.createElement("li");
+    codeLi.className = "ui-state-default";
+    codeLi.style.backgroundColor = "var(--color-background-gray)";
+    codeLi.id = "li" + timestampNum;
+    codeLi.value = currentTime;
+    var codeDiv = document.createElement("div");
+    codeDiv.className = "divcode";
+    codeDiv.id = "t1" + timestampNum;
+    codeDiv.style.backgroundColor = "var(--color-background-gray)";
+    codeDiv.style.width = "99%";
+    var runbtnSpan = document.createElement("span");
+    runbtnSpan.id = "divcode__run";
+    var runbtnI = document.createElement("i");
+    runbtnI.className = "far fa-play-circle";
+    runbtnI.id = "runbtn";
+    runbtnI.style.fontSize = "20px";
+    runbtnI.style.color = "whitesmoke";
+    runbtnSpan.appendChild(runbtnI);
+    var codetextDiv = document.createElement("divcodetext");
+    codetextDiv.style.width = "100%";
+    codetextDiv.style.height = "100%";
+    codetext = document.createElement("textarea");
+
+    if (language == "C") {
+      codetext.id = "c-code" + timestampNum;
+    } else if (language == "Cpp") {
+      codetext.id = "cpp-code" + timestampNum;
+    }
+
+    codetext.style.width = "90%";
+    codetextDiv.appendChild(codetext);
+    var resultDiv = document.createElement("div");
+    resultDiv.id = "t2" + timestampNum;
+    resultDiv.className = "divresult";
+    resultDiv.style.display = "block";
+    resultDiv.style.width = "100%";
+    resultDiv.style.height = "20px";
+    resultDiv.style.backgroundColor = "gray";
+    resultDiv.style.color = "whitesmoke";
+    resultDiv.innerText = "  [OUTPUT] : ";
+    resultDiv.style.textAlign = "left";
+    resultDiv.style.fontFamily = 'Malgun Gothic';
+    resultDiv.style.fontSize = "15px";
+    resultDiv.style.verticalAlign = "middle";
+    codeDiv.appendChild(runbtnSpan);
+    codeDiv.appendChild(codetextDiv);
+    codeLi.appendChild(codeDiv);
+    codeLi.appendChild(resultDiv);
+    codetext.addEventListener("input", function (e) {
+      console.log(e.target.id);
+      var thisId = e.target.id.slice(5, e.target.id.length);
+      document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px"); //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
+    }, false);
+    document.querySelector("#sortable").appendChild(codeLi);
+    var d = $("#sortable");
+    d.scrollTop(d.prop("scrollHeight"));
+
+    (function () {
+      $("#sortable").scroll(function () {
+        //console.log("scrolling");
+        //console.log($("#realtimestamp"));
+        $("#realtimestamp").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
+        $("#timestamp_area").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
+      });
+    })();
+
+    if (language == "C") {
+      nowcode = "c-code" + timestampNum;
+      console.log(nowcode);
+      console.log(typeof nowcode === "undefined" ? "undefined" : _typeof(nowcode));
+    } else if (language == "Cpp") {
+      nowcode = "cpp-code" + timestampNum;
+      console.log(nowcode);
+      console.log(typeof nowcode === "undefined" ? "undefined" : _typeof(nowcode));
+    }
+
+    if (language == "C") {
+      var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        mode: "text/x-csrc",
+        theme: "material-darker"
+      });
+    } else if (language == "Cpp") {
+      var cppEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        mode: "text/x-c++src",
+        theme: "material-darker"
+      });
+    }
+
+    document.querySelector("#t1".concat(timestampNum, " > divcodetext > div")).CodeMirror.setValue(text);
+    return timestampNum;
+  }
+}
+
+function nonemakeTextarea(text) {
+  timestampNum++;
+  var currentTime = player.getCurrentTime();
+  var textLi = document.createElement("li");
+  textLi.className = "ui-state-default";
+  textLi.style.backgroundColor = "var(--color-background-gray)";
+  textLi.value = currentTime;
+  textLi.id = "li" + timestampNum;
+  var textDiv = document.createElement("div");
+  textDiv.className = "divtext";
+  textDiv.style.backgroundColor = "var(--color-background-gray)";
+  textDiv.style.width = "-webkit-fill-available";
+  textDiv.style.border = "1px solid var(--color-background-gray)";
+  textDiv.style.paddingBottom = "0px";
+  textDiv.style.paddingLeft = "34px";
+  var texttextDiv = document.createElement("div");
+  texttextDiv.className = "divtexttext";
+  texttextDiv.contentEditable = "true";
+  texttextDiv.id = "t1" + timestampNum;
+  texttextDiv.style.display = "flex";
+  texttextDiv.style.backgroundColor = "black";
+  texttextDiv.style.width = "100%";
+  texttextDiv.style.border = "3px solid black";
+  texttextDiv.style.border = "0px";
+  texttextDiv.style.color = "whitesmoke";
+  texttextDiv.style.textAlign = "left";
+  texttextDiv.style.verticalAlign = "middle";
+  texttextDiv.style.fontFamily = 'Malgun Gothic';
+  texttextDiv.style.fontSize = "15px";
+  texttextDiv.style.overflow = "hidden";
+  texttextDiv.style.wordBreak = "break-all";
+  texttextDiv.style.display = "inline-block";
+  texttextDiv.style.whiteSpace = "pre-wrap";
+  texttextDiv.innerHTML = text;
+  textDiv.appendChild(texttextDiv);
+  textLi.appendChild(textDiv);
+  texttextDiv.addEventListener("input", function (e) {
+    var thisId = e.target.id.slice(2, e.target.id.length);
+    document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight) + 10 + "px"); //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
+  }, false);
+  document.querySelector("#sortable").appendChild(textLi);
+  var d = $("#sortable");
+  d.scrollTop(d.prop("scrollHeight"));
+
+  (function () {
+    $("#sortable").scroll(function () {
+      //console.log("scrolling");
+      //console.log($("#realtimestamp"));
+      $("#realtimestamp").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
+      $("#timestamp_area").prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
+    });
+  })(); //return timestampNum;
+
+}
+
 document.getElementById("codeplusbtn__title").addEventListener('click', function () {
-  makeCodearea("");
+  if (clock == true) {
+    makeCodearea("");
+  } else {
+    nonemakeCodearea("");
+  }
 });
 document.getElementById("textplusbtn__title").addEventListener('click', function () {
-  makeTextarea("");
+  if (clock == true) {
+    makeTextarea("");
+  } else {
+    nonemakeTextarea("");
+  }
 });
 
 function sortableEnable() {
