@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areadesignbutton")
     .addEventListener('click', function(e){
-        canvasVisible = !canvasClickable;
+        canvasVisible = !canvasVisible;
         canvasClickable = !canvasClickable;
         if(canvasClickable){
             drawCanvas();
