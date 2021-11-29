@@ -171,6 +171,78 @@ function compile(carrotId){
 
 var timestampNum = 0;
 
+
+function makeImgarea(url){
+    timestampNum++;
+    var currentTime = player.getCurrentTime();
+
+    var imgLi = document.createElement("li");
+    imgLi.className = "ui-state-default";
+    //imgLi.style.backgroundColor = "var(--color-background-gray)";
+    imgLi.id = "li" + timestampNum;
+    imgLi.value = currentTime;
+
+    var imgDiv = document.createElement("div");
+    imgDiv.className = "divcode";
+    imgDiv.contentEditable = "false";
+    imgDiv.id = "t1" + timestampNum;
+    imgDiv.style.backgroundColor = "var(--color-background-gray)";
+    imgDiv.style.marginLeft = "35px";
+
+    var img = document.createElement("img");
+    img.src = url;
+    img.id = "i"+timestampNum;
+    img.style.width = "100%";
+
+    var carrot = document.createElement("i");
+    console.log("carrot");
+    carrot.className = "fas fa-tenge fa-2x";
+    carrot.id = "time"+timestampNum;
+    carrot.style.float = "left";
+    carrot.style.marginTop = "15px";
+    carrot.style.marginLeft = "5px";
+    if(timestampOpen == false) carrot.style.display = "none";
+
+    var now = transSectoTime(currentTime);
+    carrot.title = now;
+    carrot.value = currentTime;
+
+    imgDiv.appendChild(img);
+    imgLi.appendChild(carrot);
+    imgLi.appendChild(imgDiv);
+
+    document.querySelector("#sortable").appendChild(imgLi);
+
+    carrot.addEventListener('click', function (e) {
+        player.seekTo(e.target.value, true);
+    });
+
+    var d = $("#sortable");
+    d.scrollTop(d.prop("scrollHeight"));
+
+    imgtLi.addEventListener('click', function (e) {
+        if(clickdeletionbtn){
+            var jbResult = confirm("정말삭제하시겠습니까?");
+            console.log(e.target.id)
+            console.log(this);
+            console.log(this.childElementCount);
+            if (jbResult) {
+                console.log('delete');
+                this.remove();
+            }
+            else {
+                console.log('nodelete');
+                return;
+            }
+        }
+    });
+
+    return timestampNum;
+
+
+}
+
+
 function makeCodearea(text) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
@@ -223,6 +295,7 @@ function makeCodearea(text) {
     resultDiv.style.marginLeft = "40px";
     resultDiv.style.marginBottom = "5px";
     resultDiv.style.padding = "5px";
+    resultDiv.contentEditable = "false";
 
     var inputDiv = document.createElement("div");
     inputDiv.className = "divtexttext"
@@ -260,11 +333,6 @@ function makeCodearea(text) {
     var now = transSectoTime(currentTime);
     carrot.title = now;
     carrot.value = currentTime;
-    //console.log(document.getElementById("li" + timestampNum).offsetHeight);
-    /*div.style.height = "330px";
-    div.style.backgroundColor = "var(--color-pink)";
-    div.appendChild(carrot);*/
-
 
     codeDiv.appendChild(runbtnSpan);
     codeDiv.appendChild(codetextDiv);
@@ -273,12 +341,6 @@ function makeCodearea(text) {
     codeLi.appendChild(inputDiv);
     codeLi.appendChild(resultDiv);
 
-    /*codetext.addEventListener("input", function (e) {
-        console.log(e.target.id);
-        var thisId = e.target.id.slice(5, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(integer(document.getElementById("t1" + thisId).offsetHeight) + integer(document.getElementById("t2" + thisId).offsetHeight) + "px");
-        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
-    }, false);*/
 
     runbtnI.addEventListener('click', function(e){
         console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
@@ -288,12 +350,6 @@ function makeCodearea(text) {
 
     document.querySelector("#sortable").appendChild(codeLi);
 
-
-    //var div = document.createElement("div");
-    //div.style.border = "1px solid blue";
-    //div.id = "c" + timestampNum;
-
-    //document.querySelector("#realtimestamp").appendChild(div);
 
     carrot.addEventListener('click', function (e) {
         player.seekTo(e.target.value, true);
@@ -398,19 +454,7 @@ function makeTextarea(text) {
     textLi.appendChild(carrot);
     textLi.appendChild(textDiv);
 
-    /*texttextDiv.addEventListener("input", function (e) {
-        var thisId = e.target.id.slice(2, e.target.id.length);
-        document.getElementById("c" + thisId).style.height = String(parseInt(document.getElementById("t1" + thisId).offsetHeight) + 10 + "px");
-        //document.getElementById("c" + thisId).style.backgroundColor = "#f6c0c0";
-    }, false);*/
-
     document.querySelector("#sortable").appendChild(textLi);
-
-
-    //var div = document.createElement("div");
-    //div.style.border = "1px solid blue";
-    //div.id = "c" + timestampNum;
-    
 
     carrot.addEventListener('click', function (e) {
         player.seekTo(e.target.value, true);
