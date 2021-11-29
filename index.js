@@ -245,7 +245,7 @@ function makeImgarea(url){
 
     var carrot = document.createElement("i");
     console.log("carrot");
-    carrot.className = "fas fa-tenge fa-2x";
+    carrot.className = "fas fa-file-image";
     carrot.id = "time"+timestampNum;
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
