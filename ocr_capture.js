@@ -7,6 +7,9 @@ $(document).ready(function () {
         drawCanvas();
         if(started && ended && startTime <= endTime){
             if(confirm("현재 선택된 영역에서 "+String(transSectoTime(startTime))+"부터"+String(transSectoTime(endTime))+"까지 코드를 추출하시겠습니까?")){
+                started = false;
+                ended = false;
+                
                 var xhr = new XMLHttpRequest();
                 var data = {x: x/cw, y: y/ch, w: (w-x)/cw, h: (h-y)/ch, start_time: String(startTime), end_time: String(endTime), video_name: videoUid};
                 console.log(data);
