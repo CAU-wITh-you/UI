@@ -12,8 +12,8 @@ chrome.tabs.getCurrent(function (tab) {
             console.log(document.querySelector('#withYou'));
             if(document.querySelector('#withYou')){
                 document.querySelector('#withYou').remove();
-                window.location.reload();
             }  
+            window.location.reload();
         }
     }
     if (tab.url != lastTab) {
@@ -60,8 +60,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             console.log(document.querySelector('#withYou'));
             if(document.querySelector('#withYou')){
                 document.querySelector('#withYou').remove();
-                window.location.reload();
             }
+            window.location.reload();
             //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
             //console.log(document.getElementById("youtubeMP4"));        
         }

@@ -76,20 +76,26 @@ $(document).ready(function () {
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areadesignbutton")
     .addEventListener('click', function(e){
-        canvasVisible = !canvasVisible;
-        canvasClickable = !canvasClickable;
-        if(canvasClickable){
-            drawCanvas();
-            canvas3.style.pointerEvents = "auto";
-        }
-        else{
-            clearCanvas();
-            canvas3.style.pointerEvents = "none";
+        selectedBorder = getSelectedBorder();
+        //console.log(selectedBorder);
+        if(selectedBorder == 10){
+            canvasVisible = !canvasClickable;
+            canvasClickable = !canvasClickable;
+            
+            if(canvasClickable){
+                drawCanvas();
+                canvas3.style.pointerEvents = "auto";
+            }
+            else{
+                clearCanvas();
+                canvas3.style.pointerEvents = "none";
+            }
         }
     });
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areaselectionbutton")
     .addEventListener('click', function(e){
+        selectedBorder = 0;
         if(selectedBorder != -1){
             if(canvasClickable) canvasVisible = true;
             else canvasVisible = !canvasVisible;
@@ -124,11 +130,14 @@ $(document).ready(function () {
             //console.log(myX, myY);
             //console.log(selectedBorder);
         }
+
         if(getSelectedBorder(myX, myY) == -1 && canvasClickable){
+            console.log('aa');
             canvasVisible = true;
             canvasClickable = false;
             canvas3.style.pointerEvents = "none";
             drawCanvas();
+            selectedBorder = 0;
         }
     });
 
@@ -138,7 +147,7 @@ $(document).ready(function () {
     });
 
     document.addEventListener('mousemove', function(e){
-        if(selectedBorder>0){
+        if(0<selectedBorder && selectedBorder<10){
             offset = getOffset(document.getElementById("youtubeMP4"));
             var myX = e.clientX - offset.left;
             var myY = e.clientY - offset.top;
@@ -168,14 +177,12 @@ $(document).ready(function () {
             drawCanvas(true);
             getSelectedBorder(myX,myY);
         }
-
     })
-
-
 });
 
+
 function getSelectedBorder(myX, myY){
-    //console.log(myX, myY,"/",x,y,w,h);
+    //console.log(myX, myY);
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
     if(Math.abs(myX-x)<30 && Math.abs(myY-y)<30) return 5;
     if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) return 6;
@@ -188,6 +195,9 @@ function getSelectedBorder(myX, myY){
     if(Math.abs(myY-h)<30) return 4;
 
     if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) return 9;
+    if(-30<myX && myX<width+30 && -130<myY && myY<-80) return 10;
+    if(!(myX || myY)) return 10;
+
     return -1;
 }
 

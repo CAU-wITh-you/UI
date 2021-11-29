@@ -63,6 +63,10 @@ if(document.querySelector('video') && videoSelected == false){
             ctx.fillStyle = "#6799FF";
             ctx.fillText('동영상을 선택해주세요', canvas1.width/2, canvas1.height/2);
             console.log("end")
+
+            canvas1.remove();
+            document.querySelector("#movie_player > div.html5-video-container > video").pause();
+            $("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
         }
     }
     
