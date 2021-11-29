@@ -29,6 +29,7 @@ chrome.tabs.getCurrent(function (tab) {
             }
         }
         xhr.send(JSON.stringify(data));
+        
         //http://ec2-52-14-144-75.us-east-2.compute.amazonaws.com:3000/ocr/?x=0.5&y=0.5&w=0.5&h=0.5&t=10&n=07e54c0a28b54529a5a4c6f5836f7dc8
         //https://youtube.googleapis.com/youtube/v3/videos?id=KF6t61yuPCY&part=contentDetails&key=AIzaSyDE7ObLBGlJjHIxgEfroxyWpc10ft4u4Ls&type=playlist&regionCode=KR
         //ec2-52-14-144-75.us-east-2.compute.amazonaws.com:443/ocr?x=0.5&y=0.5&w=0.5&h=0.5&t=18&n=c55c25a12710419a95a27723db21173f
