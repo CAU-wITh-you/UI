@@ -30,12 +30,14 @@ function toggleImgstart() {
         document
             .getElementById("startbtn")
             .src = "buttons/startbutton-" + color + ".png";
-        //startTime = 0;
+        started = false;
+        startTime = 0;
     } else {
         document
             .getElementById("startbtn")
             .src = "buttons/startbutton2-" + color + ".png";
-        //startTime = document.getElementById("youtubeMP4").currentTime;
+        started = true;
+        startTime = player.getCurrentTime();
     }
     //console.log(startTime);
 }
@@ -47,12 +49,14 @@ function toggleImgend() {
         document
             .getElementById("endbtn")
             .src = "buttons/endbutton-" + color + ".png";
-        //endTime = 0;
+        ended = false;
+        endTime = 0;
     } else {
         document
             .getElementById("endbtn")
             .src = "buttons/endbutton2-" + color + ".png";
-        //endTime = document.getElementById("youtubeMP4").currentTime;
+        ended = true;
+        endTime = player.getCurrentTime();
     }
     //console.log(endTime);
 }
@@ -862,9 +866,9 @@ function updateTimestamp() {
 
 document.getElementById("backbtn__icon").addEventListener('click', function () {
     orderchange = false;
-    sortableDisable();
     clickdeletion = false;
     changebutton();
+    //sortableDisable(); 
 });
 
 var openedit = false;
