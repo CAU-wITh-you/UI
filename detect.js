@@ -66,9 +66,16 @@ if(document.querySelector('video') && videoSelected == false){
 
             canvas1.remove();
             document.querySelector("#movie_player > div.html5-video-container > video").pause();
-            //document.querySelector('#secondary').innerHTML = ``;
-            //document.querySelector('#primary').innerHTML = ``;
-            /*var iframe = document.createElement("iframe");
+            //document.querySelector('#secondary').style.display = "none";
+            //document.querySelector('#primary').style.display = "none";
+            //var html = $("#columns").innerHTML;
+            //$("#columns").html(``);
+            //var columnHtml = document.createElement("div");
+            //columnHtml.id ="columnHtml";
+            //columnHtml.innerHTML = html;
+            //columnHtml.style.display = "none";
+
+            var iframe = document.createElement("iframe");
             iframe.id = "withYou";
             iframe.src = chrome.runtime.getURL("index.html");
             iframe.style.width = "100%";
@@ -76,9 +83,9 @@ if(document.querySelector('video') && videoSelected == false){
             iframe.style.zIndex = "1000";
             iframe.style.position = "absolute"
             iframe.style.overflow="hidden";
-            document.getElementById("columns").appendChild(iframe);*/
-            var html = $("#columns").innerHTML;
-            $("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+            document.querySelector("#masthead-container").appendChild(iframe);
+
+            //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
         }
     }
     
@@ -124,3 +131,14 @@ if(document.querySelector('video') && videoSelected == false){
 else if(videoSelected){
     window.location.reload();
 }
+
+document.addEventListener('message', function(ev) {
+    console.log("message from iframe")
+    if (ev.data == 'closeIframe') {
+        document.getElementById("withYou").remove();
+        document.querySelector('#secondary').style.display = "block";
+        document.querySelector('#primary').style.display = "block";
+        //pushIframe(document); // Your code
+    }
+});
+

@@ -16,33 +16,31 @@ function exitfunc() {
             var xhr = new XMLHttpRequest();
             var data = {url: videoUrl};
             console.log(data);
-            if(document.querySelector('#withYou')){
-                document.querySelector('#withYou').remove();
-            }
-            window.open('','_self').close(); 
-            //localStorage.clear();
-            //window.history.forward(2);
-            xhr.open("DELETE", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdelete/url", true);
-            xhr.setRequestHeader('Content-Type', 'application/json'); 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    // JSON.parse does not evaluate the attacker's scripts.
-                    console.log("response!");
-                }
-            }
-            xhr.send(JSON.stringify(data));
+
+            chrome.runtime.sendMessage({sendBack:true, data:"test data"});
+            /*chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+                console.log(response.farewell);
+                document.querySelector('#withYou').style.display = "none";
+                document.querySelector('#withYou').style.pointerEvents = "none";
+            });*/
         }
         else{
             var xhr = new XMLHttpRequest();
             var data = {video_name: videoUid};
             console.log(data);
             console.log(document.querySelector('#withYou'));
-            if(document.querySelector('#withYou')){
-                document.querySelector('#withYou').remove();
+            document.querySelector('#withYou').style.display = "none";
+            document.querySelector('#withYou').style.pointerEvents = "none";
+            //parent.postMessage('closeIframe', '*');
+            //chrome.runtime.sendMessage({sendBack:true, data:"test data"});
+            /*if(document.querySelector('#withYou')){
+                var html = document.querySelector('#columnHtml').innerHtml;
+                document.querySelector('#withYou').innerHTML = html;
+                //document.querySelector('#withYou').remove();
             }
             window.open('','_self').close(); 
             //localStorage.clear();
-            //window.history.forward(2);
+            //window.history.forward(2);*/
             xhr.open("DELETE", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdelete/vid", true);
             xhr.setRequestHeader('Content-Type', 'application/json'); 
             xhr.onreadystatechange = function() {

@@ -17,13 +17,13 @@
     }
 }, 500);*/
 
-
+console.log("hello stopvideo");
 $(document).ready(function(){
     var videoUrl = new URL(window.location.href);
     var videoId = videoUrl.searchParams.get("v");
     console.log(videoUrl);
-    if(videoId){
-        console.log(videoId);
+    console.log(videoId);
+    if(!videoId){
         if(document.querySelector('#withYou')){
             document.querySelector('#withYou').remove();
             window.location.reload();
@@ -31,24 +31,9 @@ $(document).ready(function(){
     }
 });    
 
-        /*document.querySelector("#movie_player > div.html5-video-container > video").pause();
-        document.querySelector('#secondary').innerHTML = ``;
-        document.querySelector('#primary').innerHTML = ``;        /
-        setTimeout(function(){
-            if(confirm('start')){
-                document.querySelector("#movie_player > div.html5-video-container > video").pause();
-                document.querySelector('#secondary').innerHTML = ``;
-                document.querySelector('#primary').innerHTML = ``;
-        
-                //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
-                //console.log(document.getElementById("youtubeMP4"));
-            }
-        }, 2000);*/
+chrome.runtime.onMessage.addListener(function(details) {
+    alert('Message from frame: ' + details.data);
+    console.log('Message from frame: ' + details.data);
+});
 
-/*setTimeout(function(){
-    if(document.querySelector('#withYou')){
-        document.querySelector('#withYou').remove();
-        window.location.reload();
-    }
 
-}, 2000);*/

@@ -8,8 +8,8 @@ chrome.tabs.getCurrent(function (tab) {
         videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
-        if(videoId){
-            console.log(videoId);
+        console.log(videoId);
+        if(!videoId){
             console.log(document.querySelector('#withYou'));
             if(document.querySelector('#withYou')){
                 document.querySelector('#withYou').remove();
@@ -57,8 +57,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
-        if(videoId){
-            console.log(videoId);
+        console.log(videoId);
+        if(!videoId){
             console.log(document.querySelector('#withYou'));
             if(document.querySelector('#withYou')){
                 document.querySelector('#withYou').remove();

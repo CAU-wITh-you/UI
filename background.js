@@ -27,9 +27,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (changeInfo.url) {
         var videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
-        if(videoId){
+        if(!videoId){
           console.log('change', changeInfo.url);
           hello();
         }
     }
+});
+
+chrome.runtime.onMessage.addListener(function(details) {
+  hello();
+  console.log('Message from frame: ' + details.data);
 });

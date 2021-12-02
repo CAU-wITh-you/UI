@@ -39,7 +39,7 @@
         "./assets/jquery-3.3.1.min.js",
         "./assets/jquery-3.6.0.js",
         "./assets/jquery-ui.js",
-        "boundrect.js"
+        "stopvideo.js"
       ],
       "all-frames": true
     }
