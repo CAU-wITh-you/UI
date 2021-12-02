@@ -1,10 +1,11 @@
 let videoUid;
 let lastTab = '';
+let videoUrl;
 console.log("change.js");
 chrome.tabs.getCurrent(function (tab) {
     console.log(lastTab);
     if(lastTab != ''){
-        var videoUrl = new URL(tab.url);
+        videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
         if(videoId){
@@ -15,17 +16,18 @@ chrome.tabs.getCurrent(function (tab) {
             }  
             window.location.reload();
         }
+        loadNote();
     }
     if (tab.url != lastTab) {
         lastTab = tab.url;
-        var videoUrl = new URL(tab.url);
+        videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
         console.log(tab);
         //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
         document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
         console.log(document.getElementById("youtubeMP4"));
-
+        loadNote();
 
         var xhr = new XMLHttpRequest();
         var data = {url: videoUrl};
@@ -52,7 +54,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
     if (tab.url != lastTab) {
         lastTab = tab.url;
-        var videoUrl = new URL(tab.url);
+        videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
         if(videoId){

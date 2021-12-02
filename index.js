@@ -10,7 +10,51 @@ var language = "c";
 document.getElementById('exitbutton').addEventListener('click', exitfunc);
 function exitfunc() {
     console.log("extension 종료");
+    saveNote();
+    if(confirm("doIT yourself를 종료하시겠습니까?")){
+        if(!videoUid){
+            var xhr = new XMLHttpRequest();
+            var data = {url: videoUrl};
+            console.log(data);
+            if(document.querySelector('#withYou')){
+                document.querySelector('#withYou').remove();
+            }
+            window.open('','_self').close(); 
+            //localStorage.clear();
+            //window.history.forward(2);
+            xhr.open("DELETE", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdelete/url", true);
+            xhr.setRequestHeader('Content-Type', 'application/json'); 
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    // JSON.parse does not evaluate the attacker's scripts.
+                    console.log("response!");
+                }
+            }
+            xhr.send(JSON.stringify(data));
+        }
+        else{
+            var xhr = new XMLHttpRequest();
+            var data = {video_name: videoUid};
+            console.log(data);
+            console.log(document.querySelector('#withYou'));
+            if(document.querySelector('#withYou')){
+                document.querySelector('#withYou').remove();
+            }
+            window.open('','_self').close(); 
+            //localStorage.clear();
+            //window.history.forward(2);
+            xhr.open("DELETE", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdelete/vid", true);
+            xhr.setRequestHeader('Content-Type', 'application/json'); 
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    // JSON.parse does not evaluate the attacker's scripts.
+                    console.log("response!");
+                }
+            }
+        }
+    }
 }
+
 document.getElementById("exitbutton__icon").addEventListener("mouseover", exitover);
 function exitover() {
     console.log("hover");
@@ -192,42 +236,45 @@ function compile(carrotId) {
 
     var code = document.querySelector(`#t1${carrotId} > divcodetext > div`).CodeMirror.getValue();
     var input = document.querySelector(`#t3${carrotId}`).innerText;
-    alert("compile", input);
-
-    var xhr = new XMLHttpRequest();
-    var data = {
-        clientId: 'ee0532ecd7fd6bfdab3b8449e971ab28',
-        clientSecret: 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
-        script: code,
-        stdin: input,
-        language: language,
-        versionIndex: '4'
-    };
-    console.log(data);
-
-    xhr.open("POST", "https://api.jdoodle.com/v1/execute", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            // JSON.parse does not evaluate the attacker's scripts.
-            console.log("compile response!");
-            var resp = JSON.parse(xhr.responseText);
-            //var result = resp.result.slice(1,resp.length);
-            //var resp = xhr.responseText;
-            console.log(resp);
-            //console.log(result);
-            document.querySelector(`#t2${carrotId}`).innerText = '  [OUTPUT] : ' + resp.output;
-            //alert(resp);
+    if(confirm("컴파일하시겠습니까?")){
+        var xhr = new XMLHttpRequest();
+        var data = {
+            clientId: 'ee0532ecd7fd6bfdab3b8449e971ab28',
+            clientSecret: 'e7888abe6f272c7b870d1574da29fe46a89855f84a600e238fef3b770bd12730',
+            script: code,
+            stdin: input,
+            language: language,
+            versionIndex: '4'
+        };
+        console.log(data);
+    
+        xhr.open("POST", "https://api.jdoodle.com/v1/execute", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                // JSON.parse does not evaluate the attacker's scripts.
+                console.log("compile response!");
+                var resp = JSON.parse(xhr.responseText);
+                //var result = resp.result.slice(1,resp.length);
+                //var resp = xhr.responseText;
+                console.log(resp);
+                //console.log(result);
+                document.querySelector(`#t2${carrotId}`).innerText = '  [OUTPUT] : ' + resp.output;
+                //alert(resp);
+            }
         }
+        xhr.send(JSON.stringify(data));
     }
-    xhr.send(JSON.stringify(data));
 }
 
 var timestampNum = 0;
 
-function makeImgarea(url) {
+function makeImgarea(url, time) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
+    if(time){
+        currentTime = time;
+    }
 
     var imgLi = document.createElement("li");
     imgLi.className = "ui-state-default";
@@ -249,7 +296,7 @@ function makeImgarea(url) {
 
     var carrot = document.createElement("i");
     console.log("carrot");
-    carrot.className = "fas fa-file-image";
+    carrot.className = "fas fa-file-image fa-2x";
     carrot.id = "time" + timestampNum;
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
@@ -275,7 +322,7 @@ function makeImgarea(url) {
 
     imgLi.addEventListener('click', function (e) {
         if (clickdeletionbtn) {
-            var jbResult = confirm("정말삭제하시겠습니까?");
+            var jbResult = confirm("정말 삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
             console.log(this.childElementCount);
@@ -294,9 +341,12 @@ function makeImgarea(url) {
 }
 
 
-function makeCodearea(text) {
+function makeCodearea(text, time) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
+    if(time){
+        currentTime = time;
+    }
 
     var codeLi = document.createElement("li");
     codeLi.className = "ui-state-default";
@@ -416,7 +466,7 @@ function makeCodearea(text) {
 
     codeLi.addEventListener('click', function (e) {
         if (clickdeletionbtn) {
-            var jbResult = confirm("정말삭제하시겠습니까?");
+            var jbResult = confirm("정말 삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
             console.log(this.childElementCount);
@@ -466,9 +516,12 @@ function makeCodearea(text) {
 }
 
 
-function makeTextarea(text) {
+function makeTextarea(text, time) {
     timestampNum++;
     var currentTime = player.getCurrentTime();
+    if(time){
+        currentTime = time;
+    }
 
     var textLi = document.createElement("li");
     textLi.className = "ui-state-default";
@@ -540,7 +593,7 @@ function makeTextarea(text) {
 
     textLi.addEventListener('click', function (e) {
         if (clickdeletionbtn) {
-            var jbResult = confirm("정말삭제하시겠습니까?");
+            var jbResult = confirm("정말 삭제하시겠습니까?");
             console.log(e.target.id)
             console.log(this);
             console.log(this.childElementCount);
@@ -778,6 +831,57 @@ function nonemakeTextarea(text) {
     return timestampNum;
 }
 
+function makeImgarea(url, time) {
+    timestampNum++;
+
+    var imgLi = document.createElement("li");
+    imgLi.className = "ui-state-default";
+    //imgLi.style.backgroundColor = "var(--color-background-gray)";
+    imgLi.id = "li" + timestampNum;
+
+    var imgDiv = document.createElement("div");
+    imgDiv.className = "divcode";
+    imgDiv.contentEditable = "false";
+    imgDiv.id = "t1" + timestampNum;
+    imgDiv.style.backgroundColor = "var(--color-background-gray)";
+    imgDiv.style.marginLeft = "35px";
+
+    var img = document.createElement("img");
+    img.src = url;
+    img.id = "i" + timestampNum;
+    img.style.width = "100%";
+
+    imgDiv.appendChild(img);
+    imgLi.appendChild(imgDiv);
+
+    document.querySelector("#sortable").appendChild(imgLi);
+
+    carrot.addEventListener('click', function (e) {
+        player.seekTo(e.target.value, true);
+    });
+
+    var d = $("#sortable");
+    d.scrollTop(d.prop("scrollHeight"));
+
+    imgLi.addEventListener('click', function (e) {
+        if (clickdeletionbtn) {
+            var jbResult = confirm("정말 삭제하시겠습니까?");
+            console.log(e.target.id)
+            console.log(this);
+            console.log(this.childElementCount);
+            if (jbResult) {
+                console.log('delete');
+                this.remove();
+            }
+            else {
+                console.log('nodelete');
+                return;
+            }
+        }
+    });
+
+    return timestampNum;
+}
 
 var clock = true;
 document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";

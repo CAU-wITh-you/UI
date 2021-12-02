@@ -1,4 +1,4 @@
-let videoSelected = false;
+var videoSelected = false;
 //alert("detect.js");
 
 function getOffset( el ) {
@@ -66,6 +66,18 @@ if(document.querySelector('video') && videoSelected == false){
 
             canvas1.remove();
             document.querySelector("#movie_player > div.html5-video-container > video").pause();
+            //document.querySelector('#secondary').innerHTML = ``;
+            //document.querySelector('#primary').innerHTML = ``;
+            /*var iframe = document.createElement("iframe");
+            iframe.id = "withYou";
+            iframe.src = chrome.runtime.getURL("index.html");
+            iframe.style.width = "100%";
+            iframe.style.height = "670px";
+            iframe.style.zIndex = "1000";
+            iframe.style.position = "absolute"
+            iframe.style.overflow="hidden";
+            document.getElementById("columns").appendChild(iframe);*/
+            var html = $("#columns").innerHTML;
             $("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
         }
     }
@@ -84,7 +96,7 @@ if(document.querySelector('video') && videoSelected == false){
                 
                 canvas1.remove();
                 document.querySelector("#movie_player > div.html5-video-container > video").pause();
-                /*document.querySelector('#secondary').innerHTML = ``;
+                document.querySelector('#secondary').innerHTML = ``;
                 document.querySelector('#primary').innerHTML = ``;
                 var iframe = document.createElement("iframe");
                 iframe.id = "withYou";
@@ -94,8 +106,8 @@ if(document.querySelector('video') && videoSelected == false){
                 iframe.style.zIndex = "10";
                 iframe.style.position = "absolute"
                 iframe.style.overflow="hidden";
-                document.getElementById("columns").appendChild(iframe);*/
-                $("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+                document.getElementById("columns").appendChild(iframe);
+                //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
             }
         }
     
@@ -109,4 +121,6 @@ if(document.querySelector('video') && videoSelected == false){
 
     });
 }
-
+else if(videoSelected){
+    window.location.reload();
+}

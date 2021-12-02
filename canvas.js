@@ -184,21 +184,25 @@ $(document).ready(function () {
 function getSelectedBorder(myX, myY){
     //console.log(myX, myY);
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
-    if(Math.abs(myX-x)<30 && Math.abs(myY-y)<30) return 5;
-    if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) return 6;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) return 7;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) return 8;
+    var returnVal = -1;
+    if(Math.abs(myX-x)<30 && Math.abs(myY-y)<30) returnVal = 5;
+    if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) returnVal = 6;
+    if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) returnVal = 7;
+    if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) returnVal = 8;
 
-    if(Math.abs(myX-x)<30) return 1;
-    if(Math.abs(myX-w)<30) return 2;
-    if(Math.abs(myY-y)<30) return 3;
-    if(Math.abs(myY-h)<30) return 4;
+    if(Math.abs(myX-x)<30) returnVal = 1;
+    if(Math.abs(myX-w)<30) returnVal = 2;
+    if(Math.abs(myY-y)<30) returnVal = 3;
+    if(Math.abs(myY-h)<30) returnVal = 4;
 
-    if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) return 9;
-    if(-30<myX && myX<width+30 && -130<myY && myY<-80) return 10;
-    if(!(myX || myY)) return 10;
+    if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) returnVal = 9;
+    if(-30<myX && myX<width+30 && -130<myY && myY<-80) returnVal = 10;
+    if(!(myX || myY)) returnVal = 10;
 
-    return -1;
+    if(returnVal == 9){
+        saveNote();
+    }
+    return returnVal;
 }
 
 function adjustVideo(){

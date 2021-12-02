@@ -1,5 +1,5 @@
 function hello() {
-    document.getElementById("changeColor").style.background = '#000000';
+    document.getElementById("star").src = "images/starhappy__logo30.png";
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var currTab = tabs[0];
         if (currTab) { // Sanity check
@@ -15,4 +15,4 @@ function hello() {
     });
 }
 
-document.getElementById('changeColor').addEventListener('click', hello);
+document.getElementById('star').addEventListener('click', hello);
