@@ -199,9 +199,10 @@ function getSelectedBorder(myX, myY){
     if(-30<myX && myX<width+30 && -130<myY && myY<-80) returnVal = 10;
     if(!(myX || myY)) returnVal = 10;
 
-    if(returnVal == 9){
+    if(returnVal != 9){
         saveNote();
     }
+    //console.log(returnVal);
     return returnVal;
 }
 

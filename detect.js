@@ -20,24 +20,25 @@ function pos(){
     }	
 }
 
-if(document.querySelector('video') && videoSelected == false){
-    var canvas1 = document.createElement("canvas");
-    canvas1.setAttribute("id", "selectionVideo");
-    
-    // this right here should be fixed
-    // for the youtube videos to work properly
-    
-    console.log("hello detect")
-    
-    document.body.appendChild(canvas1);
-    var ctx = canvas1.getContext("2d");
+function initCanvas(){
+    if(document.querySelector('video')){
+        var canvas1 = document.createElement("canvas");
+        canvas1.setAttribute("id", "selectionVideo");
+        
+        // this right here should be fixed
+        // for the youtube videos to work properly
+        
+        console.log("hello detect")
+        
+        document.body.appendChild(canvas1);
+        var ctx = canvas1.getContext("2d");
 
-    var video = document.querySelector('video');
-    var height = $("video").height();
-    var width = $("video").width();
-    console.log(height,width);
+        var video = document.querySelector('video');
+        var height = $("video").height();
+        var width = $("video").width();
+        console.log(height,width);
+        
     
-    function initCanvas(){
         if($('video').position()){
             $("#selectionVideo").css({
                 position: 'absolute',
@@ -75,62 +76,59 @@ if(document.querySelector('video') && videoSelected == false){
             //columnHtml.innerHTML = html;
             //columnHtml.style.display = "none";
 
-            var iframe = document.createElement("iframe");
-            iframe.id = "withYou";
-            iframe.src = chrome.runtime.getURL("index.html");
-            iframe.style.width = "100%";
-            iframe.style.height = "670px";
-            iframe.style.zIndex = "1000";
-            iframe.style.position = "absolute"
-            iframe.style.overflow="hidden";
-            document.querySelector("#masthead-container").appendChild(iframe);
+            videoUrl = new URL(window.location.href);
+            var videoId = videoUrl.searchParams.get("v");
 
-            //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
-        }
-    }
-    
-    canvas1.addEventListener('click', function(event) {
-        var x = event.pageX,
-            y = event.pageY;
-    
-        var top = pos().top,
-            left = pos().left;
-
-        if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
-            videoSelected = true;
-            
-            if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
-                
-                canvas1.remove();
+            if(videoId){
                 document.querySelector("#movie_player > div.html5-video-container > video").pause();
-                document.querySelector('#secondary').innerHTML = ``;
-                document.querySelector('#primary').innerHTML = ``;
                 var iframe = document.createElement("iframe");
                 iframe.id = "withYou";
                 iframe.src = chrome.runtime.getURL("index.html");
                 iframe.style.width = "100%";
                 iframe.style.height = "670px";
-                iframe.style.zIndex = "10";
+                iframe.style.zIndex = "1000";
                 iframe.style.position = "absolute"
                 iframe.style.overflow="hidden";
-                document.getElementById("columns").appendChild(iframe);
-                //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+                document.querySelector("#masthead-container").appendChild(iframe);
             }
+            else{
+                alert("선택 가능한 동영상이 없습니다! 다른 페이지에서 실행시켜주세요.");
+            }
+
+            canvas1.addEventListener('click', function(event) {
+                var x = event.pageX,
+                    y = event.pageY;
+            
+                var top = pos().top,
+                    left = pos().left;
+        
+                if(x>=left && x<canvas1.width+left && y>=top && y<canvas1.height+top) {
+                    videoSelected = true;
+                    
+                    if(confirm("in "+x+","+y+","+chrome.runtime.getURL('index.html'))){
+                        
+                        canvas1.remove();
+                        document.querySelector("#movie_player > div.html5-video-container > video").pause();
+                        //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+                    }
+                }
+            
+            }, false);
+            //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
         }
-    
-    }, false);
+    }
+    else{
+        alert("선택 가능한 동영상이 없습니다! 다른 페이지에서 실행시켜주세요.");
+    }
 
     
-    $(document).ready(function(){
 
-        initCanvas();
-        //boundRect();
+}
 
-    });
-}
-else if(videoSelected){
-    window.location.reload();
-}
+$(document).ready(function(){
+
+    initCanvas();
+});
 
 document.addEventListener('message', function(ev) {
     console.log("message from iframe")

@@ -5,7 +5,7 @@ var color = "pink"
 var timeStamp = [];
 var timeStampnum = 0;
 var startclicknum = 0
-var language = "c";
+var language = "cpp";
 
 document.getElementById('exitbutton').addEventListener('click', exitfunc);
 function exitfunc() {
@@ -269,11 +269,13 @@ var timestampNum = 0;
 
 function makeImgarea(url, time) {
     timestampNum++;
-    var currentTime = player.getCurrentTime();
+    var currentTime = 0; 
     if(time){
         currentTime = time;
     }
-
+    else{
+        currentTime = player.getCurrentTime();
+    }
     var imgLi = document.createElement("li");
     imgLi.className = "ui-state-default";
     //imgLi.style.backgroundColor = "var(--color-background-gray)";
@@ -341,9 +343,12 @@ function makeImgarea(url, time) {
 
 function makeCodearea(text, time) {
     timestampNum++;
-    var currentTime = player.getCurrentTime();
+    var currentTime = 0; 
     if(time){
         currentTime = time;
+    }
+    else{
+        currentTime = player.getCurrentTime();
     }
 
     var codeLi = document.createElement("li");
@@ -516,9 +521,12 @@ function makeCodearea(text, time) {
 
 function makeTextarea(text, time) {
     timestampNum++;
-    var currentTime = player.getCurrentTime();
+    var currentTime = 0; 
     if(time){
         currentTime = time;
+    }
+    else{
+        currentTime = player.getCurrentTime();
     }
 
     var textLi = document.createElement("li");
@@ -829,7 +837,7 @@ function nonemakeTextarea(text) {
     return timestampNum;
 }
 
-function makeImgarea(url, time) {
+function nonemakeImgarea(url) {
     timestampNum++;
 
     var imgLi = document.createElement("li");

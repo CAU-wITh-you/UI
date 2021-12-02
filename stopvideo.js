@@ -18,8 +18,10 @@
 }, 500);*/
 
 console.log("hello stopvideo");
+
 $(document).ready(function(){
     var videoUrl = new URL(window.location.href);
+    before = videoUrl;
     var videoId = videoUrl.searchParams.get("v");
     console.log(videoUrl);
     console.log(videoId);
@@ -30,10 +32,5 @@ $(document).ready(function(){
         }
     }
 });    
-
-chrome.runtime.onMessage.addListener(function(details) {
-    alert('Message from frame: ' + details.data);
-    console.log('Message from frame: ' + details.data);
-});
 
 

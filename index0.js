@@ -126,6 +126,7 @@ function saveNote(){
       note : save
   })
   .then(function(docRef) {
+      
       console.log("저장되었습니다");
   })
   .catch(function(error) {
