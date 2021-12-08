@@ -13,7 +13,7 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 ![image](https://user-images.githubusercontent.com/77157003/145250832-9ae2b119-4d6c-45f4-8a3d-8debfd9fc9c8.png)<br/><br/>
 
-### [기능 1] 동영상 코드 추출
+### [주요 기능] 동영상 코드 추출
 #### 1. 코드(캡쳐) 영역지정
 
 ![image](https://user-images.githubusercontent.com/77157003/145253262-bf4051b5-feac-4659-859e-2c98382cc51c.png)<br/><br/>
@@ -30,9 +30,9 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 ![image](https://user-images.githubusercontent.com/77157003/145253797-baebb7ec-d0b0-4d41-9962-ba11b9323548.png)<br/><br/>
 
-### [기능 2] 이미지 캡쳐
+### [그 외의 기능 소개]
+![image](https://user-images.githubusercontent.com/77157003/145254730-6e676b09-e0dc-4653-b110-789680835f56.png)<br/><br/>
 
-![image](https://user-images.githubusercontent.com/77157003/145253408-5658cac7-3a58-4eff-9f3b-ca934539a76b.png)<br/><br/>
 
 ## 크롬 확장 프로그램 설치
 1. Chrome Menu > [설정] 에서 [확장프로그램] 클릭<br/>
