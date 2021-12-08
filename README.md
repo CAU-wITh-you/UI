@@ -30,7 +30,7 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 ### [기능 2] 이미지 캡쳐
 
-![image](https://user-images.githubusercontent.com/77157003/145250926-3784b712-9577-4850-b286-e057cbbef643.png)<br/><br/>
+![image](https://user-images.githubusercontent.com/77157003/145251681-c4ddd741-d435-4dcd-8f61-29c0e5b2bb61.png)<br/><br/>
 
 ## 크롬 확장 프로그램 설치
 1. Chrome Menu > [설정] 에서 [확장프로그램] 클릭<br/>
