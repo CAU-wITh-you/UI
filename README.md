@@ -30,8 +30,14 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 ![image](https://user-images.githubusercontent.com/77157003/145253797-baebb7ec-d0b0-4d41-9962-ba11b9323548.png)<br/><br/>
 
+### [주요 기능] 이미지 캡쳐
+
+![image](https://user-images.githubusercontent.com/77157003/145255583-3db8c9e1-f0de-4a9d-baf5-1aeec491b905.png)<br/><br/>
+
+
 ### [그 외의 기능 소개]
-![image](https://user-images.githubusercontent.com/77157003/145254915-b63c3c15-8c61-4793-87d0-1dafe43fc4aa.png)<br/><br/>
+
+![image](https://user-images.githubusercontent.com/77157003/145255513-de1a1a2f-fa6e-4ef0-8299-981be3521e1d.png)<br/><br/>
 
 
 ## 크롬 확장 프로그램 설치
