@@ -6,25 +6,25 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 ## 크롬 확장 프로그램 설치
 1. Chrome Menu > [설정] 에서 [확장프로그램] 클릭
 
-![image](https://user-images.githubusercontent.com/77157003/145247771-7fc12e47-e2c8-44a6-bcda-7e61090eaf8f.png)  
+![image](https://user-images.githubusercontent.com/77157003/145247771-7fc12e47-e2c8-44a6-bcda-7e61090eaf8f.png)  <br/><br/>
 
 
 
 
 2. [개발자 모드] 활성화 후 [압축해제된 확장 프로그램을 로드합니다.] 클릭
 
-![image](https://user-images.githubusercontent.com/77157003/145248116-0531de85-eff8-4b8f-aa00-ca3cfaf311b3.png)  
+![image](https://user-images.githubusercontent.com/77157003/145248116-0531de85-eff8-4b8f-aa00-ca3cfaf311b3.png)  <br/><br/>
 
 
 
 
 3. [폴더] do IT yourself 폴더 선택
 
-![image](https://user-images.githubusercontent.com/77157003/145248356-eaaf1426-d35f-4e67-82b8-f5879d764cf7.png)  
+![image](https://user-images.githubusercontent.com/77157003/145248356-eaaf1426-d35f-4e67-82b8-f5879d764cf7.png)  <br/><br/>
 
 
 
 
 4. 완료
 
-![image](https://user-images.githubusercontent.com/77157003/145248416-d302698e-10f2-4290-be9d-ff4221a6a5c2.png)  
+![image](https://user-images.githubusercontent.com/77157003/145248416-d302698e-10f2-4290-be9d-ff4221a6a5c2.png)  <br/>
