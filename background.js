@@ -42,6 +42,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function(details) {
-  stop2();
+  if(details.data == "test data2")
+    stop();
+  console.log('Message from frame: ' + details.data);
+});
+
+
+chrome.runtime.onMessage.addListener(function(details) {
+  if(details.data == "test data")
+    stop2();
   console.log('Message from frame: ' + details.data);
 });

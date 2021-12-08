@@ -186,23 +186,23 @@ function getSelectedBorder(myX, myY){
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
     var returnVal = -1;
     if(Math.abs(myX-x)<30 && Math.abs(myY-y)<30) returnVal = 5;
-    if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) returnVal = 6;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) returnVal = 7;
-    if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) returnVal = 8;
+    else if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) returnVal = 6;
+    else if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) returnVal = 7;
+    else if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) returnVal = 8;
 
-    if(Math.abs(myX-x)<30) returnVal = 1;
-    if(Math.abs(myX-w)<30) returnVal = 2;
-    if(Math.abs(myY-y)<30) returnVal = 3;
-    if(Math.abs(myY-h)<30) returnVal = 4;
+    else if(Math.abs(myX-x)<30) returnVal = 1;
+    else if(Math.abs(myX-w)<30) returnVal = 2;
+    else if(Math.abs(myY-y)<30) returnVal = 3;
+    else if(Math.abs(myY-h)<30) returnVal = 4;
 
-    if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) returnVal = 9;
-    if(-30<myX && myX<width+30 && -130<myY && myY<-80) returnVal = 10;
+    else if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) returnVal = 9;
+    if(0<myX && myX<660 && -120<myY && myY<-50) returnVal = 10;
     if(!(myX || myY)) returnVal = 10;
 
-    if(returnVal != 9){
+    if(returnVal == -1){
         saveNote();
     }
-    //console.log(returnVal);
+    console.log(myX, myY, returnVal);
     return returnVal;
 }
 

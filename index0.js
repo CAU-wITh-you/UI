@@ -40,17 +40,17 @@ function loadNote(){
             var content = note[i-1].content;
             var time = note[i-1].time;
             if(type == "code"){
-              if(time) makeCodearea(content, time);
+              if(time==0 || time) makeCodearea(content, time);
               
               else nonemakeCodearea(content);
             }
             else if(type == "text"){
-              if(time) makeTextarea(content, time);
+              if(time==0 || time) makeTextarea(content, time);
               
               else nonemakeTextarea(content);
             }
             else if(type == "img"){
-              if(time) makeImgarea(content, time);
+              if(time==0 || time) makeImgarea(content, time);
               
               else nonemakeImgarea(content);
             }    

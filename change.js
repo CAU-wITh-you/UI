@@ -24,11 +24,20 @@ chrome.tabs.getCurrent(function (tab) {
         var videoId = videoUrl.searchParams.get("v");
         console.log(videoUrl);
         console.log(tab);
-        //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
-        document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
-        console.log(document.getElementById("youtubeMP4"));
-        loadNote();
-
+        if(videoId){
+            //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
+            document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
+            console.log(document.getElementById("youtubeMP4"));
+            loadNote();
+        }
+        else{
+            alert("실행 가능한 동영상이 없습니다. 다른 페이지에서 실행해주세요!");
+            if(document.querySelector('#withYou')){
+                document.querySelector('#withYou').style.display = "none";
+                document.querySelector('#withYou').style.pointerEvents = "none";
+            }
+            chrome.runtime.sendMessage({sendBack:true, data:"test data2"});
+        }
         var xhr = new XMLHttpRequest();
         var data = {url: videoUrl};
         xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdownload", true);
@@ -70,23 +79,3 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     }
         
 });
-
-/*var videoUrl = new URL(window.location.href);
-    var videoId = videoUrl.searchParams.get("v");
-    console.log(videoUrl);
-    if(videoId){
-        console.log(videoId);
-        if(document.querySelector('#withYou')){
-            document.querySelector('#withYou').remove();
-            window.location.reload();
-        }
-    }*/
-
-/*function toggleMuteState(tabId) {
-    chrome.tabs.get(tabId, async (tab) => {
-        //let muted = !tab.mutedInfo.muted;
-        console.log("mute");
-        await chrome.tabs.update(tabId, { muted: true });
-        //console.log(`Tab ${tab.id} is ${muted ? 'muted' : 'unmuted'}`);
-    });
-}*/

@@ -55,7 +55,7 @@ function exitfunc() {
 
 document.getElementById("exitbutton__icon").addEventListener("mouseover", exitover);
 function exitover() {
-    console.log("hover");
+    //console.log("hover");
     document.getElementById("exitbutton__icon").className = "fas fa-door-open";
     document.getElementById("exitbutton__icon").style.color = "var(--color-dark-pink)";
 }
@@ -154,11 +154,11 @@ document.getElementById('timestampbtn').addEventListener('click', clicktimestamp
 //<i class="fas fa-carrot fa-2x" id="1"></i>
 // 언어 선택
 var selectLanguage = true;
-document.getElementById("language__C").style.backgroundColor = "var(--color-dark-pink)";
-document.getElementById("language__C").style.borderRadius = "15px";
+document.getElementById("language__Cpp").style.backgroundColor = "var(--color-dark-pink)";
+document.getElementById("language__Cpp").style.borderRadius = "15px";
 
 document.getElementById("realselectionbtn").addEventListener('click', function () {
-    console.log("enter");
+    //console.log("enter");
     selectLanguage = !selectLanguage;
     if (selectLanguage == true) {
         document.getElementById("language__C").style.display = "block";
@@ -270,7 +270,7 @@ var timestampNum = 0;
 function makeImgarea(url, time) {
     timestampNum++;
     var currentTime = 0; 
-    if(time){
+    if(time==0 || time){
         currentTime = time;
     }
     else{
@@ -344,7 +344,7 @@ function makeImgarea(url, time) {
 function makeCodearea(text, time) {
     timestampNum++;
     var currentTime = 0; 
-    if(time){
+    if(time==0 || time){
         currentTime = time;
     }
     else{
@@ -450,7 +450,6 @@ function makeCodearea(text, time) {
     codeLi.appendChild(inputDiv);
     codeLi.appendChild(resultDiv);
 
-
     runbtnI.addEventListener('click', function (e) {
         console.log(e.target.id, e.target.id.slice(6, e.target.id.length));
         var thisId = e.target.id.slice(6, e.target.id.length);
@@ -508,7 +507,7 @@ function makeCodearea(text, time) {
         var cppEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
             lineNumbers: true,
             matchBrackets: true,
-            autoCloseBrackets: true,
+            //autoCloseBrackets: true,
             mode: "text/x-c++src",
             theme: "material-darker"
         });
@@ -522,7 +521,7 @@ function makeCodearea(text, time) {
 function makeTextarea(text, time) {
     timestampNum++;
     var currentTime = 0; 
-    if(time){
+    if(time==0 || time){
         currentTime = time;
     }
     else{
@@ -593,6 +592,10 @@ function makeTextarea(text, time) {
     carrot.addEventListener('click', function (e) {
         player.seekTo(e.target.value, true);
     });
+
+    texttextDiv.addEventListener('input', function(){
+        saveNote();
+    })
 
     var d = $("#sortable");
     d.scrollTop(d.prop("scrollHeight"));
@@ -748,7 +751,7 @@ function nonemakeCodearea(text) {
         var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
             lineNumbers: true,
             matchBrackets: true,
-            autoCloseBrackets: true,
+            //autoCloseBrackets: true,
             mode: "text/x-csrc",
             theme: "material-darker"
         });
@@ -757,7 +760,7 @@ function nonemakeCodearea(text) {
         var cppEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
             lineNumbers: true,
             matchBrackets: true,
-            autoCloseBrackets: true,
+            //autoCloseBrackets: true,
             mode: "text/x-c++src",
             theme: "material-darker"
         });
@@ -813,6 +816,10 @@ function nonemakeTextarea(text) {
     textLi.appendChild(textDiv);
 
     document.querySelector("#sortable").appendChild(textLi);
+
+    texttextDiv.addEventListener('input', function(){
+        saveNote();
+    })
 
     var d = $("#sortable");
     d.scrollTop(d.prop("scrollHeight"));
