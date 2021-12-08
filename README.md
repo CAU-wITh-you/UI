@@ -6,4 +6,3 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 1. Chrome Menu > [설정] 에서 [확장프로그램] 클릭
 ![image](https://user-images.githubusercontent.com/77157003/145247771-7fc12e47-e2c8-44a6-bcda-7e61090eaf8f.png)
 2. [개발자 모드] 활성화 후 [압축해제된 확장 프로그램을 로드합니다.] 클릭
-![image](https://user-images.githubusercontent.com/77157003/145247801-433f6d54-153a-400f-a2bb-7cd8136f7b48.png)
