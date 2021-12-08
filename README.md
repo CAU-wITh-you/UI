@@ -6,7 +6,8 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 ## 서비스 소개
 
 ### 동영상 선택 - 크롬익스텐션 실행
-![image](https://user-images.githubusercontent.com/77157003/145250812-a3f0f3b5-75df-40d2-b4f5-896210b8b547.png)
+
+![image](https://user-images.githubusercontent.com/77157003/145253538-132108b0-a0a4-4c85-904e-677bd099100d.png)<br/><br/>
 
 ### UI - 시작화면
 
