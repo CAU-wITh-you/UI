@@ -14,11 +14,11 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 ### [기능 1] 동영상 코드 추출
 #### 1. 코드(캡쳐) 영역지정
-
-![image](https://user-images.githubusercontent.com/77157003/145251935-48bbf862-a3d9-4533-ab3f-4adcce697bf7.png)<br/><br/>
+![image](https://user-images.githubusercontent.com/77157003/145252953-cf7b8681-f4aa-449b-affb-5f965812b249.png)<br/><br/>
   
 #### 2. 시간(시작 시간 끝 시간) 지정
-![image](https://user-images.githubusercontent.com/77157003/145251860-c069ffbb-95ea-4e2c-be37-e0597a521a91.png)<br/><br/>
+
+![image](https://user-images.githubusercontent.com/77157003/145252828-16c25231-4976-4aa4-88e6-f190feae3c66.png)<br/><br/>
 
 #### 3. 코드 추출(시작)
 
