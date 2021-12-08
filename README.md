@@ -28,7 +28,7 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 #### 4. 코드 추출(결과)
 
-![image](https://user-images.githubusercontent.com/77157003/145253142-2a3d73a2-76e8-47a6-9d20-7f28803c1d53.png)<br/><br/>
+![image](https://user-images.githubusercontent.com/77157003/145253797-baebb7ec-d0b0-4d41-9962-ba11b9323548.png)<br/><br/>
 
 ### [기능 2] 이미지 캡쳐
 
