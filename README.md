@@ -10,15 +10,18 @@ do It yourself는 유튜브를 활용한 코딩 학습 도우미 프로그램으
 
 
 
+
 2. [개발자 모드] 활성화 후 [압축해제된 확장 프로그램을 로드합니다.] 클릭
 
 ![image](https://user-images.githubusercontent.com/77157003/145248116-0531de85-eff8-4b8f-aa00-ca3cfaf311b3.png)
 
 
 
+
 3. [폴더] do IT yourself 폴더 선택
 
 ![image](https://user-images.githubusercontent.com/77157003/145248356-eaaf1426-d35f-4e67-82b8-f5879d764cf7.png)
+
 
 
 
