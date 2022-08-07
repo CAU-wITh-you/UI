@@ -85,10 +85,10 @@ function initCanvas(){
                 iframe.id = "withYou";
                 iframe.src = chrome.runtime.getURL("index.html");
                 iframe.style.width = "100%";
-                iframe.style.height = "670px";
+                iframe.style.height = "100vh";
                 iframe.style.zIndex = "1000";
                 iframe.style.position = "absolute"
-                iframe.style.overflow="hidden";
+                iframe.style.overflow="visible";
                 document.querySelector("#masthead-container").appendChild(iframe);
             }
             else{
@@ -109,19 +109,16 @@ function initCanvas(){
                         
                         canvas1.remove();
                         document.querySelector("#movie_player > div.html5-video-container > video").pause();
-                        //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
+                        //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:100vh; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
                     }
                 }
             
             }, false);
-            //$("#columns").html(`<iframe id="withYou" src="${chrome.runtime.getURL("index.html")}" style="width:100%; height:670px; z-index:10; position:absolute; left:-0%; overflow:hidden"></iframe>`);
         }
     }
     else{
         alert("선택 가능한 동영상이 없습니다! 다른 페이지에서 실행시켜주세요.");
     }
-
-    
 
 }
 

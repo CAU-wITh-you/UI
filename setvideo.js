@@ -1,14 +1,14 @@
 let videoUid;
 let lastTab = '';
 let videoUrl;
-console.log("change.js");
+console.log("setvideo.js");
 chrome.tabs.getCurrent(function (tab) {
     console.log(lastTab);
     if(lastTab != ''){
         videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
-        console.log(videoUrl);
-        console.log(videoId);
+        //console.log(videoUrl);
+        //console.log(videoId);
         if(!videoId){
             console.log(document.querySelector('#withYou'));
             if(document.querySelector('#withYou')){
@@ -22,12 +22,12 @@ chrome.tabs.getCurrent(function (tab) {
         lastTab = tab.url;
         videoUrl = new URL(tab.url);
         var videoId = videoUrl.searchParams.get("v");
-        console.log(videoUrl);
-        console.log(tab);
+        //console.log(videoUrl);
+        //console.log(tab);
         if(videoId){
             //document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&rel=0`;
             document.getElementById("youtubeMP4").src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&listType=playlist&rel=0`;
-            console.log(document.getElementById("youtubeMP4"));
+            //console.log(document.getElementById("youtubeMP4"));
             loadNote();
         }
         else{

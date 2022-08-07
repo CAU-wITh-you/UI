@@ -295,7 +295,6 @@ function makeImgarea(url, time) {
     img.style.width = "100%";
 
     var carrot = document.createElement("i");
-    console.log("carrot");
     carrot.className = "fas fa-file-image fa-2x";
     carrot.id = "time" + timestampNum;
     carrot.style.float = "left";
@@ -432,7 +431,6 @@ function makeCodearea(text, time) {
 
     var carrot = document.createElement("i");
     carrot.id = "time" + timestampNum;
-    console.log("carrot");
     carrot.className = "fab fa-cuttlefish fa-2x";
     carrot.style.float = "left";
     carrot.style.marginTop = "15px";
@@ -567,7 +565,6 @@ function makeTextarea(text, time) {
     texttextDiv.innerHTML = text;
 
     var carrot = document.createElement("i");
-    console.log("carrot");
     carrot.className = "fas fa-tenge fa-2x";
     carrot.id = "time" + timestampNum;
     carrot.style.float = "left";
@@ -961,13 +958,7 @@ function updateTimestamp() {
                 selectnode = timeparent.childNodes[j + 2];
                 if (selectnode[1] == textparent[2]) {
                     timeparent.childNodes[i + 2] = selectnode;
-                    console.log("switch");
-                    console.log(timeparent.childNodes[i + 2])
-                    console.log(selectnode);
-
                     timeparent.childNodes[j + 2] = tempnode;
-                    console.log(i);
-                    console.log('다름');
                     break;
                 }
             }

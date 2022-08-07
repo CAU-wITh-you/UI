@@ -22,7 +22,7 @@ h2, h3, h1 {
 }
 h1 { font-size: 140%; }
 h2 { font-size: 120%; }
-h3 { font-size: 110%; }
+h3 { font-size: 115%; }
 article > h2:first-child, section:first-child > h2 { margin-top: 0; }
 
 #nav h1 {

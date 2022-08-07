@@ -49,7 +49,6 @@
       "resources": [
         "index.html",
         "mypage.html",
-        "hello_world.html",
         "index.js",
         "http://news.google.com/",
         "https://code.jquery.com/jquery-latest.min.js",

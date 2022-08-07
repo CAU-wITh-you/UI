@@ -132,7 +132,7 @@ $(document).ready(function () {
         }
 
         if(getSelectedBorder(myX, myY) == -1 && canvasClickable){
-            console.log('aa');
+            //console.log('aa');
             canvasVisible = true;
             canvasClickable = false;
             canvas3.style.pointerEvents = "none";
@@ -202,13 +202,13 @@ function getSelectedBorder(myX, myY){
     if(returnVal == -1){
         saveNote();
     }
-    console.log(myX, myY, returnVal);
+    //console.log(myX, myY, returnVal);
     return returnVal;
 }
 
 function adjustVideo(){
     var heightDiff = $("#there").height()-$("#playerbuttons").height()-$("#there").width()*0.5625;
-    console.log(heightDiff);
+    //console.log(heightDiff);
     document.getElementById("youtubeWrapper").style.marginTop = String(heightDiff*0.35)+"px";
 }
 

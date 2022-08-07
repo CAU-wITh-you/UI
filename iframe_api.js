@@ -1,4 +1,3 @@
-console.log("iframe_api");
 var scriptUrl = 'chrome-extension://' + chrome.runtime.getURL('index.html').split('/')[2] + '/widgetapi.js';
 try { var ttPolicy = window.trustedTypes.createPolicy("youtube-widget-api", { createScriptURL: function (x) { return x } }); scriptUrl = ttPolicy.createScriptURL(scriptUrl) } catch (e) { } if (!window["YT"]) var YT = { loading: 0, loaded: 0 }; if (!window["YTConfig"]) var YTConfig = { "host": "https://www.youtube.com" };
 if (!YT.loading) {

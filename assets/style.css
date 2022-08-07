@@ -85,7 +85,7 @@ video::-webkit-media-controls-fullscreen-button {
 .extensions__left {
   float: left;
   width: 60%;
-  height: 670px;
+  height: 95vh;
   background-color: #333f50;
 }
 
@@ -103,7 +103,7 @@ video::-webkit-media-controls-fullscreen-button {
   justify-content: space-evenly;
   display: flex;
   align-items: center;
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 .videobuttons3 {
@@ -123,7 +123,7 @@ video::-webkit-media-controls-fullscreen-button {
   height: 100%;
   margin-bottom: 15px;
   align-items: flex-end;
-  margin-left: 10px;
+  margin-left: 18px;
 }
 
 #exitbutton__icon {
@@ -137,7 +137,7 @@ video::-webkit-media-controls-fullscreen-button {
   height: 100%;
   display: flex;
   align-items: flex-end;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
 .areadesignbutton__icon {
@@ -166,7 +166,7 @@ video::-webkit-media-controls-fullscreen-button {
   height: 100%;
   display: flex;
   align-items: flex-end;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
 .areaselectionbutton__icon {
@@ -232,7 +232,7 @@ video::-webkit-media-controls-fullscreen-button {
 .extensions__right {
   float: right;
   width: 40%;
-  height: 670px;
+  height: 95vh;
 }
 
 .notebuttons1 {
@@ -272,7 +272,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 #realselectionbtn {
-  padding-top: 4%;
+  padding-top: 8%;
   border-left: 10px;
   float: left;
   height: 50%;
@@ -591,7 +591,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 #sortable::-webkit-scrollbar {
-  width: 4px;
+  width: 10px;
   /*스크롤바의 너비*/
 }
 
