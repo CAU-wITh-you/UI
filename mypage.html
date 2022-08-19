@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portforlio</title>
-    <meta name="description" content="Portforlio for world-renowened software engineer Eunseo">
-    <meta name="author" content="Eunseo">
-    <link rel="icon" type="image/png" href="image/favicon.png">
-    <script src="assets/fontawesome.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/9ff9f6bf5f.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>wITh you</title>
+    <meta name="description" content="Cau 3-2 Capstone design team 5-5">
+    <meta name="author" content="Team name : wITh you">
+    <script src="assets\fontawesome.js" crossorigin="anonymous"></script>
+    <script src="\assets\jquery.min.js" defer="defer"></script>
+    <script src="\assets\html2canvas.min.js" defer="defer"></script>
+    <script src="\assets\jquery-3.3.1.min.js" defer="defer"></script>
+    <script src="\assets\jquery-3.6.0.js" defer="defer"></script>
+    <script src="\assets\jquery-ui.js" defer="defer"></script>
+
     <link rel="stylesheet" href="mypage.css">
-    <script src="http://code.jquery.com/jquery-latest.js" defer="defer"></script> 
     <script src="mypage.js" defer="defer"></script>
+    <script src=".\server\db\loadnotes.js" defer="defer"></script>
 </head>
 
 <body>
@@ -28,86 +31,206 @@
             <div class="addfolder">
                 <div class="addfolder__icon">
                     <p>
-                        <i class="fas fa-plus" id=plusbtn></i>
+                        <i class="fas fa-plus" id=plusbtn>폴더추가</i>
                     </p>
                 </div>
             </div>
             <div class="deletefolder">
                 <div class="deletefolder__icon">
                     <p>
-                    <i class="fas fa-minus" id=deletebtn></i>
+                        <i class="fas fa-minus" id=deletebtn>폴더삭제</i>
+                    </p>
+                </div>
+            </div>
+            <div class="edit__editfolder">
+                <div class="edit__editfolder__icon">
+                    <p>
+                        <i class="fas fa-minus" id=edit__editfolderbtn>폴더수정</i>
                     </p>
                 </div>
             </div>
         </div>
         <div class="edit__container__middle">
             <div class="folder__name">
-                <h1 class="mypage__title">모든 문서</h1>
+                <h1 class="mypage__title" , id="mypage__title">모든 문서</h1>
             </div>
         </div>
         <div class="edit__container__right">
             <div class="colors" id="colorslist">
                 <div class="pickcolor__icon">
-                    <i class="fas fa-check-circle fa-2x" style="color:var(--color-dark-pink)" id="pink"></i>
+                    <i class="" style="color:var(--color-dark-pink)" id="pink"></i>
                 </div>
                 <div class="yellowcolor__icon">
-                    <i class="fas fa-circle fa-2x" style="color:var(--color-dark-yellow);" id="yellow"></i>
+                    <i class="" style="color:var(--color-dark-yellow);" id="yellow"></i>
                 </div>
                 <div class="bluecolor__icon">
-                    <i class="fas fa-circle fa-2x" style="color:var(--color-blue);" id="blue"></i>
+                    <i class="" style="color:var(--color-blue);" id="blue"></i>
                 </div>
-                <div class="purplecolor__icon" style="color:var(--color-purple);" id="purple">
-                    <i class="fas fa-circle fa-2x"></i>
+                <div class="purplecolor__icon">
+                    <i class="" style="color:var(--color-purple);" id="purple"></i>
                 </div>
             </div>
         </div>
     </section>
     <section id="file" class="file__container">
-        <div class="folders">
-            <div class="default">
-                <div class="folder" id="allnote">
+        <div class="folders" id="foldersdiv">
+            <div class="default" id="default">
+                <div class="folder target_by_EachleftFolder" id="allnote">
                     <div class="allnote__icon">
-                        <i class="fas fa-list-alt" , style="font-size: 20px;"></i>
+                        <i class="fas fa-list-alt" style="font-size: 20px;"></i>
                     </div>
-                    <h4 class="allnote__title">모든노트</h4>
-                    <h4 class="allnote__num">33</h4>
+                    <h4 class="allnote__title" id="allnote__title">모든 문서</h4>
+                    <h4 class="allnote__num" id="allnote__num">33</h4>
                 </div>
-                <div class="folder" id="recentnote">
+                <div class="folder target_by_EachleftFolder" id="recentnote">
                     <div class="recentnote__icon">
-                        <i class="fas fa-history" , style="font-size: 20px;"></i>
+                        <i class="fas fa-history" style="font-size: 20px;"></i>
                     </div>
-                    <h4 class="recentnote__title">최근노트</h4>
-                    <h4 class="recentnote__num">33</h4>
+                    <h4 class="recentnote__title" id="recentnote__title">최근 노트</h4>
+                    <h4 class="recentnote__num" id="recentnote__num">33</h4>
                 </div>
-                <div class="folder" id="notinfoler">
+                <div class="folder target_by_EachleftFolder" id="notinfoler">
                     <div class="notinfoler__icon">
                         <i class="fab fa-mix" , style="font-size: 20px;"></i>
                     </div>
-                    <h4 class="notinfoler__title">분류되지 않은 노트</h4>
-                    <h4 class="notinfoler__num">33</h4>
+                    <h4 class="notinfoler__title" , id="notinfoler__title">분류되지 않은 노트</h4>
+                    <h4 class="notinfoler__num" id="notinfolder__num">33</h4>
                 </div>
-                <div class="divider" id="div1_div">
-                    <div class="aboutdiv">
-                        <div class="divider__icon">
-                            <i class="fas fa-caret-right" style="font-size: 20px;"></i>
-                        </div>
-                        <h4 class="divider__title">3-1</h4>
+                <div class="folder target_by_EachleftFolder" id="폴더이름1">
+                    <!--title을 id로-->
+                    <div class="folder__icon">
+                        <p class="afloder__icon" style="font-size: large;">📁 </p>
                     </div>
-                    <div class="divider__folder" id="div1__folder">
-                        <div class="divider__folder__icon">
-                            <i class="fas fa-circle fa-2x" style="color:red; font-size: 20px;"></i>
-                        </div>
-                        <h4 class="divider__folder__title">32551</h4>
-                        <h4 class="divider__folder__num">33</h4>
-                    </div>
+                    <h4 class="folder__title" , id="폴더이름1__title">폴더이름1</h4>
+                    <h4 class="folder__num" , id="폴더이름1__num">33</h4>
                 </div>
             </div>
         </div>
         <div class="textfilearea">
-            <p>Documents</p>
-            <div class=documents>
-                <div class=document>
-                    
+            <p class="folders__title" , id="folders__title">폴더</p>
+            <div class="area__folders" , id="area__folders">
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <p class="afloder__icon" style="font-size: large;">📁 </p>
+                    <p class="afolder__name">폴더1sdjlfkskdjflskdflk</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fas fa-circle fa-2x" id="afolder__icon" style="color:red; font-size: 20px;"></i>
+                    <p>폴더2</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folders"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+                <div id="folderid" , class="afolder call target_by_EachFolder">
+                    <i class="fa-solid fa-folder"></i>
+                    <p>폴더3</p>
+                </div>
+
+            </div>
+            <p class="notes__title">노트</p>
+            <div class="area__notes">
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+                <div id="notestid" , class="anote call target_by_EachNote">
+                    <div class="anote__background">dkljfs</div>
+                    <div class="anote__title">dlfksld</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="plus_modalpopup">
+        <div class="plusbtn__background">
+            <div class="plusbtn__window">
+                <div class="plusbtn__popup">
+                    <div class="plusbtn__backclosebtn">
+                        <h2 id="close__title">폴더 생성</h2>
+                        <i class="fas fa-circle" id="close__plusbtnbackground" style="font-size: 25px;"></i>
+                    </div>
+                    <div class="plusbtn__backcontent">
+                        <h3 class="plusbtn__backcontent__title">폴더 이름을 입력하세요</h3>
+                        <input type="text" class="createtext">
+                    </div>
+                    <div class="plusbtn__backcontent__finalselect">
+                        <div class="foldercreatebtn" id="foldercreatebtn">폴더 생성</div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="edit__modalpopup">
+        <div class="edit__editfolderbtn__background">
+            <div class="edit__editfolderbtn__window">
+                <div class="edit__editfolderbtn__popup">
+                    <div class="edit__editfolderbtn__backclosebtn">
+                        <h2 id="close__title">폴더 수정</h2>
+                        <i class="fas fa-circle" id="close__editbtnbackground" style="font-size: 25px;"></i>
+                    </div>
+                    <div class="edit__editfolderbtn__backcontent">
+                        <h3 class="edit__editfolderbtn__backcontent__title">폴더 이름을 입력하세요</h3>
+                        <select name="folders__name" class="selectbtn">
+                            <option disabled selected>📁</option>
+                            <option value="apple">apple</option>
+                            <option value="orange">orange</option>
+                            <option value="grape">grape</option>
+                            <option value="melon">melon</option>
+                        </select>
+                        <h3 class="edit__editfolderbtn__backcontent__title">노트를 선택하세요</h3>
+                        <select name="files__name" class="selectbtn">
+                            <option disabled selected>📒</option>
+                            <option value="apple">apple</option>
+                            <option value="orange">orange</option>
+                            <option value="grape">grape</option>
+                            <option value="melon">melon</option>
+                        </select>
+                    </div>
+                    <div class="edit__editfolderbtn__backcontent__finalselect">
+                        <div class="folderinbtn" id="folderinbtn">노트 넣기</div>
+                        <div class="folderoutbtn" id="folderoutbtn">노트 꺼내기</div>
+                    </div>
                 </div>
             </div>
         </div>
