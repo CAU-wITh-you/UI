@@ -1,3 +1,7 @@
+var server1 = "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com"
+var server2 = "https://cauwithyou.ga"
+var server = server2
+
 $(document).ready(function () {
     document.querySelector("#codeExtractBtn").addEventListener('click', function(e){
         var ch = canvas3.height = $("#youtubeMP4").height();
@@ -22,7 +26,7 @@ $(document).ready(function () {
         
                 var carrotId = makeCodearea("로딩중", startTime);
         
-                xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/ocr/continuous", true);
+                xhr.open("POST", server + ":443/ocr/continuous", true);
                 xhr.setRequestHeader('Content-Type', 'application/json'); 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
@@ -48,7 +52,7 @@ $(document).ready(function () {
         
                 var carrotId = makeCodearea("로딩중");
         
-                xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/ocr", true);
+                xhr.open("POST", server + ":443/ocr", true);
                 xhr.setRequestHeader('Content-Type', 'application/json'); 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
@@ -84,7 +88,7 @@ $(document).ready(function () {
             var data = {x: x/cw, y: y/ch, w: (w-x)/cw, h: (h-y)/ch, video_time: String(t), video_name: videoUid};
             console.log(data);
     
-            xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/ocr/only_capture", true);
+            xhr.open("POST", server + ":443/ocr/only_capture", true);
             xhr.setRequestHeader('Content-Type', 'application/json'); 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {

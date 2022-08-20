@@ -1,3 +1,7 @@
+var server1 = "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com"
+var server2 = "https://cauwithyou.ga"
+var server = server2
+
 let videoUid;
 let lastTab = '';
 let videoUrl;
@@ -40,7 +44,7 @@ chrome.tabs.getCurrent(function (tab) {
         }
         var xhr = new XMLHttpRequest();
         var data = {url: videoUrl};
-        xhr.open("POST", "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com:443/mdownload", true);
+        xhr.open("POST", server + ":443/mdownload", true);
         xhr.setRequestHeader('Content-Type', 'application/json'); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
