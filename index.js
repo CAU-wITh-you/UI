@@ -7,7 +7,7 @@ var timeStampnum = 0;
 var startclicknum = 0
 
 var server1 = "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com"
-var server2 = "https://cauwithyou.ga"
+var server2 = "https://capstoneocr.com"
 var server = server2
 
 document.getElementById('exitbutton').addEventListener('click', exitfunc);
@@ -44,7 +44,7 @@ function exitfunc() {
             window.open('','_self').close(); 
             //localStorage.clear();
             //window.history.forward(2);*/
-            xhr.open("DELETE", server + ":443/mdelete/vid", true);
+            xhr.open("DELETE", server + "/mdelete/vid", true);
             xhr.setRequestHeader('Content-Type', 'application/json'); 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
@@ -84,6 +84,7 @@ function toggleImgstart() {
         started = true;
         startTime = player.getCurrentTime();
     }
+    drawTimecanvas();
     //console.log(startTime);
 }
 
@@ -103,6 +104,7 @@ function toggleImgend() {
         ended = true;
         endTime = player.getCurrentTime();
     }
+    drawTimecanvas();
     //console.log(endTime);
 }
 var playclicknum = 0

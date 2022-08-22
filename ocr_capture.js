@@ -1,5 +1,5 @@
 var server1 = "https://ec2-18-117-151-129.us-east-2.compute.amazonaws.com"
-var server2 = "https://cauwithyou.ga"
+var server2 = "https://capstoneocr.com"
 var server = server2
 
 $(document).ready(function () {
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 ended = false;
                 document.getElementById("startbtn").src = "buttons/startbutton-" + color + ".png";
                 document.getElementById("endbtn").src = "buttons/endbutton-" + color + ".png";
-                drawTimecanvas()
+                drawTimecanvas();
                 
                 var xhr = new XMLHttpRequest();
                 var data = {x: x/cw, y: y/ch, w: (w-x)/cw, h: (h-y)/ch, start_time: String(startTime), end_time: String(endTime), video_name: videoUid};
@@ -26,7 +26,7 @@ $(document).ready(function () {
         
                 var carrotId = makeCodearea("로딩중", startTime);
         
-                xhr.open("POST", server + ":443/ocr/continuous", true);
+                xhr.open("POST", server + "/ocr/continuous", true);
                 xhr.setRequestHeader('Content-Type', 'application/json'); 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         
                 var carrotId = makeCodearea("로딩중");
         
-                xhr.open("POST", server + ":443/ocr", true);
+                xhr.open("POST", server + "/ocr", true);
                 xhr.setRequestHeader('Content-Type', 'application/json'); 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
@@ -88,7 +88,7 @@ $(document).ready(function () {
             var data = {x: x/cw, y: y/ch, w: (w-x)/cw, h: (h-y)/ch, video_time: String(t), video_name: videoUid};
             console.log(data);
     
-            xhr.open("POST", server + ":443/ocr/only_capture", true);
+            xhr.open("POST", server + "/ocr/only_capture", true);
             xhr.setRequestHeader('Content-Type', 'application/json'); 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
