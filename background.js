@@ -30,6 +30,29 @@ function stop2() {
   });
 }
 
+/*chrome.identity.getAuthToken({
+  interactive: true
+}, function(token) {
+  console.log('token',token);
+  if (chrome.runtime.lastError) {
+      console.log(chrome.runtime.lastError.message);
+      return;
+  }
+  /*var x = new XMLHttpRequest();
+  x.open('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + token);
+  x.onload = function() {
+    console.log(x.response);
+  };
+  x.send();
+
+  fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + token)
+  .then(r => r.text()).then(result => {
+    console.log(result)  
+    // Result now contains the response text, do what you want...
+  })
+
+});*/
+
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (changeInfo.url) {
         var videoUrl = new URL(tab.url);

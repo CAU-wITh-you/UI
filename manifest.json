@@ -6,11 +6,20 @@
   "background": {
     "service_worker": "background.js"
   },
+  "oauth2": {
+    "client_id": "962492428676-tm2rlvn05gsuj4thqrvus5sbe4fv29p6.apps.googleusercontent.com",
+    "scopes": [
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/spreadsheets"
+    ]   
+  },
   "permissions": [
     "storage",
     "activeTab",
     "scripting",
-    "tabs"
+    "tabs",
+    "identity",
+    "identity.email"
   ],
   "action": {
     "default_popup": "popup.html",

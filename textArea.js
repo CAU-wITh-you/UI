@@ -113,7 +113,7 @@ function createTextDiv(text) {
     texttextDiv.innerHTML = text;
 
     texttextDiv.addEventListener('input', function(){
-        saveNote();
+        saveNote(user_email);
     })
 
     textDiv.appendChild(texttextDiv);
@@ -193,6 +193,10 @@ function createCodeDiv(timestampNum){
     var codetextDiv = document.createElement("divcodetext");
     codetextDiv.style.width = "100%";
     codetextDiv.style.height = "100%";
+
+    codetextDiv.addEventListener('input', function(){
+        saveNote(user_email);
+    })
 
     codetext = document.createElement("textarea");
     if (language == "c") {

@@ -13,7 +13,7 @@ var server = server2
 document.getElementById('exitbutton').addEventListener('click', exitfunc);
 function exitfunc() {
     console.log("extension 종료");
-    saveNote();
+    saveNote(user_email);
     if(confirm("doIT yourself를 종료하시겠습니까?")){
         if(!videoUid){
             var xhr = new XMLHttpRequest();
