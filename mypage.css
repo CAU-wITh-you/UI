@@ -40,7 +40,7 @@ p {
 
 .edit__container__left {
   display: flex;
-  width: 20%;
+  width: 30%;
 }
 
 .edit__container__middle {
@@ -52,7 +52,7 @@ p {
 
 .edit__container__right {
   display: flex;
-  width: 10%;
+  width: 30%;
   justify-content: right;
   align-items: center;
 }
@@ -315,6 +315,27 @@ p {
   width: 20%;
 }
 
+.file {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+}
+
+.file__icon {
+  padding-left: 5%;
+  display: flex;
+  width: 15%;
+  justify-content: center;
+}
+
+.file__title {
+  display: flex;
+  width: 80%;
+}
+
+
+
 .textfilearea {
   height: 100%;
   width: 80%;
@@ -342,7 +363,6 @@ p {
   border: 2px solid white;
   border-radius: 10px;
   margin-bottom: 1%;
-  box-shadow: -3px 5px 5px var(--color-background-gray);
   align-items: center;
   padding-left: 1%;
   padding-right: 1%;
@@ -373,9 +393,8 @@ p {
   flex-basis: 16%;
   height: 200px;
   border: 2px solid whitesmoke;
-  border-radius: 10px;
+  border-radius: 8px;
   margin-bottom: 2%;
-  box-shadow: -3px 5px 5px gray;
   align-items: center;
   padding-left: 1%;
   padding-right: 1%;
@@ -437,7 +456,9 @@ p {
   height: 15%;
   vertical-align: middle;
 }
-
+#close__plusbtnbackground:hover{
+  transform: scale(1.1);
+}
 #close__title {
   padding-left: 3%;
 }
@@ -475,6 +496,112 @@ p {
 }
 
 .foldercreatebtn {
+  width: 20%;
+  height: 50%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border: solid 2px;
+  border-radius: 8px;
+  font-size: large;
+  margin-right: 2%;
+}
+
+
+.deletebtn__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+
+  /* 숨기기 */
+  z-index: -1;
+  opacity: 0;
+}
+
+.deletebtn__show {
+  opacity: 1;
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.deletebtn__window {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.deletebtn__popup {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid;
+  border-radius: 20px;
+  background-color: var(--color-background-gray);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+  /* 임시 지정 */
+  width: 35%;
+  height: 25%;
+
+  /* 초기에 약간 아래에 배치 */
+  transform: translate(-50%, -40%);
+}
+
+.deletebtn__show .popup {
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.deletebtn__backclosebtn {
+  display: flex;
+  width: 98%;
+  height: 15%;
+  vertical-align: middle;
+}
+#close__deletebtnbackground:hover{
+  transform: scale(1.1);
+}
+#close__title {
+  padding-left: 3%;
+}
+
+#close__deletebtnbackground {
+  padding-top: 2%;
+  margin-left: auto;
+}
+
+.deletebtn__backcontent {
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 90%;
+  height: 50%;
+}
+
+.deletebtn__backcontent__title {
+  padding-top: 2%;
+}
+
+.delete__selectbtn {
+  width: 100%;
+  height: 35%;
+  font-size: large;
+}
+
+.deletebtn__backcontent__finalselect{
+  display: flex;
+  height: 20%;
+  width: 100%;
+  font-size: large;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.deletefolderbtn {
   width: 20%;
   height: 50%;
   padding-top: 1%;
@@ -543,7 +670,9 @@ p {
   height: 15%;
   vertical-align: middle;
 }
-
+#close__editbtnbackground:hover{
+  transform: scale(1.1);
+}
 #close__title {
   padding-left: 3%;
 }
@@ -601,3 +730,105 @@ p {
   font-size: large;
   margin-left: 2%;
 }
+
+
+
+.openfile__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+
+  /* 숨기기 */
+  z-index: -1;
+  opacity: 0;
+}
+
+.openfile__show {
+  opacity: 1;
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.openfile__window {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.openfile__popup {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid;
+  border-radius: 20px;
+  background-color: var(--color-background-gray);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+  /* 임시 지정 */
+  width: 30%;
+  height: 20%;
+
+  /* 초기에 약간 아래에 배치 */
+  transform: translate(-50%, -40%);
+}
+
+.openfile__show .popup {
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.openfile__backclosebtn {
+  display: flex;
+  width: 98%;
+  height: 55%;
+  vertical-align: middle;
+}
+#close__openfilebackground:hover{
+  transform: scale(1.1);
+}
+#nowopen__title {
+  padding-left: 5%;
+}
+
+#close__openfilebackground {
+  padding-top: 2%;
+  margin-left: auto;
+}
+
+.openfile__backcontent__finalselect {
+  display: flex;
+  height: 30%;
+  width: 100%;
+  font-size: large;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.openfilebtn{
+  width: 20%;
+  height: 50%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border: solid 2px;
+  border-radius: 8px;
+  font-size: large;
+  margin-right: 3%;
+}
+.notopenfilebtn {
+  width: 20%;
+  height: 50%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border: solid 2px;
+  border-radius: 8px;
+  font-size: large;
+  margin-left: 3%;
+}
+
+

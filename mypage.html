@@ -9,7 +9,6 @@
     <meta name="description" content="Cau 3-2 Capstone design team 5-5">
     <meta name="author" content="Team name : wITh you">
     <script src="assets\fontawesome.js" crossorigin="anonymous"></script>
-    <script src="assets\fontawesome2.js" crossorigin="anonymous"></script>
     <script src="\assets\jquery.min.js" defer="defer"></script>
     <script src="\assets\html2canvas.min.js" defer="defer"></script>
     <script src="\assets\jquery-3.3.1.min.js" defer="defer"></script>
@@ -18,7 +17,7 @@
 
     <link rel="stylesheet" href="mypage.css">
     <script src="mypage.js" defer="defer"></script>
-    <script src=".\server\db\loadnotes.js" defer="defer"></script>
+    <script src="mypageload.js" defer="defer"></script>
 </head>
 
 <body>
@@ -32,21 +31,21 @@
             <div class="addfolder">
                 <div class="addfolder__icon">
                     <p>
-                        <i class="fa fa-plus" id=plusbtn>폴더추가</i>
+                        <i class="fas fa-plus" id=plusbtn>폴더추가</i>
                     </p>
                 </div>
             </div>
             <div class="deletefolder">
                 <div class="deletefolder__icon">
                     <p>
-                        <i class="fa fa-minus" id=deletebtn>폴더삭제</i>
+                        <i class="fas fa-minus" id=deletebtn>폴더삭제</i>
                     </p>
                 </div>
             </div>
             <div class="edit__editfolder">
                 <div class="edit__editfolder__icon">
                     <p>
-                        <i class="fa fa-pencil-square-o" id=edit__editfolderbtn>폴더수정</i>
+                        <i class="fa fa-edit" id=edit__editfolderbtn>폴더수정</i>
                     </p>
                 </div>
             </div>
@@ -105,6 +104,28 @@
                     <h4 class="folder__title" , id="폴더이름1__title">폴더이름1</h4>
                     <h4 class="folder__num" , id="폴더이름1__num">33</h4>
                 </div>
+                <div id="폴더이름1__files" style="display: none;">
+                    <div class="file target_by_Each폴더이름1" id="파일아이디1">
+                        <div class="file__icon">
+                            <p class="afile__icon" style="font-size: large;">📄</p>
+                        </div>
+                        <h4 class="file__title" , id="파일이름2">파일이름1</h4>
+                    </div>
+                    <div class="file target_by_Each폴더이름1" id="파일아이디2">
+                        <div class="file__icon">
+                            <p class="afile__icon" style="font-size: large;">📄</p>
+                        </div>
+                        <h4 class="file__title" , id="파일이름2">파일이름2</h4>
+                    </div>
+                </div>
+                <div class="folder target_by_EachleftFolder" id="폴더이름2">
+                    <!--title을 id로-->
+                    <div class="folder__icon">
+                        <p class="afloder__icon" style="font-size: large;">📁 </p>
+                    </div>
+                    <h4 class="folder__title" , id="폴더이름2__title">폴더이름2</h4>
+                    <h4 class="folder__num" , id="폴더이름2__num">33</h4>
+                </div>
             </div>
         </div>
         <div class="textfilearea">
@@ -116,10 +137,10 @@
                 </div>
                 <div id="folderid" , class="afolder call target_by_EachFolder">
                     <i class="fas fa-circle fa-2x" id="afolder__icon" style="color:red; font-size: 20px;"></i>
-                    <p>폴더2</p>
+                    <p class="folderid__foldername">폴더2</p>
                 </div>
                 <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
+                    <i class="fa fa-edit"></i>
                     <p>폴더3</p>
                 </div>
                 <div id="folderid" , class="afolder call target_by_EachFolder">
@@ -202,6 +223,33 @@
             </div>
     </section>
 
+    
+    <section id="delete__modalpopup">
+        <div class="deletebtn__background">
+            <div class="deletebtn__window">
+                <div class="deletebtn__popup">
+                    <div class="deletebtn__backclosebtn">
+                        <h2 id="close__title">폴더 삭제</h2>
+                        <i class="fas fa-circle" id="close__deletebtnbackground" style="font-size: 25px;"></i>
+                    </div>
+                    <div class="deletebtn__backcontent">
+                        <h3 class="deletebtn__backcontent__title">폴더 이름을 선택하세요</h3>
+                        <select name="folders__name" class="delete__selectbtn">
+                            <option disabled selected>📁 폴더 이름</option>
+                            <option value="apple">apple</option>
+                            <option value="orange">orange</option>
+                            <option value="grape">grape</option>
+                            <option value="melon">melon</option>
+                        </select>
+                    </div>
+                    <div class="deletebtn__backcontent__finalselect">
+                        <div class="deletefolderbtn" id="deletefolderbtn">폴더 삭제</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="edit__modalpopup">
         <div class="edit__editfolderbtn__background">
             <div class="edit__editfolderbtn__window">
@@ -211,9 +259,9 @@
                         <i class="fas fa-circle" id="close__editbtnbackground" style="font-size: 25px;"></i>
                     </div>
                     <div class="edit__editfolderbtn__backcontent">
-                        <h3 class="edit__editfolderbtn__backcontent__title">폴더 이름을 입력하세요</h3>
+                        <h3 class="edit__editfolderbtn__backcontent__title">폴더 이름을 선택하세요</h3>
                         <select name="folders__name" class="selectbtn">
-                            <option disabled selected>📁</option>
+                            <option disabled selected>📁 폴더 이름</option>
                             <option value="apple">apple</option>
                             <option value="orange">orange</option>
                             <option value="grape">grape</option>
@@ -221,7 +269,7 @@
                         </select>
                         <h3 class="edit__editfolderbtn__backcontent__title">노트를 선택하세요</h3>
                         <select name="files__name" class="selectbtn">
-                            <option disabled selected>📒</option>
+                            <option disabled selected>📄 파일 이름</option>
                             <option value="apple">apple</option>
                             <option value="orange">orange</option>
                             <option value="grape">grape</option>
@@ -236,6 +284,27 @@
             </div>
         </div>
     </section>
+
+    <section id="openfile__modalpopup">
+        <div class="openfile__background">
+            <div class="openfile__window">
+                <div class="openfile__popup">
+                    <div class="openfile__backclosebtn">
+                        <h2 id="nowopen__title"></h2>
+                        <i class="fas fa-circle" id="close__openfilebackground" style="font-size: 25px;"></i>
+                    </div>
+                    <div class="openfile__backcontent__finalselect">
+                        <div class="openfilebtn" id="openfilebtn">파일 열기</div>
+                        <div class="notopenfilebtn" id="notopenfilebtn">취소</div>
+                    </div>
+                </div>
+            </div>
+    </section>
 </body>
 
 </html>
+
+<script src="assets/firebase-app.js"></script>
+<script src="assets/firebase-firestore.js"></script>
+<script src="assets/firebase-auth.js"></script>
+<script src="assets/firebase-database.js"></script>
