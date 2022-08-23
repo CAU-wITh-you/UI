@@ -6,13 +6,17 @@ function hello() {
             console.log(currTab);
             console.log(currTab.id);
             chrome.scripting.executeScript(
-                {
-                    target: { tabId: currTab.id, allFrames: true },
-                    files: ['detect.js'],
-                },
-                () => { console.log("success!"); });
+            {
+                target: { tabId: currTab.id, allFrames: true },
+                files: ['detect.js'],
+            },
+            () => { console.log("success!"); });
         }
     });
 }
+document.getElementById('star').addEventListener('click', hello);       
 
-document.getElementById('star').addEventListener('click', hello);
+
+
+
+

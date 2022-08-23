@@ -1,15 +1,3 @@
-
-
-//https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=ya29.A0AVA9y1taVM8pYPdQppg4chQaDla7SJvy__9GOvU-DpEyeQCx1A_PplRhFG_pM8ZVrnYF4GBYMh02vu4pb54S2VjGxeHjHKAXDRmKTN8D_DisJ8hzRR7_6yHXkMLQkdc0VWSdPWBidLs2cEB24xAk8ylucaGSaCgYKATASATASFQE65dr89DRdniAa7RFyFOc1xpX3kA0163
-authurl = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=ya29.A0AVA9y1taVM8pYPdQppg4chQaDla7SJvy__9GOvU-DpEyeQCx1A_PplRhFG_pM8ZVrnYF4GBYMh02vu4pb54S2VjGxeHjHKAXDRmKTN8D_DisJ8hzRR7_6yHXkMLQkdc0VWSdPWBidLs2cEB24xAk8ylucaGSaCgYKATASATASFQE65dr89DRdniAa7RFyFOc1xpX3kA0163"
-var xmlHttp = new XMLHttpRequest();
-xmlHttp.onreadystatechange = function(response) {
-    console.log('response',response)
-}
-xmlHttp.open("GET", authurl, true); // true for asynchronous 
-xmlHttp.send(null);
-
-
 var canvas2 = document.getElementById('canvas');
 var ctx = canvas2.getContext("2d");
 
@@ -42,6 +30,7 @@ function onPlayerReady(event) {
 
     event.target.unMute()
     console.log("hey Im ready");
+    if(document.getElementById("user_email").innerHTML == "not login") loadNote();
 
     document.getElementById('playbutton').addEventListener('click', function () {
         if(player.getPlayerState() == 2){
@@ -55,7 +44,7 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange() {
-    console.log("my state changed" + player.getPlayerState());
+    //console.log("my state changed" + player.getPlayerState());
     if(player.getPlayerState() == -1){
         document.getElementById("playbutton").hidden=true;
     }
