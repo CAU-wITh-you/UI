@@ -2,7 +2,7 @@ var canvas3 = document.getElementById("mycanvas");
 var ctx3 = canvas3.getContext("2d");
 var video = document.querySelector('#youtubeMP4');
 
-var height = $("#youtubeMP4").height()-10;
+var height = $("#youtubeMP4").height() - 10;
 var width = $("#youtubeMP4").width();
 var x = 0;
 var y = 0;
@@ -14,12 +14,12 @@ var w2 = width;
 var h2 = height;
 
 console.log("hello canvas");
-console.log(height,width);
+console.log(height, width);
 
-function drawCanvas(){
+function drawCanvas() {
     //console.log(selectedBorder)
     //console.log("start");
-    canvas3.height = $("#youtubeMP4").height()-10;
+    canvas3.height = $("#youtubeMP4").height() - 10;
     canvas3.width = $("#youtubeMP4").width();
     var variables = variableTrim(x, y, w, h, height, width);
     x = variables.x;
@@ -27,33 +27,33 @@ function drawCanvas(){
     w = variables.w;
     h = variables.h;
 
-    if(canvasVisible){
+    if (canvasVisible) {
         ctx3.beginPath();
         ctx3.clearRect(0, 0, width, height);
-        if(canvasClickable){
+        if (canvasClickable) {
             document.getElementById("check").className = "far fa-check-square fa-2x";
             ctx3.fillStyle = "#00D8FF27";
-            ctx3.fillRect(x, y, w-x, h-y); 
+            ctx3.fillRect(x, y, w - x, h - y);
             ctx3.strokeStyle = "#6799FF"
-            ctx3.lineWidth = 2;   
+            ctx3.lineWidth = 2;
         }
-        else{
+        else {
             document.getElementById("check").className = "fas fa-check-square fa-2x";
             ctx3.strokeStyle = "#6799FF"
             ctx3.lineWidth = 3;
         }
-        ctx3.rect(x, y, w-x, h-y);
+        ctx3.rect(x, y, w - x, h - y);
         ctx3.stroke();
     }
     //console.log("end");    
 }
 
-function clearCanvas(){
+function clearCanvas() {
     document.getElementById("check").className = "far fa-check-square fa-2x";
     ctx3.clearRect(0, 0, width, height);
 }
 
-function variableTrim(x, y, w, h, height, width){
+function variableTrim(x, y, w, h, height, width) {
     x = x < 0 ? 0 : x;
     x = x > width ? width : x;
     y = y < 0 ? 0 : y;
@@ -62,7 +62,7 @@ function variableTrim(x, y, w, h, height, width){
     w = w > width ? width : w;
     h = h < 0 ? 0 : h;
     h = h > height ? height : h;
-    return {x, y, w, h};
+    return { x, y, w, h };
 }
 
 let canvasClickable = false;
@@ -75,55 +75,55 @@ $(document).ready(function () {
     adjustVideo();
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areadesignbutton")
-    .addEventListener('click', function(e){
-        selectedBorder = getSelectedBorder();
-        //console.log(selectedBorder);
-        if(selectedBorder == 10){
-            canvasVisible = !canvasClickable;
-            canvasClickable = !canvasClickable;
-            
-            if(canvasClickable){
-                drawCanvas();
-                canvas3.style.pointerEvents = "auto";
+        .addEventListener('click', function (e) {
+            selectedBorder = getSelectedBorder();
+            //console.log(selectedBorder);
+            if (selectedBorder == 10) {
+                canvasVisible = !canvasClickable;
+                canvasClickable = !canvasClickable;
+
+                if (canvasClickable) {
+                    drawCanvas();
+                    canvas3.style.pointerEvents = "auto";
+                }
+                else {
+                    clearCanvas();
+                    canvas3.style.pointerEvents = "none";
+                }
             }
-            else{
-                clearCanvas();
-                canvas3.style.pointerEvents = "none";
-            }
-        }
-    });
+        });
 
     document.querySelector("#extensions > div.extensions__left > div.videobuttons1 > div.areaselectionbutton")
-    .addEventListener('click', function(e){
-        selectedBorder = 0;
-        if(selectedBorder != -1){
-            if(canvasClickable) canvasVisible = true;
-            else canvasVisible = !canvasVisible;
-            canvasClickable = false;
-            canvas3.style.pointerEvents = "none";
-            if(canvasVisible){
-                drawCanvas();
+        .addEventListener('click', function (e) {
+            selectedBorder = 0;
+            if (selectedBorder != -1) {
+                if (canvasClickable) canvasVisible = true;
+                else canvasVisible = !canvasVisible;
+                canvasClickable = false;
+                canvas3.style.pointerEvents = "none";
+                if (canvasVisible) {
+                    drawCanvas();
+                }
+                else {
+                    clearCanvas();
+                }
             }
-            else{
-                clearCanvas();
-            }
-        }
-    });
-    
+        });
+
 
     var prevX = 0;
     var prevY = 0;
-    document.addEventListener('mousedown', function(e){
+    document.addEventListener('mousedown', function (e) {
         //console.log(e);
         //console.log("start",x,y,w,h);
-        
+
         offset = getOffset(document.getElementById("youtubeMP4"));
         var myX = e.clientX - offset.left;
-        var myY = e.clientY - offset.top;  
+        var myY = e.clientY - offset.top;
         prevX = myX;
         prevY = myY;
 
-        if(canvasClickable && selectedBorder==0){
+        if (canvasClickable && selectedBorder == 0) {
             prevX = myX;
             prevY = myY;
             selectedBorder = getSelectedBorder(myX, myY);
@@ -131,7 +131,7 @@ $(document).ready(function () {
             //console.log(selectedBorder);
         }
 
-        if(getSelectedBorder(myX, myY) == -1 && canvasClickable){
+        if (getSelectedBorder(myX, myY) == -1 && canvasClickable) {
             //console.log('aa');
             canvasVisible = true;
             canvasClickable = false;
@@ -141,83 +141,83 @@ $(document).ready(function () {
         }
     });
 
-    document.addEventListener('mouseup', function(e){
+    document.addEventListener('mouseup', function (e) {
         //console.log("end",x,y,w,h);
         selectedBorder = 0;
     });
 
-    document.addEventListener('mousemove', function(e){
-        if(0<selectedBorder && selectedBorder<10){
+    document.addEventListener('mousemove', function (e) {
+        if (0 < selectedBorder && selectedBorder < 10) {
             offset = getOffset(document.getElementById("youtubeMP4"));
             var myX = e.clientX - offset.left;
             var myY = e.clientY - offset.top;
 
-            if(selectedBorder == 1 || selectedBorder == 5 || selectedBorder == 6) x = myX;
-            if(selectedBorder == 2 || selectedBorder == 7 || selectedBorder == 8) w = myX;
-            if(selectedBorder == 3 || selectedBorder == 5 || selectedBorder == 7) y = myY;
-            if(selectedBorder == 4 || selectedBorder == 6 || selectedBorder == 8) h = myY;
-            if(selectedBorder == 9){
-                var dx = myX-prevX;
-                var dy = myY-prevY;
+            if (selectedBorder == 1 || selectedBorder == 5 || selectedBorder == 6) x = myX;
+            if (selectedBorder == 2 || selectedBorder == 7 || selectedBorder == 8) w = myX;
+            if (selectedBorder == 3 || selectedBorder == 5 || selectedBorder == 7) y = myY;
+            if (selectedBorder == 4 || selectedBorder == 6 || selectedBorder == 8) h = myY;
+            if (selectedBorder == 9) {
+                var dx = myX - prevX;
+                var dy = myY - prevY;
                 x += dx;
-                y += dy; 
+                y += dy;
                 w += dx;
                 h += dy;
             }
-            
+
             prevX = myX;
             prevY = myY;
-            var ch = canvas3.height = $("#youtubeMP4").height()-10;
+            var ch = canvas3.height = $("#youtubeMP4").height() - 10;
             var cw = canvas3.width = $("#youtubeMP4").width();
-            x2 = x/cw;
-            y2 = y/ch;
-            w2 = w/cw;
-            h2 = h/ch;
+            x2 = x / cw;
+            y2 = y / ch;
+            w2 = w / cw;
+            h2 = h / ch;
 
             drawCanvas(true);
-            getSelectedBorder(myX,myY);
+            getSelectedBorder(myX, myY);
         }
     })
 });
 
 
-function getSelectedBorder(myX, myY){
+function getSelectedBorder(myX, myY) {
     //console.log(myX, myY);
     //console.log(Math.abs(myX-x),Math.abs(myX-w),Math.abs(myY-y),Math.abs(myY-h));
     var returnVal = -1;
-    if(Math.abs(myX-x)<30 && Math.abs(myY-y)<30) returnVal = 5;
-    else if(Math.abs(myX-x)<30 && Math.abs(myY-h)<30) returnVal = 6;
-    else if(Math.abs(myX-w)<30 && Math.abs(myY-y)<30) returnVal = 7;
-    else if(Math.abs(myX-w)<30 && Math.abs(myY-h)<30) returnVal = 8;
+    if (Math.abs(myX - x) < 30 && Math.abs(myY - y) < 30) returnVal = 5;
+    else if (Math.abs(myX - x) < 30 && Math.abs(myY - h) < 30) returnVal = 6;
+    else if (Math.abs(myX - w) < 30 && Math.abs(myY - y) < 30) returnVal = 7;
+    else if (Math.abs(myX - w) < 30 && Math.abs(myY - h) < 30) returnVal = 8;
 
-    else if(Math.abs(myX-x)<30) returnVal = 1;
-    else if(Math.abs(myX-w)<30) returnVal = 2;
-    else if(Math.abs(myY-y)<30) returnVal = 3;
-    else if(Math.abs(myY-h)<30) returnVal = 4;
+    else if (Math.abs(myX - x) < 30) returnVal = 1;
+    else if (Math.abs(myX - w) < 30) returnVal = 2;
+    else if (Math.abs(myY - y) < 30) returnVal = 3;
+    else if (Math.abs(myY - h) < 30) returnVal = 4;
 
-    else if(x-30<myX && myX<w+30 && y-30<myY && myY<h+30) returnVal = 9;
-    if(0<myX && myX<660 && -120<myY && myY<-50) returnVal = 10;
-    if(!(myX || myY)) returnVal = 10;
+    else if (x - 30 < myX && myX < w + 30 && y - 30 < myY && myY < h + 30) returnVal = 9;
+    if (0 < myX && myX < 660 && -120 < myY && myY < -50) returnVal = 10;
+    if (!(myX || myY)) returnVal = 10;
 
-    if(returnVal == -1){
-        saveNote();
+    if (returnVal == -1) {
+        saveNote("jstep0000@gmail.com");
     }
     //console.log(myX, myY, returnVal);
     return returnVal;
 }
 
-function adjustVideo(){
-    var heightDiff = $("#there").height()-$("#playerbuttons").height()-$("#there").width()*0.5625;
+function adjustVideo() {
+    var heightDiff = $("#there").height() - $("#playerbuttons").height() - $("#there").width() * 0.5625;
     //console.log(heightDiff);
-    document.getElementById("youtubeWrapper").style.marginTop = String(heightDiff*0.35)+"px";
+    document.getElementById("youtubeWrapper").style.marginTop = String(heightDiff * 0.35) + "px";
 }
 
-function getOffset( el ) {
+function getOffset(el) {
     var rect = el.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { 
-        top: rect.top + scrollTop, left: rect.left + scrollLeft 
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return {
+        top: rect.top + scrollTop, left: rect.left + scrollLeft
     }
 }
 /*var delay = 300;
@@ -225,24 +225,24 @@ var timer = null;
 
 //Javascript
 window.addEventListener('resize', function(){
-	clearTimeout(timer);
-	timer = setTimeout(function(){
-		console.log('resize event!');
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+        console.log('resize event!');
         adjustVideo();
-	}, delay);
+    }, delay);
 });*/
 
-window.onresize = function(event){
+window.onresize = function (event) {
     //console.log("resize!");
 
-    canvas3.height = $("#youtubeMP4").height()-10;
+    canvas3.height = $("#youtubeMP4").height() - 10;
     canvas3.width = $("#youtubeMP4").width();
-    x = $("#youtubeMP4").width()*x2;
-    y = ($("#youtubeMP4").height()-10)*y2;
-    w = $("#youtubeMP4").width()*w2;
-    h = ($("#youtubeMP4").height()-10)*h2;
+    x = $("#youtubeMP4").width() * x2;
+    y = ($("#youtubeMP4").height() - 10) * y2;
+    w = $("#youtubeMP4").width() * w2;
+    h = ($("#youtubeMP4").height() - 10) * h2;
 
-    height = $("#youtubeMP4").height()-10;
+    height = $("#youtubeMP4").height() - 10;
     width = $("#youtubeMP4").width();
     var variables = variableTrim(x, y, w, h);
     x = variables.x;
@@ -250,20 +250,20 @@ window.onresize = function(event){
     w = variables.w;
     h = variables.h;
 
-    if(canvasVisible){
+    if (canvasVisible) {
         ctx3.beginPath();
         ctx3.clearRect(0, 0, width, height);
-        if(canvasClickable){
+        if (canvasClickable) {
             ctx3.fillStyle = "#00D8FF27";
-            ctx3.fillRect(x, y, w-x, h-y);    
+            ctx3.fillRect(x, y, w - x, h - y);
             ctx3.strokeStyle = "#6799FF";
             ctx3.lineWidth = 2;
         }
-        else{
+        else {
             ctx3.strokeStyle = "#6799FF"
             ctx3.lineWidth = 3;
         }
-        ctx3.rect(x, y, w-x, h-y);
+        ctx3.rect(x, y, w - x, h - y);
         ctx3.stroke();
     }
 
