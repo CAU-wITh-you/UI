@@ -47,7 +47,8 @@
         "./assets/jquery-3.3.1.min.js",
         "./assets/jquery-3.6.0.js",
         "./assets/jquery-ui.js",
-        "stopvideo.js","stopvideo2.js"
+        "stopvideo.js","stopvideo2.js",
+        "mypageload.js"
       ],
       "all-frames": true
     }
@@ -58,6 +59,8 @@
         "index.html",
         "mypage.html",
         "index.js",
+        "mypageload.js",
+        "mypage.js",
         "http://news.google.com/",
         "https://code.jquery.com/jquery-latest.min.js",
         "https://html2canvas.hertzen.com/dist/html2canvas.min.js"
