@@ -1,9 +1,9 @@
 //색상변경
-var nowcolor = "purple";
-var pink = false;
+var nowcolor = "pink";
+var pink = true;
 var yellow = false;
 var blue = false;
-var purple = true;
+var purple = false;
 var nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
 var nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
 console.log("nowdarkcolor" + nowdarkcolor);
@@ -48,6 +48,7 @@ document.getElementById('pink').addEventListener('click', function () {
     document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
     document.getElementById('editbtn').style.color = String(nowdarkcolor);
     console.log(nowcolor);
+    db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
 });
 document.getElementById('yellow').addEventListener('click', function () {
     if (nowcolor == "yellow") {
@@ -72,6 +73,7 @@ document.getElementById('yellow').addEventListener('click', function () {
     document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
     document.getElementById('editbtn').style.color = String(nowdarkcolor);
     console.log(nowcolor);
+    db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
 });
 document.getElementById('blue').addEventListener('click', function () {
     if (nowcolor == "blue") {
@@ -96,6 +98,7 @@ document.getElementById('blue').addEventListener('click', function () {
     document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
     document.getElementById('editbtn').style.color = String(nowdarkcolor);
     console.log(nowcolor);
+    db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
 });
 document.getElementById('purple').addEventListener('click', function () {
     if (nowcolor == "purple") {
@@ -120,6 +123,7 @@ document.getElementById('purple').addEventListener('click', function () {
     document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
     document.getElementById('editbtn').style.color = String(nowdarkcolor);
     console.log(nowcolor);
+    db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
 });
 
 
@@ -147,27 +151,9 @@ function changeNeonbackOutfunc() {
     this.style.border = "2px solid whitesmoke";
 }
 
-var nowclick = null;
-var nowfoldername;
-
-var nowtargetfolder;
-//왼쪽 (폴더, 노트, 파일)그림자.
-let targetAleftfolder = document.querySelectorAll('.target_by_EachleftFolder');
-targetAleftfolder.forEach((target) => target.addEventListener("click", changeBackplusTitle));
-//파일 설정
-let targetAleftfile = document.querySelectorAll('.target_by_Each폴더이름1');
-targetAleftfile.forEach((target) => target.addEventListener("mouseover", function () {
-    this.style.backgroundColor = "var(--color-hover-gray)";
-    this.style.borderRadius = "5px";
-}));
-targetAleftfile.forEach((target) => target.addEventListener("mouseout", function () {
-    this.style.backgroundColor = "";
-}));
-targetAleftfile.forEach((target) => target.addEventListener("click", function () {
-    document.getElementById('nowopen__title').innerHTML = this.getElementsByTagName('h4')[0].id + "를 여시겠습니까?";
-    show__fileopenback();
-}));
-//
+document.querySelector('#notopenfilebtn').addEventListener("click", function () {
+    document.querySelector(".openfile__background").className = "openfile__background";
+})
 document.querySelector("#close__openfilebackground").addEventListener("click", function () {
     document.querySelector(".openfile__background").className = "openfile__background";
 
@@ -180,39 +166,6 @@ function show__fileopenback() {
     document.getElementById("openfilebtn").style.border.color = "white";
     //document.querySelector(".openfilebtn").style.border.color = "whitesmoke";
     //document.querySelector(".notopenfilebtn").style.border.color = String(nowdarkcolor);
-}
-
-
-
-function changeBackplusTitle() {
-    if (nowclick != null) {//기존 background 원래대로
-        document.getElementById(nowclick).style.backgroundColor = "";
-        document.getElementById(nowclick).style.borderRadius = "";
-        if (nowclick != "allnote" && nowclick != "recentnote" && nowclick != "notinfoler") {//폴더이면
-            if (document.getElementById(String(nowclick) + "__files") != null) {
-                document.getElementById(String(nowclick) + "__files").style.display = "none";
-            }
-        }
-    }
-    nowclick = String(this.id);
-    console.log(nowclick);
-    document.getElementById(nowclick).style.backgroundColor = "var(--color-hover-gray)";
-    document.getElementById(nowclick).style.borderRadius = "10px";
-    document.getElementById('mypage__title').innerText = String(document.getElementById(nowclick + '__title').innerHTML);
-    if (nowclick == "allnote") {
-        document.getElementById("folders__title").style.display = "";
-        document.getElementById("area__folders").style.display = "";
-    } else if (nowclick == "recentnote" || nowclick == "notinfoler") {
-        document.getElementById("folders__title").style.display = "none";
-        document.getElementById("area__folders").style.display = "none";
-    } else {
-        console.log("폴더클릭");
-        document.getElementById("folders__title").style.display = "none";
-        document.getElementById("area__folders").style.display = "none";
-        if (document.getElementById(String(nowclick) + "__files") != null) {
-            document.getElementById(String(nowclick) + "__files").style.display = "block";
-        }
-    }
 }
 
 

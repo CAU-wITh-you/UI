@@ -16,7 +16,6 @@
     <script src="\assets\jquery-ui.js" defer="defer"></script>
 
     <link rel="stylesheet" href="mypage.css">
-    <script src="mypage.js" defer="defer"></script>
     <script src="mypageload.js" defer="defer"></script>
 </head>
 
@@ -80,125 +79,30 @@
                         <i class="fas fa-list-alt" style="font-size: 20px;"></i>
                     </div>
                     <h4 class="allnote__title" id="allnote__title">모든 문서</h4>
-                    <h4 class="allnote__num" id="allnote__num">33</h4>
+                    <h4 class="allnote__num" id="allnote__num"></h4>
                 </div>
                 <div class="folder target_by_EachleftFolder" id="recentnote">
                     <div class="recentnote__icon">
                         <i class="fas fa-history" style="font-size: 20px;"></i>
                     </div>
                     <h4 class="recentnote__title" id="recentnote__title">최근 노트</h4>
-                    <h4 class="recentnote__num" id="recentnote__num">33</h4>
+                    <h4 class="recentnote__num" id="recentnote__num"></h4>
                 </div>
                 <div class="folder target_by_EachleftFolder" id="notinfoler">
                     <div class="notinfoler__icon">
                         <i class="fab fa-mix" , style="font-size: 20px;"></i>
                     </div>
                     <h4 class="notinfoler__title" , id="notinfoler__title">분류되지 않은 노트</h4>
-                    <h4 class="notinfoler__num" id="notinfolder__num">33</h4>
-                </div>
-                <div class="folder target_by_EachleftFolder" id="폴더이름1">
-                    <!--title을 id로-->
-                    <div class="folder__icon">
-                        <p class="afloder__icon" style="font-size: large;">📁 </p>
-                    </div>
-                    <h4 class="folder__title" , id="폴더이름1__title">폴더이름1</h4>
-                    <h4 class="folder__num" , id="폴더이름1__num">33</h4>
-                </div>
-                <div id="폴더이름1__files" style="display: none;">
-                    <div class="file target_by_Each폴더이름1" id="파일아이디1">
-                        <div class="file__icon">
-                            <p class="afile__icon" style="font-size: large;">📄</p>
-                        </div>
-                        <h4 class="file__title" , id="파일이름2">파일이름1</h4>
-                    </div>
-                    <div class="file target_by_Each폴더이름1" id="파일아이디2">
-                        <div class="file__icon">
-                            <p class="afile__icon" style="font-size: large;">📄</p>
-                        </div>
-                        <h4 class="file__title" , id="파일이름2">파일이름2</h4>
-                    </div>
-                </div>
-                <div class="folder target_by_EachleftFolder" id="폴더이름2">
-                    <!--title을 id로-->
-                    <div class="folder__icon">
-                        <p class="afloder__icon" style="font-size: large;">📁 </p>
-                    </div>
-                    <h4 class="folder__title" , id="폴더이름2__title">폴더이름2</h4>
-                    <h4 class="folder__num" , id="폴더이름2__num">33</h4>
+                    <h4 class="notinfoler__num" id="notinfolder__num"></h4>
                 </div>
             </div>
         </div>
         <div class="textfilearea">
             <p class="folders__title" , id="folders__title">폴더</p>
             <div class="area__folders" , id="area__folders">
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <p class="afloder__icon" style="font-size: large;">📁 </p>
-                    <p class="afolder__name">폴더1sdjlfkskdjflskdflk</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fas fa-circle fa-2x" id="afolder__icon" style="color:red; font-size: 20px;"></i>
-                    <p class="folderid__foldername">폴더2</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa fa-edit"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folders"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-                <div id="folderid" , class="afolder call target_by_EachFolder">
-                    <i class="fa-solid fa-folder"></i>
-                    <p>폴더3</p>
-                </div>
-
             </div>
             <p class="notes__title">노트</p>
             <div class="area__notes">
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
-                <div id="notestid" , class="anote call target_by_EachNote">
-                    <div class="anote__background">dkljfs</div>
-                    <div class="anote__title">dlfksld</div>
-                </div>
             </div>
         </div>
     </section>
@@ -214,7 +118,11 @@
                     </div>
                     <div class="plusbtn__backcontent">
                         <h3 class="plusbtn__backcontent__title">폴더 이름을 입력하세요</h3>
-                        <input type="text" class="createtext">
+                        <input type="text" class="createtext" id="createtext">
+                        <h3 class="plusbtn__backcontent__title">폴더에 넣을 파일을 선택하세요</h3>
+                        <select name="files__name" class="plus__selectbtn" id="selected__file">
+                            <option disabled selected id="notinfolder__files__name">📄 파일 이름</option>
+                        </select>
                     </div>
                     <div class="plusbtn__backcontent__finalselect">
                         <div class="foldercreatebtn" id="foldercreatebtn">폴더 생성</div>
@@ -234,12 +142,8 @@
                     </div>
                     <div class="deletebtn__backcontent">
                         <h3 class="deletebtn__backcontent__title">폴더 이름을 선택하세요</h3>
-                        <select name="folders__name" class="delete__selectbtn">
+                        <select name="folders__name" class="delete__selectbtn" id="delete__selected__folder">
                             <option disabled selected>📁 폴더 이름</option>
-                            <option value="apple">apple</option>
-                            <option value="orange">orange</option>
-                            <option value="grape">grape</option>
-                            <option value="melon">melon</option>
                         </select>
                     </div>
                     <div class="deletebtn__backcontent__finalselect">
@@ -260,25 +164,17 @@
                     </div>
                     <div class="edit__editfolderbtn__backcontent">
                         <h3 class="edit__editfolderbtn__backcontent__title">폴더 이름을 선택하세요</h3>
-                        <select name="folders__name" class="selectbtn">
+                        <select name="folders__name" class="edit__selectbtn__folder" id="edit__selectbtn__folder">
                             <option disabled selected>📁 폴더 이름</option>
-                            <option value="apple">apple</option>
-                            <option value="orange">orange</option>
-                            <option value="grape">grape</option>
-                            <option value="melon">melon</option>
                         </select>
                         <h3 class="edit__editfolderbtn__backcontent__title">노트를 선택하세요</h3>
-                        <select name="files__name" class="selectbtn">
+                        <select name="files__name" class="edit__selectbtn__file" id="edit__selectbtn__file">
                             <option disabled selected>📄 파일 이름</option>
-                            <option value="apple">apple</option>
-                            <option value="orange">orange</option>
-                            <option value="grape">grape</option>
-                            <option value="melon">melon</option>
                         </select>
                     </div>
                     <div class="edit__editfolderbtn__backcontent__finalselect">
                         <div class="folderinbtn" id="folderinbtn">노트 넣기</div>
-                        <div class="folderoutbtn" id="folderoutbtn">노트 꺼내기</div>
+                        <div class="folderoutbtn" id="folderoutbtn">취소</div>
                     </div>
                 </div>
             </div>
