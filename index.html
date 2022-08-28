@@ -24,6 +24,7 @@
     <script src="setvideo.js" defer="defer"></script>
     <script src="player.js" defer="defer"></script>
     <script src="canvas.js" defer="defer"></script>
+    <script src="player.js" defer="defer"></script>
     <script src="index.js" defer="defer"></script>
     <script src="textArea.js" defer="defer"></script>
     <script src="firebase.js" defer="defer"></script>
@@ -141,6 +142,12 @@
                 </button>
             </div>
             <div class="note" style="display: flex;">
+                <div id="load_comp" hidden="hidden">false</div>
+                <div id="vid_url" hidden="hidden">videoid</div>
+                <div id="user_email" hidden="hidden">not login</div>
+                <div id="vid_title" hidden="hidden">title</div>
+                <div id="vid_author" hidden="hidden">author</div>
+                <div id="vid_thumbnail" hidden="hidden">thumbnail</div>
                 <div class="maketimestamp_note__area" id="timestamp_area" style="overflow:hidden; position: absolute; z-index: -1;">
                     <div class="timestamp" id="realtimestamp">
                         <div id="c0" style="height: 6.5%; background-color: var(--color-pink);"></div>

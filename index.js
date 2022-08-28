@@ -13,7 +13,7 @@ var server = server2
 document.getElementById('exitbutton').addEventListener('click', exitfunc);
 function exitfunc() {
     console.log("extension 종료");
-    saveNote(user_email);
+    saveNote();
     if(confirm("doIT yourself를 종료하시겠습니까?")){
         if(!videoUid){
             var xhr = new XMLHttpRequest();
@@ -233,6 +233,7 @@ document.getElementById("clockbtn").addEventListener('click', function () {
 });
 
 document.getElementById("codeplusbtn").addEventListener('click', function () {
+    loadNote();
     setDefault();
     if (clock == true) {
         makeCodearea("");
@@ -243,6 +244,7 @@ document.getElementById("codeplusbtn").addEventListener('click', function () {
 });
 
 document.querySelector("#textplusbtn").addEventListener('click', function () {
+    loadNote();
     setDefault();
     if (clock == true) {
         makeTextarea("");

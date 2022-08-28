@@ -113,7 +113,7 @@ function createTextDiv(text) {
     texttextDiv.innerHTML = text;
 
     texttextDiv.addEventListener('input', function(){
-        saveNote(user_email);
+        saveNote();
     })
 
     textDiv.appendChild(texttextDiv);
@@ -195,7 +195,7 @@ function createCodeDiv(timestampNum){
     codetextDiv.style.height = "100%";
 
     codetextDiv.addEventListener('input', function(){
-        saveNote(user_email);
+        saveNote();
     })
 
     codetext = document.createElement("textarea");
@@ -469,6 +469,7 @@ function nonemakeCodearea(text) {
     codeLi.className = "ui-state-default";
     //codeLi.style.backgroundColor = "var(--color-background-gray)";
     codeLi.id = "li" + timestampNum;
+    codeLi.value = -1
 
     var codeDiv = createCodeDiv(timestampNum)
     var resultDiv = createResultDiv(timestampNum)
@@ -511,6 +512,7 @@ function nonemakeTextarea(text) {
     textLi.className = "ui-state-default";
     //textLi.style.backgroundColor = "var(--color-background-gray)";
     textLi.id = "li" + timestampNum;
+    textLi.value = -1
 
     var textDiv = createTextDiv(text)
     textLi.appendChild(textDiv);
@@ -547,6 +549,7 @@ function nonemakeImgarea(url) {
     imgLi.className = "ui-state-default";
     //imgLi.style.backgroundColor = "var(--color-background-gray)";
     imgLi.id = "li" + timestampNum;
+    imgLi.value = -1
 
     var imgDiv = document.createElement("div");
     imgDiv.className = "divcode";

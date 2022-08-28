@@ -22,13 +22,19 @@ const firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
-  console.log("hello index0");
-  
   var db = firebase.firestore();
-  
-  var user_email = "jstep0000@gmail.com"
 
-  function loadNote(user_email) {
+  function loadNote() {
+    check = document.getElementById('load_comp');
+    if(check.innerHTML != 'false') return
+    document.getElementById('load_comp').innerHTML = "true";
+    
+    user_email = document.getElementById("user_email").innerHTML;
+    while(user_email.indexOf('@') == -1){
+      user_email = prompt("이메일을 입력해주세요!");
+      document.getElementById("user_email").innerHTML = user_email;
+    }
+
     var videoId = videoUrl.searchParams.get("v");
     var docRef = db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId);
     docRef.get().then((doc) => {
@@ -41,61 +47,35 @@ const firebaseConfig = {
           var content = note[i - 1].content;
           var time = note[i - 1].time;
           if (type == "code") {
-            if (time == 0 || time) makeCodearea(content, time);
-            else nonemakeCodearea(content);
+            if (time == -1) nonemakeCodearea(content);
+            else makeCodearea(content, time);
           }
           else if (type == "text") {
-            if (time == 0 || time) makeTextarea(content, time);
-            else nonemakeTextarea(content);
+            if (time == -1) nonemakeTextarea(content);
+            else makeTextarea(content, time);
           }
           else if (type == "img") {
-            if (time == 0 || time) makeImgarea(content, time);
-            else nonemakeImgarea(content);
+            if (time == -1) nonemakeImgarea(content);
+            else makeImgarea(content, time);
           }
         }
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!11");
-  
       }
     }).catch((error) => {
       console.log("Error getting document:", error);
     });
-    /*
-              var type = doc.get("type");
-              var content = doc.get("content");
-              var time = doc.get("time");
-              if(type == "code"){
-                if(time) makeCodearea(content, time);
-                
-                else nonemakeCodearea(content);
-              }
-              else if(type == "text"){
-                if(time) makeTextarea(content, time);
-                
-                else nonemakeTextarea(content);
-              }
-              else if(type == "img"){
-                if(time) makeImgarea(content, time);
-                
-                else nonemakeImgarea(content);
-              }
-    */
-    //var videoname = db.collection("doITyourselfDB").get();
-    var query = db.collection("doITyourselfDB_user");
-    query.get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          console.log("여기여기여기");
-          console.log(doc.id, " => ", doc.data());
-        });
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
   }
   
-  function saveNote(user_email) {
+  function promiseLoadNote(){
+    return new Promise(loadNote);
+  }
+  
+  function saveNote(){
+    user_email = document.getElementById("user_email").innerHTML;
+    if(user_email.indexOf('@') == -1) return
+
     var save = [];
   
     nodeList = document.querySelector(`#sortable`).childNodes;
@@ -106,6 +86,7 @@ const firebaseConfig = {
       var codearea = document.querySelector(`#t1${id} > divcodetext > div`);
       var textarea = document.querySelector(`#t1${id}`);
       var imgarea = document.querySelector(`#i${id}`);
+      var time = nodeList[i].value;
       if (codearea) {
         save.push({
           content_timestamp: getFormattedDate(Date.now()),
@@ -132,23 +113,35 @@ const firebaseConfig = {
         });
       }
     }
+    
+    if(save != []){
+        var videoId = videoUrl.searchParams.get("v");
+        //db.collection("doITyourselfDB").doc(user_email).collection("videos").doc(videoId);
+        db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId).set({
+          folder_name: "",
+          note: save,
+          video_image: document.getElementById("vid_url").innerHTML,
+          video_name: document.getElementById("vid_title").innerHTML,
+          videoowner_image: document.getElementById("vid_thumbnail").innerHTML,
+          videoowner_name: document.getElementById("vid_author").innerHTML,
+          note_timestamp: getFormattedDate(Date.now())
+        }).then(function (docRef) {
+          console.log("저장되었습니다");
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+  }
   
-    var videoId = videoUrl.searchParams.get("v");
-    //db.collection("doITyourselfDB").doc(user_email).collection("videos").doc(videoId);
-    db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId).set({
-      folder_name: "",
-      note: save,
-      video_image: String("url"),
-      video_name: String("비디오 제목"),
-      videoowner_image: String("이미지 url"),
-      videoowner_name: String("비디오 오너 이름"),
-      note_timestamp: getFormattedDate(Date.now())
-    }).then(function (docRef) {
-        console.log("저장되었습니다");
-      })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
+  async function asyncSaveNote() {
+    console.log("save");
+    if(document.getElementById("load_comp").innerHTML == "false"){
+      await promiseLoadNote();
+    }
+    console.log(document.getElementById("load_comp").innerHTML);
+    console.log(document.getElementById("user_email").innerHTML);
+    saveNote();
   }
   
   
