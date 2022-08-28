@@ -120,9 +120,8 @@ const firebaseConfig = {
         db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId).set({
           folder_name: "",
           note: save,
-          video_image: document.getElementById("vid_url").innerHTML,
+          video_image: document.getElementById("vid_thumbnail").innerHTML,
           video_name: document.getElementById("vid_title").innerHTML,
-          videoowner_image: document.getElementById("vid_thumbnail").innerHTML,
           videoowner_name: document.getElementById("vid_author").innerHTML,
           note_timestamp: getFormattedDate(Date.now())
         }).then(function (docRef) {
