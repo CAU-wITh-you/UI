@@ -22,15 +22,14 @@ firebase.initializeApp(firebaseConfig);
 });*/
 
 window.addEventListener('load', function () {
-    alert("It's loaded!"+nowuser);
+    alert("It's loaded!" + nowuser);
     loadMypage(nowuser);
     loadColor(nowuser);
     //document.getElementById("allnote").click();    
 });
 
-function loadColor(nowuser){
+function loadColor(nowuser) {
     db.collection("doITyourselfDB_user").doc(nowuser).get().then((doc) => {
-        console.log("바이바이");
         console.log(doc.data()["color"]);
         //색상변경
         var nowcolor = doc.data()["color"];
@@ -57,10 +56,9 @@ function loadColor(nowuser){
         }
         nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
         nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-        console.log("nowdarkcolor" + nowdarkcolor);
         document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
         document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-    
+
         document.getElementById('pink').addEventListener('click', function () {
             if (nowcolor == "pink") {
             } else {
@@ -83,7 +81,6 @@ function loadColor(nowuser){
             document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
             document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
             document.getElementById('editbtn').style.color = String(nowdarkcolor);
-            console.log(nowcolor);
             db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
         });
         document.getElementById('yellow').addEventListener('click', function () {
@@ -108,7 +105,6 @@ function loadColor(nowuser){
             document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
             document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
             document.getElementById('editbtn').style.color = String(nowdarkcolor);
-            console.log(nowcolor);
             db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
         });
         document.getElementById('blue').addEventListener('click', function () {
@@ -133,7 +129,6 @@ function loadColor(nowuser){
             document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
             document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
             document.getElementById('editbtn').style.color = String(nowdarkcolor);
-            console.log(nowcolor);
             db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
         });
         document.getElementById('purple').addEventListener('click', function () {
@@ -158,11 +153,10 @@ function loadColor(nowuser){
             document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
             document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
             document.getElementById('editbtn').style.color = String(nowdarkcolor);
-            console.log(nowcolor);
             db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
         });
-    
-    
+
+
         //(폴더, 노트)네온 색상 변경, 같은 이름을 갖는 각각의 요소들.
         let targetAfolder = document.querySelectorAll('.target_by_EachFolder');
         targetAfolder.forEach((target) => target.addEventListener("mouseover", changeNeonbackInfunc));
@@ -179,22 +173,22 @@ function loadColor(nowuser){
             this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
             this.style.border = "2px solid whitesmoke"
         }
-    
+
         targetAnote.forEach((target) => target.addEventListener("mouseout", changeNeonbackOutfunc));
         function changeNeonbackOutfunc() {
             this.style.color = "";
             this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
             this.style.border = "2px solid whitesmoke";
         }
-    
+
         document.querySelector('#notopenfilebtn').addEventListener("click", function () {
             document.querySelector(".openfile__background").className = "openfile__background";
         })
         document.querySelector("#close__openfilebackground").addEventListener("click", function () {
             document.querySelector(".openfile__background").className = "openfile__background";
-    
+
         });
-    }); 
+    });
 }
 
 var db = firebase.firestore();
@@ -208,11 +202,12 @@ function loadleft(foldername, folder__filedict, forrightload) {
     console.log("loadleft 수행");
     //console.log(foldername.sort());
     foldername.sort();
+    var nowfoldernum = foldername.length;
+    var foldernum = 6 - nowfoldernum % 5;
     foldername.forEach(function (element) {
-        sum += 1;
         if (element != "notinfolder") {
+            sum += 1;
             var tempfiles;
-            tempfiles
             var div__folder = document.createElement("div");
             div__folder.className = "folder target_by_EachleftFolder";
             div__folder.id = element;
@@ -318,7 +313,6 @@ function loadleft(foldername, folder__filedict, forrightload) {
             document.getElementById("folders__title").style.display = "";
             document.getElementById("area__folders").style.display = "";
             //오른쪽 폴더 목록 추가
-            var foldernum = foldername.length - 1;//notinfolder 빼기
             foldername.forEach(function (folderelement) {
                 if (folderelement != "notinfolder") {
                     var div__folder = document.createElement("div");
@@ -416,7 +410,8 @@ function loadleft(foldername, folder__filedict, forrightload) {
             show__fileopenback();
         }));
     });
-    document.getElementById("allnote__num").innerHTML = String(sum) + folder__filedict["notinfolder"].length;//총 파일 개수
+
+    document.getElementById("allnote__num").innerHTML = sum + folder__filedict["notinfolder"].length;//총 파일 개수
     document.getElementById("recentnote__num").innerHTML = "15";
     document.getElementById("notinfolder__num").innerHTML = folder__filedict["notinfolder"].length;
 }
@@ -453,9 +448,6 @@ function loadright(nowfoldername, folder__filedict) {
     <div id="notestid" , class="anote call target_by_EachNote">
         <img class="anote__img" src="./images/doITyourself__default__logo128.png"></img>
         <div class="anote__contents">
-            <div class="content__divownerimg">
-                <img class="content__ownerimg" src="./images/doITyourself__default__logo128.png"></img>
-            </div>
             <div class="content__titlenamedate">
                 <h4 style="margin: 0;">제목10000000000</h4>
                 <h5 style="margin: 0; color: gray;">소유주 이름</h5>
@@ -475,27 +467,17 @@ function loadright(nowfoldername, folder__filedict) {
                 var div__noteid = document.createElement("div");
                 div__noteid.id = afile[0];
                 div__noteid.className = "anote call target_by_EachNote";
-                div__noteid.style = "display: block; height: 250px; border: 2px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %; ";
+                div__noteid.style = "display: block; height: 300px; border: 1px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %;";
 
                 var div__noteid__img = document.createElement("img");
                 div__noteid__img.className = "anote__img";
-                div__noteid__img.src = "url(" + String(afile[1]) + ");";
+                //console.log(afile[1]);
+                div__noteid__img.src = String(afile[1]);
                 div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
 
                 var div__noteid__div = document.createElement("div");
                 div__noteid__div.className = "anote__contents";
                 div__noteid__div.style = "width: 100%; height: 90px; object-fit: cover; display: flex; align-items: center; vertical-align: middle;";
-
-                var div__noteid__div__div = document.createElement("div");
-                div__noteid__div__div.className = "content__divownerimg";
-                div__noteid__div__div.style = "border-radius: 50%; width: 50px; height: 50px; margin-right: 5%;";
-                var div__noteid__div__div__img = document.createElement("img");
-                div__noteid__div__div__img.className = "content__ownerimg";
-                div__noteid__div__div__img.src = "url(" + String(afile[2]) + ");";
-                div__noteid__div__div__img.style.width = "100%";
-                div__noteid__div__div__img.style.height = "100%";
-                div__noteid__div__div__img.style.borderRadius = "50%";
-                div__noteid__div__div.appendChild(div__noteid__div__div__img);
 
                 var div__noteid__div__div2 = document.createElement("div");
                 div__noteid__div__div2.className = "content__titlenamedate";
@@ -513,7 +495,7 @@ function loadright(nowfoldername, folder__filedict) {
                 div__noteid__div__div2.appendChild(div__noteid__div__div2__h4);
                 div__noteid__div__div2.appendChild(div__noteid__div__div2__h5);
                 div__noteid__div__div2.appendChild(div__noteid__div__div2__h6);
-                div__noteid__div.appendChild(div__noteid__div__div);
+                //div__noteid__div.appendChild(div__noteid__div__div);
                 div__noteid__div.appendChild(div__noteid__div__div2);
 
                 div__noteid.appendChild(div__noteid__img);
@@ -527,35 +509,25 @@ function loadright(nowfoldername, folder__filedict) {
     }
     else if (nowfoldername == "recentnote") {
         console.log(folder__filedict["notinfolder"]);
-    } else if (nowfoldername == "notinfoler") {
+    } else if (nowfoldername == "notinfolder") {
+        console.log("here");
         console.log(folder__filedict["notinfolder"]);
         filenum = 6 - (folder__filedict["notinfolder"].length % 5);
         folder__filedict["notinfolder"].forEach(element3 => {
             var div__noteid = document.createElement("div");
             div__noteid.id = element3[0];
-            //console.log(element3[0]);
             div__noteid.className = "anote call target_by_EachNote";
-            div__noteid.style = "display: block; height: 250px; border: 2px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %; ";
+            div__noteid.style = "display: block; height: 300px; border: 1px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %;";
 
             var div__noteid__img = document.createElement("img");
             div__noteid__img.className = "anote__img";
-            div__noteid__img.src = "url(" + String(element3[1]) + ");";
+            console.log(element3[1]);
+            div__noteid__img.src = String(element3[1]);
             div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
 
             var div__noteid__div = document.createElement("div");
             div__noteid__div.className = "anote__contents";
             div__noteid__div.style = "width: 100%; height: 90px; object-fit: cover; display: flex; align-items: center; vertical-align: middle;";
-
-            var div__noteid__div__div = document.createElement("div");
-            div__noteid__div__div.className = "content__divownerimg";
-            div__noteid__div__div.style = "border-radius: 50%; width: 50px; height: 50px; margin-right: 5%;";
-            var div__noteid__div__div__img = document.createElement("img");
-            div__noteid__div__div__img.className = "content__ownerimg";
-            div__noteid__div__div__img.src = "url(" + String(element3[2]) + ");";
-            div__noteid__div__div__img.style.width = "100%";
-            div__noteid__div__div__img.style.height = "100%";
-            div__noteid__div__div__img.style.borderRadius = "50%";
-            div__noteid__div__div.appendChild(div__noteid__div__div__img);
 
             var div__noteid__div__div2 = document.createElement("div");
             div__noteid__div__div2.className = "content__titlenamedate";
@@ -573,7 +545,7 @@ function loadright(nowfoldername, folder__filedict) {
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h4);
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h5);
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h6);
-            div__noteid__div.appendChild(div__noteid__div__div);
+
             div__noteid__div.appendChild(div__noteid__div__div2);
 
             div__noteid.appendChild(div__noteid__img);
@@ -582,37 +554,22 @@ function loadright(nowfoldername, folder__filedict) {
             document.querySelector(".area__notes").appendChild(div__noteid);
         });
     } else {
-        console.log(folder__filedict[nowfoldername]);
-        //console.log("여기여기여기");
         filenum = 6 - (folder__filedict[nowfoldername].length) % 5;
-        //console.log(filenum);
         folder__filedict[nowfoldername].forEach(element3 => {
             var div__noteid = document.createElement("div");
             div__noteid.id = element3[0];
             div__noteid.className = "anote call target_by_EachNote";
-            div__noteid.style = "display: block; height: 250px; border: 2px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %; ";
-
+            div__noteid.style = "display: block; height: 300px; border: 1px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %;";
 
             var div__noteid__img = document.createElement("img");
             div__noteid__img.className = "anote__img";
-            div__noteid__img.src = "url(" + String(element3[1]) + ");";
+            console.log(element3[1]);
+            div__noteid__img.src = String(element3[1]);
             div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
 
             var div__noteid__div = document.createElement("div");
             div__noteid__div.className = "anote__contents";
-            div__noteid__div.style = "width: 100%; height: 90px; object-fit: cover; display: flex; align-items: center; vertical-align: middle;";
-
-            var div__noteid__div__div = document.createElement("div");
-            div__noteid__div__div.className = "content__divownerimg";
-            div__noteid__div__div.style = "border-radius: 50%; width: 50px; height: 50px; margin-right: 5%;";
-
-            var div__noteid__div__div__img = document.createElement("img");
-            div__noteid__div__div__img.className = "content__ownerimg";
-            div__noteid__div__div__img.src = "url(" + String(element3[2]) + ");";
-            div__noteid__div__div__img.style.width = "100%";
-            div__noteid__div__div__img.style.height = "100%";
-            div__noteid__div__div__img.style.borderRadius = "50%";
-            div__noteid__div__div.appendChild(div__noteid__div__div__img);
+            div__noteid__div.style = "width: 100%; height: 120px; object-fit: cover; display: flex; align-items: center; vertical-align: middle;";
 
             var div__noteid__div__div2 = document.createElement("div");
             div__noteid__div__div2.className = "content__titlenamedate";
@@ -630,14 +587,13 @@ function loadright(nowfoldername, folder__filedict) {
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h4);
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h5);
             div__noteid__div__div2.appendChild(div__noteid__div__div2__h6);
-            div__noteid__div.appendChild(div__noteid__div__div);
+
             div__noteid__div.appendChild(div__noteid__div__div2);
 
             div__noteid.appendChild(div__noteid__img);
             div__noteid.appendChild(div__noteid__div);
 
             document.querySelector(".area__notes").appendChild(div__noteid);
-
         });
     }
     while (filenum != 0) {
@@ -788,9 +744,9 @@ function show__fileopenback() {
 document.getElementById('openfilebtn').addEventListener("click", function () {
     videoId = document.getElementById('nowopen__title').className
     console.log("클릭한 비디오 아이디", videoId);
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var tab = tabs[0];
-        chrome.tabs.update(tab.id, {url: 'https://www.youtube.com/watch?v='+videoId});
+        chrome.tabs.update(tab.id, { url: 'https://www.youtube.com/watch?v=' + videoId });
     });
     //document.getElementById('nowopen__title').className 가 노트 id 번호임
 });
@@ -814,7 +770,21 @@ document.getElementById("editbtn").addEventListener('click', function () {
 
     }
 });
-
+function reloadfunc1s() {
+    setTimeout(function () {
+        window.location.reload();
+    }, 1000);
+}
+function reloadfunc2s() {
+    setTimeout(function () {
+        window.location.reload();
+    }, 1000);
+}
+function reloadfunc3s() {
+    setTimeout(function () {
+        window.location.reload();
+    }, 1000);
+}
 var plusbtnopen = false;
 var deletebtnopen = false;
 var edit__editfolderbtnopen = false;
@@ -857,7 +827,6 @@ function show__plusbtnback() {
             document.querySelector('.plus__selectbtn').appendChild(option);
         });
     });
-    document.getElementById('foldercreatebtn').addEventListener('click', createnewfolder);
     function createnewfolder() {
         var selected__file = document.getElementById('selected__file');
         var selected__fileid = selected__file.options[selected__file.selectedIndex].value;
@@ -867,6 +836,10 @@ function show__plusbtnback() {
         close__plusbtnback();
         //reload 필요!
     }
+    document.getElementById('foldercreatebtn').addEventListener('click', function () {
+        createnewfolder();
+        reloadfunc2s();
+    });
 }
 
 
@@ -909,7 +882,6 @@ function show_deletefolderback() {
                 document.querySelector('.delete__selectbtn').appendChild(option);
             }
         });
-        document.getElementById('deletefolderbtn').addEventListener('click', deletefolder);
         function deletefolder() {
             var selected__folder = document.getElementById('delete__selected__folder');
             var selected__folderid = selected__folder.options[selected__folder.selectedIndex].value;
@@ -924,7 +896,12 @@ function show_deletefolderback() {
             });
             //reload 필요!
             //window.location.reload();
+            document.getElementById(selected__folderid).style.display = "none";
         }
+        document.getElementById('deletefolderbtn').addEventListener('click', function () {
+            deletefolder();
+            reloadfunc3s();
+        });
     });
 }
 function close__deletefolderback() {
@@ -989,8 +966,6 @@ function show__editfolderback() {
             });
             //fileidname.push
         });
-        console.log(fileidname);
-        console.log(filename);
         filename.sort();
         filename.forEach(thefilename => {
             var option = document.createElement("option");
@@ -999,7 +974,6 @@ function show__editfolderback() {
             document.querySelector('.edit__selectbtn__file').appendChild(option);
         });
 
-        document.getElementById('folderinbtn').addEventListener('click', editfolder);
         function editfolder() {
             var selected__folder = document.getElementById('edit__selectbtn__folder');
             var selected__folderid = selected__folder.options[selected__folder.selectedIndex].value;
@@ -1017,6 +991,10 @@ function show__editfolderback() {
             //reload 필요!
             //window.location.reload();
         }
+        document.getElementById('folderinbtn').addEventListener('click', function () {
+            editfolder();
+            reloadfunc2s();
+        });
     });
 }
 function close__editfolderback() {
