@@ -224,6 +224,9 @@ function createCodeDiv(timestampNum){
     else if (language == "cpp") {
         codetext.id = "cpp-code" + timestampNum;
     }
+    else {
+        codetext.id = "code" + timestampNum;
+    }
     codetext.style.width = "90%";
 
     codetextDiv.appendChild(codetext);
@@ -264,6 +267,11 @@ function setCodeMirror(language, timestampNum, text){
     }
     else if (language == "cpp") {
         nowcode = "cpp-code" + timestampNum;
+        console.log(nowcode);
+        console.log(typeof (nowcode));
+    }
+    else{
+        nowcode = "code" + timestampNum;
         console.log(nowcode);
         console.log(typeof (nowcode));
     }
@@ -360,6 +368,11 @@ function makeCodearea(text, time) {
         console.log(nowcode);
         console.log(typeof (nowcode));
     }
+    else {
+        nowcode = "code" + timestampNum;
+        console.log(nowcode);
+        console.log(typeof (nowcode));
+    }
 
     if (language == "c") {
         var cEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
@@ -379,7 +392,15 @@ function makeCodearea(text, time) {
             theme: "darcula"
         });
     }
-
+    else if (language == "python3") {
+        var pythonEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+            lineNumbers: true,
+            matchBrackets: true,
+            //autoCloseBrackets: true,
+            mode: "text/x-python",
+            theme: "darcula"
+        });
+    }
     document.querySelector(`#t1${timestampNum} > divcodetext > div`).CodeMirror.setValue(text);
     return timestampNum;
 }
