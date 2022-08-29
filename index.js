@@ -56,6 +56,25 @@ function exitfunc() {
     }
 }
 
+document.getElementById("capturebtn__icon").addEventListener("mouseover", captureover);
+function captureover() {
+    document.getElementById("capturebtn__icon").style.color = "var(--color-"+color+")";
+}
+document.getElementById("capturebtn__icon").addEventListener("mouseout", captureout);
+function captureout() {
+    document.getElementById("capturebtn__icon").style.color = "whitesmoke";
+}
+
+
+document.getElementById("editbtn__icon").addEventListener("mouseover", editover);
+function editover() {
+    document.getElementById("editbtn__icon").style.color = "var(--color-"+color+")";
+}
+document.getElementById("editbtn__icon").addEventListener("mouseout", editout);
+function editout() {
+    document.getElementById("editbtn__icon").style.color = "whitesmoke";
+}
+
 document.getElementById("exitbutton__icon").addEventListener("mouseover", exitover);
 function exitover() {
     //console.log("hover");
@@ -64,7 +83,7 @@ function exitover() {
 }
 document.getElementById("exitbutton__icon").addEventListener("mouseout", exitout);
 function exitout() {
-    console.log("out");
+    //console.log("out");
     document.getElementById("exitbutton__icon").className = "fas fa-door-closed";
     document.getElementById("exitbutton__icon").style.color = "black";
 }
