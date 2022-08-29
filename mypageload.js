@@ -1,12 +1,4 @@
-//var nowuser = "jstep0000@gmail.com";
-
-chrome.storage.sync.get(['user_email'], function(result) {
-    console.log(result);
-    console.log('Value currently is ' + result.user_email);
-    alert("It's loaded!! "+String(result.user_email));
-    loadMypage(result.user_email);
-});
-
+var nowuser = "jstep@gmail.com";
 const firebaseConfig = {
     apiKey: "AIzaSyAnCGQzZWMcsci2ob13jqW1-gf8Sk-_7aU",
     authDomain: "reserve-gwabang.firebaseapp.com",
@@ -19,6 +11,181 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+chrome.storage.sync.get(['user_email'], function(result) {
+    console.log(result);
+    console.log('Value currently is ' + result.user_email);
+    alert("Hello, "+String(result.user_email)+"!");
+
+    nowuser = result.user_email
+    loadMypage(nowuser);
+    db.collection("doITyourselfDB_user").doc(nowuser).get().then((doc) => {
+        console.log("바이바이");
+        console.log(doc.data()["color"]);
+        //색상변경
+        var nowcolor = doc.data()["color"];
+        var pink = false;
+        var yellow = false;
+        var blue = false;
+        var purple = false;
+        document.getElementById('pink').className = "fas fa-circle fa-2x";
+        document.getElementById('yellow').className = "fas fa-circle fa-2x";
+        document.getElementById('blue').className = "fas fa-circle fa-2x";
+        document.getElementById('purple').className = "fas fa-circle fa-2x";
+        if (nowcolor == "pink") {
+            document.getElementById('pink').className = "fas fa-check-circle fa-2x";
+            pink = true;
+        } else if (nowcolor == "yellow") {
+            document.getElementById('yellow').className = "fas fa-check-circle fa-2x";
+            yellow = true;
+        } else if (nowcolor == "blue") {
+            document.getElementById('blue').className = "fas fa-check-circle fa-2x";
+            blue = true;
+        } else if (nowcolor == "purple") {
+            document.getElementById('purple').className = "fas fa-check-circle fa-2x";
+            purple = true;
+        }
+        nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
+        nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
+        console.log("nowdarkcolor" + nowdarkcolor);
+        document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
+        document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
+    
+        document.getElementById('pink').addEventListener('click', function () {
+            if (nowcolor == "pink") {
+            } else {
+                nowcolor = "pink";
+                pink = true;
+                document.getElementById('pink').className = "fas fa-check-circle fa-2x";
+                if (yellow == true) {
+                    document.getElementById('yellow').className = "fas fa-circle fa-2x";
+                    yellow = false;
+                } else if (blue == true) {
+                    document.getElementById('blue').className = "fas fa-circle fa-2x";
+                    blue = false;
+                } else if (purple == true) {
+                    document.getElementById('purple').className = "fas fa-circle fa-2x";
+                    purple = false;
+                }
+            }
+            nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
+            nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
+            document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
+            document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
+            document.getElementById('editbtn').style.color = String(nowdarkcolor);
+            console.log(nowcolor);
+            db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
+        });
+        document.getElementById('yellow').addEventListener('click', function () {
+            if (nowcolor == "yellow") {
+            } else {
+                nowcolor = "yellow";
+                yellow = true;
+                document.getElementById('yellow').className = "fas fa-check-circle fa-2x";
+                if (pink == true) {
+                    document.getElementById('pink').className = "fas fa-circle fa-2x";
+                    pink = false;
+                } else if (blue == true) {
+                    document.getElementById('blue').className = "fas fa-circle fa-2x";
+                    blue = false;
+                } else if (purple == true) {
+                    document.getElementById('purple').className = "fas fa-circle fa-2x";
+                    purple = false;
+                }
+            }
+            nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
+            nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
+            document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
+            document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
+            document.getElementById('editbtn').style.color = String(nowdarkcolor);
+            console.log(nowcolor);
+            db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
+        });
+        document.getElementById('blue').addEventListener('click', function () {
+            if (nowcolor == "blue") {
+            } else {
+                nowcolor = "blue";
+                blue = true;
+                document.getElementById('blue').className = "fas fa-check-circle fa-2x";
+                if (pink == true) {
+                    document.getElementById('pink').className = "fas fa-circle fa-2x";
+                    pink = false;
+                } else if (yellow == true) {
+                    document.getElementById('yellow').className = "fas fa-circle fa-2x";
+                    yellow = false;
+                } else if (purple == true) {
+                    document.getElementById('purple').className = "fas fa-circle fa-2x";
+                    purple = false;
+                }
+            }
+            nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
+            nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
+            document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
+            document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
+            document.getElementById('editbtn').style.color = String(nowdarkcolor);
+            console.log(nowcolor);
+            db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
+        });
+        document.getElementById('purple').addEventListener('click', function () {
+            if (nowcolor == "purple") {
+            } else {
+                nowcolor = "purple";
+                purple = true;
+                document.getElementById('purple').className = "fas fa-check-circle fa-2x";
+                if (pink == true) {
+                    document.getElementById('pink').className = "fas fa-circle fa-2x";
+                    pink = false;
+                } else if (yellow == true) {
+                    document.getElementById('yellow').className = "fas fa-circle fa-2x";
+                    yellow = false;
+                } else if (blue == true) {
+                    document.getElementById('blue').className = "fas fa-circle fa-2x";
+                    blue = false;
+                }
+            }
+            nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
+            nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
+            document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
+            document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
+            document.getElementById('editbtn').style.color = String(nowdarkcolor);
+            console.log(nowcolor);
+            db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
+        });
+    
+    
+        //(폴더, 노트)네온 색상 변경, 같은 이름을 갖는 각각의 요소들.
+        let targetAfolder = document.querySelectorAll('.target_by_EachFolder');
+        targetAfolder.forEach((target) => target.addEventListener("mouseover", changeNeonbackInfunc));
+        let targetAnote = document.querySelectorAll('.target_by_EachNote');
+        targetAnote.forEach((target) => target.addEventListener("mouseover", changeNeonbackInfunc));
+        function changeNeonbackInfunc() {
+            this.style.boxShadow = "-3px 3px 3px " + String(nowneoncolor);
+            this.style.color = String(nowdarkcolor);
+            this.style.border = "2px solid " + String(nowdarkcolor);
+        }
+        targetAfolder.forEach((target) => target.addEventListener("mouseout", changeNeonbackFolderOutfunc));
+        function changeNeonbackFolderOutfunc() {
+            this.style.color = "";
+            this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
+            this.style.border = "2px solid whitesmoke"
+        }
+    
+        targetAnote.forEach((target) => target.addEventListener("mouseout", changeNeonbackOutfunc));
+        function changeNeonbackOutfunc() {
+            this.style.color = "";
+            this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
+            this.style.border = "2px solid whitesmoke";
+        }
+    
+        document.querySelector('#notopenfilebtn').addEventListener("click", function () {
+            document.querySelector(".openfile__background").className = "openfile__background";
+        })
+        document.querySelector("#close__openfilebackground").addEventListener("click", function () {
+            document.querySelector(".openfile__background").className = "openfile__background";
+    
+        });
+    }); 
+});
 
 var db = firebase.firestore();
 var nowdarkcolor;
@@ -243,7 +410,6 @@ function loadleft(foldername, folder__filedict, forrightload) {
     document.getElementById("recentnote__num").innerHTML = "15";
     document.getElementById("notinfolder__num").innerHTML = folder__filedict["notinfolder"].length;
 }
-
 function snapshotToarray2(querySnapshot) {
     //var foldername = [];
     var files = {}
@@ -601,175 +767,12 @@ function loadMypage(nowuser) {
     //get()을 통해서 해당 컬렉션의 정보를 가져온다.
 }
 
-
-
-
-db.collection("doITyourselfDB_user").doc(nowuser).get().then((doc) => {
-    console.log("바이바이");
-    console.log(doc.data()["color"]);
-    //색상변경
-    var nowcolor = doc.data()["color"];
-    var pink = false;
-    var yellow = false;
-    var blue = false;
-    var purple = false;
-    document.getElementById('pink').className = "fas fa-circle fa-2x";
-    document.getElementById('yellow').className = "fas fa-circle fa-2x";
-    document.getElementById('blue').className = "fas fa-circle fa-2x";
-    document.getElementById('purple').className = "fas fa-circle fa-2x";
-    if (nowcolor == "pink") {
-        document.getElementById('pink').className = "fas fa-check-circle fa-2x";
-        pink = true;
-    } else if (nowcolor == "yellow") {
-        document.getElementById('yellow').className = "fas fa-check-circle fa-2x";
-        yellow = true;
-    } else if (nowcolor == "blue") {
-        document.getElementById('blue').className = "fas fa-check-circle fa-2x";
-        blue = true;
-    } else if (nowcolor == "purple") {
-        document.getElementById('purple').className = "fas fa-check-circle fa-2x";
-        purple = true;
-    }
-    nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
-    nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-    console.log("nowdarkcolor" + nowdarkcolor);
-    document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
-    document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-
-    document.getElementById('pink').addEventListener('click', function () {
-        if (nowcolor == "pink") {
-        } else {
-            nowcolor = "pink";
-            pink = true;
-            document.getElementById('pink').className = "fas fa-check-circle fa-2x";
-            if (yellow == true) {
-                document.getElementById('yellow').className = "fas fa-circle fa-2x";
-                yellow = false;
-            } else if (blue == true) {
-                document.getElementById('blue').className = "fas fa-circle fa-2x";
-                blue = false;
-            } else if (purple == true) {
-                document.getElementById('purple').className = "fas fa-circle fa-2x";
-                purple = false;
-            }
-        }
-        nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
-        nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-        document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
-        document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-        document.getElementById('editbtn').style.color = String(nowdarkcolor);
-        console.log(nowcolor);
-        db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
-    });
-    document.getElementById('yellow').addEventListener('click', function () {
-        if (nowcolor == "yellow") {
-        } else {
-            nowcolor = "yellow";
-            yellow = true;
-            document.getElementById('yellow').className = "fas fa-check-circle fa-2x";
-            if (pink == true) {
-                document.getElementById('pink').className = "fas fa-circle fa-2x";
-                pink = false;
-            } else if (blue == true) {
-                document.getElementById('blue').className = "fas fa-circle fa-2x";
-                blue = false;
-            } else if (purple == true) {
-                document.getElementById('purple').className = "fas fa-circle fa-2x";
-                purple = false;
-            }
-        }
-        nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
-        nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-        document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
-        document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-        document.getElementById('editbtn').style.color = String(nowdarkcolor);
-        console.log(nowcolor);
-        db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
-    });
-    document.getElementById('blue').addEventListener('click', function () {
-        if (nowcolor == "blue") {
-        } else {
-            nowcolor = "blue";
-            blue = true;
-            document.getElementById('blue').className = "fas fa-check-circle fa-2x";
-            if (pink == true) {
-                document.getElementById('pink').className = "fas fa-circle fa-2x";
-                pink = false;
-            } else if (yellow == true) {
-                document.getElementById('yellow').className = "fas fa-circle fa-2x";
-                yellow = false;
-            } else if (purple == true) {
-                document.getElementById('purple').className = "fas fa-circle fa-2x";
-                purple = false;
-            }
-        }
-        nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
-        nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-        document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
-        document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-        document.getElementById('editbtn').style.color = String(nowdarkcolor);
-        console.log(nowcolor);
-        db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
-    });
-    document.getElementById('purple').addEventListener('click', function () {
-        if (nowcolor == "purple") {
-        } else {
-            nowcolor = "purple";
-            purple = true;
-            document.getElementById('purple').className = "fas fa-check-circle fa-2x";
-            if (pink == true) {
-                document.getElementById('pink').className = "fas fa-circle fa-2x";
-                pink = false;
-            } else if (yellow == true) {
-                document.getElementById('yellow').className = "fas fa-circle fa-2x";
-                yellow = false;
-            } else if (blue == true) {
-                document.getElementById('blue').className = "fas fa-circle fa-2x";
-                blue = false;
-            }
-        }
-        nowdarkcolor = "var(--color-dark-" + String(nowcolor) + ")";
-        nowneoncolor = "var(--color-neon-" + String(nowcolor) + ")";
-        document.getElementById('edit').style = "border-bottom-color: " + String(nowdarkcolor);
-        document.getElementById('foldersdiv').style = "border-right-color: " + String(nowdarkcolor);
-        document.getElementById('editbtn').style.color = String(nowdarkcolor);
-        console.log(nowcolor);
-        db.collection("doITyourselfDB_user").doc(nowuser).update({ color: nowcolor });
-    });
-
-
-    //(폴더, 노트)네온 색상 변경, 같은 이름을 갖는 각각의 요소들.
-    let targetAfolder = document.querySelectorAll('.target_by_EachFolder');
-    targetAfolder.forEach((target) => target.addEventListener("mouseover", changeNeonbackInfunc));
-    let targetAnote = document.querySelectorAll('.target_by_EachNote');
-    targetAnote.forEach((target) => target.addEventListener("mouseover", changeNeonbackInfunc));
-    function changeNeonbackInfunc() {
-        this.style.boxShadow = "-3px 3px 3px " + String(nowneoncolor);
-        this.style.color = String(nowdarkcolor);
-        this.style.border = "2px solid " + String(nowdarkcolor);
-    }
-    targetAfolder.forEach((target) => target.addEventListener("mouseout", changeNeonbackFolderOutfunc));
-    function changeNeonbackFolderOutfunc() {
-        this.style.color = "";
-        this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
-        this.style.border = "2px solid whitesmoke"
-    }
-
-    targetAnote.forEach((target) => target.addEventListener("mouseout", changeNeonbackOutfunc));
-    function changeNeonbackOutfunc() {
-        this.style.color = "";
-        this.style.boxShadow = "-3px 3px 3px var(--color-background-gray)";
-        this.style.border = "2px solid whitesmoke";
-    }
-
-    document.querySelector('#notopenfilebtn').addEventListener("click", function () {
-        document.querySelector(".openfile__background").className = "openfile__background";
-    })
-    document.querySelector("#close__openfilebackground").addEventListener("click", function () {
-        document.querySelector(".openfile__background").className = "openfile__background";
-
-    });
+window.addEventListener('load', function () {
+    //alert("It's loaded!");
+    //loadMypage(nowuser);
+    //document.getElementById("allnote").click();    
 });
+
 //팝업
 function show__fileopenback() {
     document.querySelector(".openfile__background").className = "openfile__background openfile__show";

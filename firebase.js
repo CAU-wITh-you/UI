@@ -37,6 +37,7 @@ const firebaseConfig = {
           console.log('Value is set to ' + user_email);
       });
     }
+    db.collection("doITyourselfDB_user").doc(user_email).set({color:'pink'}, {merge: true});
 
     var videoId = videoUrl.searchParams.get("v");
     var docRef = db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId);
