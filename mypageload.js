@@ -782,8 +782,12 @@ function show__fileopenback() {
 }
 
 document.getElementById('openfilebtn').addEventListener("click", function () {
-    console.log("클릭한 비디오 아이디");
-    console.log(document.getElementById('nowopen__title').className);
+    videoId = document.getElementById('nowopen__title').className
+    console.log("클릭한 비디오 아이디", videoId);
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        var tab = tabs[0];
+        chrome.tabs.update(tab.id, {url: 'https://www.youtube.com/watch?v='+videoId});
+    });
     //document.getElementById('nowopen__title').className 가 노트 id 번호임
 });
 
