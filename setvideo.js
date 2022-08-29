@@ -12,8 +12,9 @@ vid_title" hidden="hidden">title</div>
 */ 
 function getUserInfo(){
     if(document.getElementById("user_email").innerHTML != "not login") return
-    
-    chrome.identity.getAuthToken({
+    document.getElementById("user_email").innerHTML = "jstep0000@gmail.com";
+    loadNote();
+    /*chrome.identity.getAuthToken({
         interactive: true
     }, function(token) {
         console.log('token!',token);
@@ -35,7 +36,7 @@ function getUserInfo(){
         }
         xmlHttp.open("GET", authUrl, true); // true for asynchronous 
         xmlHttp.send(null);
-    });
+    });*/
 }
 
 function saveVideoDetails(videoId){
