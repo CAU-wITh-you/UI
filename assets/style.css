@@ -313,6 +313,25 @@ video::-webkit-media-controls-fullscreen-button {
   background-color: orange;
 }
 
+#language__python {
+  display: none;
+  float: left;
+  padding-top: 4%;
+  width: 20%;
+  height: 50%;
+  font-family: "HSYuji-Regular";
+}
+
+#language__python:hover {
+  border-radius: 25px;
+  background-color: orange;
+}
+
+.CodeMirror {
+  font-family: Arial, monospace;
+  font-size: 14px;
+}
+
 .mypage {
   padding: 5px;
   margin: 0;

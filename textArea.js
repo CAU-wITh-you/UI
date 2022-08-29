@@ -11,11 +11,15 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
     if (selectLanguage == true) {
         document.getElementById("language__C").style.display = "block";
         document.getElementById("language__Cpp").style.display = "block";
+        document.getElementById("language__python").style.display = "block";
         document.getElementById("language__C").addEventListener('click', function () {
             console.log("c언어 선택");
             selectLanguage = true;
             language = "c";
             document.getElementById("language__Cpp").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
+            document.getElementById("language__python").style.backgroundColor = null;
             this.style.backgroundColor = "var(--color-dark-pink)";
             this.style.borderRadius = "15px";
         });
@@ -26,12 +30,27 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
             document.getElementById("language__C").style.backgroundColor = null;
             this.style.backgroundColor = "var(--color-dark-pink)";
             this.style.borderRadius = "15px";
+            document.getElementById("language__python").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
+        });
+        document.getElementById("language__python").addEventListener('click', function () {
+            console.log("파이썬 선택");
+            selectLanguage = true;
+            language = "python3";
+            document.getElementById("language__C").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
+            document.getElementById("language__Cpp").style.backgroundColor = null;
+            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.borderRadius = "15px";
         });
 
     }
     else {
         document.getElementById("language__C").style.display = "none";
         document.getElementById("language__Cpp").style.display = "none";
+        document.getElementById("language__python").style.display = "none";
     }
 });
 
@@ -255,7 +274,7 @@ function setCodeMirror(language, timestampNum, text){
             matchBrackets: true,
             autoCloseBrackets: true,
             mode: "text/x-csrc",
-            theme: "material-darker"
+            theme: "darcula"
         });
     }
     else if (language == "cpp") {
@@ -264,7 +283,16 @@ function setCodeMirror(language, timestampNum, text){
             matchBrackets: true,
             //autoCloseBrackets: true,
             mode: "text/x-c++src",
-            theme: "material-darker"
+            theme: "darcula"
+        });
+    }
+    else if (language == "python3") {
+        var pythonEditor = CodeMirror.fromTextArea(document.getElementById(nowcode), {
+            lineNumbers: true,
+            matchBrackets: true,
+            //autoCloseBrackets: true,
+            mode: "text/x-python",
+            theme: "darcula"
         });
     }
 
@@ -339,7 +367,7 @@ function makeCodearea(text, time) {
             matchBrackets: true,
             autoCloseBrackets: true,
             mode: "text/x-csrc",
-            theme: "material-darker"
+            theme: "darcula"
         });
     }
     else if (language == "cpp") {
@@ -348,7 +376,7 @@ function makeCodearea(text, time) {
             matchBrackets: true,
             //autoCloseBrackets: true,
             mode: "text/x-c++src",
-            theme: "material-darker"
+            theme: "darcula"
         });
     }
 
@@ -419,9 +447,10 @@ function makeImgarea(url, time) {
     imgLi.value = currentTime;
 
     var imgDiv = document.createElement("div");
-    imgDiv.className = "divcode";
+    imgDiv.className = "divimg";
     imgDiv.contentEditable = "false";
-    imgDiv.id = "t1" + timestampNum;
+    imgDiv.id = "i" + timestampNum;
+    imgDiv.url = url;
     imgDiv.style.backgroundColor = "var(--color-background-gray)";
     imgDiv.style.marginLeft = "35px";
 
@@ -552,9 +581,10 @@ function nonemakeImgarea(url) {
     imgLi.value = -1
 
     var imgDiv = document.createElement("div");
-    imgDiv.className = "divcode";
+    imgDiv.className = "divimg";
     imgDiv.contentEditable = "false";
-    imgDiv.id = "t1" + timestampNum;
+    imgDiv.id = "i" + timestampNum;
+    imgDiv.url = url;
     imgDiv.style.backgroundColor = "var(--color-background-gray)";
     imgDiv.style.marginLeft = "35px";
 
