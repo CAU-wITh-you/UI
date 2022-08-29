@@ -1,4 +1,4 @@
-var nowuser = "jstep@gmail.com";
+var nowuser = "jstep0000@gmail.com";
 const firebaseConfig = {
     apiKey: "AIzaSyAnCGQzZWMcsci2ob13jqW1-gf8Sk-_7aU",
     authDomain: "reserve-gwabang.firebaseapp.com",
@@ -12,13 +12,23 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-chrome.storage.sync.get(['user_email'], function(result) {
+/*chrome.storage.sync.get(['user_email'], function(result) {
     console.log(result);
     console.log('Value currently is ' + result.user_email);
     alert("Hello, "+String(result.user_email)+"!");
 
     nowuser = result.user_email
     loadMypage(nowuser);
+});*/
+
+window.addEventListener('load', function () {
+    alert("It's loaded!"+nowuser);
+    loadMypage(nowuser);
+    loadColor(nowuser);
+    //document.getElementById("allnote").click();    
+});
+
+function loadColor(nowuser){
     db.collection("doITyourselfDB_user").doc(nowuser).get().then((doc) => {
         console.log("바이바이");
         console.log(doc.data()["color"]);
@@ -185,7 +195,7 @@ chrome.storage.sync.get(['user_email'], function(result) {
     
         });
     }); 
-});
+}
 
 var db = firebase.firestore();
 var nowdarkcolor;
@@ -766,12 +776,6 @@ function loadMypage(nowuser) {
     });
     //get()을 통해서 해당 컬렉션의 정보를 가져온다.
 }
-
-window.addEventListener('load', function () {
-    //alert("It's loaded!");
-    //loadMypage(nowuser);
-    //document.getElementById("allnote").click();    
-});
 
 //팝업
 function show__fileopenback() {
