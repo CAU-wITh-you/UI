@@ -362,17 +362,17 @@ function loadleft(foldername, folder__filedict, forrightload) {
             while (nowparentnode.hasChildNodes()) {
                 nowparentnode.removeChild(nowparentnode.firstChild);
             }
-            console.log("recentnote");
+            //console.log("recentnote");
             document.getElementById("folders__title").style.display = "none";
             document.getElementById("area__folders").style.display = "none";
             //오른쪽 파일 목록 추가
-            //loadright(String(nowclick), forrightload);
+            loadright("recentnote", forrightload);
         } else if (nowclick == "notinfoler") {
             const nowparentnode = document.querySelector('.area__notes');
             while (nowparentnode.hasChildNodes()) {
                 nowparentnode.removeChild(nowparentnode.firstChild);
             }
-            console.log("notinfolder");
+            //console.log("notinfolder");
             document.getElementById("folders__title").style.display = "none";
             document.getElementById("area__folders").style.display = "none";
             //오른쪽 파일 목록 추가
@@ -382,7 +382,7 @@ function loadleft(foldername, folder__filedict, forrightload) {
             while (nowparentnode.hasChildNodes()) {
                 nowparentnode.removeChild(nowparentnode.firstChild);
             }
-            console.log("폴더클릭");
+            //console.log("폴더클릭");
             document.getElementById("folders__title").style.display = "none";
             document.getElementById("area__folders").style.display = "none";
             if (document.getElementById(String(nowclick) + "__files") != null) {
@@ -405,16 +405,16 @@ function loadleft(foldername, folder__filedict, forrightload) {
             document.getElementById('nowopen__title').className = this.getElementsByTagName('h4')[0].id  //id에 저장
             var nowclickvideoid = this.getElementsByTagName('h4')[0].id;
             document.getElementById('nowopen__title').innerHTML = this.getElementsByTagName('h4')[0].innerHTML + "를 여시겠습니까?";
-            console.log(this.getElementsByTagName('h4')[0]);
+            //console.log(this.getElementsByTagName('h4')[0]);
             show__fileopenback();
         }));
     });
 
-    console.log(foldername);
+    //console.log(foldername);
     foldername.forEach(afoldername => {
         allfilenum = allfilenum + folder__filedict[afoldername].length;
     });
-    console.log(allfilenum);
+    //console.log(allfilenum);
     document.getElementById("allnote__num").innerHTML = allfilenum;//총 파일 개수
     if (allfilenum < 15) {
         document.getElementById("recentnote__num").innerHTML = allfilenum;
@@ -451,7 +451,7 @@ function snapshotToarray2(querySnapshot) {
     return returnArr;
 }
 function loadright(nowfoldername, folder__filedict) {
-    console.log("loadright 수행");
+    //console.log("loadright 수행");
     /*
     <div id="notestid" , class="anote call target_by_EachNote">
         <img class="anote__img" src="./images/doITyourself__default__logo128.png"></img>
@@ -467,7 +467,7 @@ function loadright(nowfoldername, folder__filedict) {
     var filenum;
     if (nowfoldername == "allnote") {
         var allkey = Object.keys(folder__filedict);
-        console.log(allkey);
+        //console.log(allkey);
         var nowfilenum = 0;
         allkey.forEach(keyelement => {
             folder__filedict[keyelement].forEach(afile => {
@@ -516,10 +516,67 @@ function loadright(nowfoldername, folder__filedict) {
         filenum = 6 - nowfilenum % 5;
     }
     else if (nowfoldername == "recentnote") {
-        console.log(folder__filedict["notinfolder"]);
+        var allkey = Object.keys(folder__filedict);
+        var dayNotedict = {};
+        allkey.forEach(akey => {
+            folder__filedict[akey].forEach(anote => {
+                dayNotedict[anote[5]] = [anote[0], anote[1], anote[3], anote[4], anote[5]]
+            });
+        });
+        var allnotenum = Number(document.getElementById('allnote__num').innerHTML);
+        var daykey;
+        if (allnotenum < 15) {
+            daykey = Object.keys(dayNotedict).sort().reverse();
+        } else {
+            daykey = Object.keys(dayNotedict).sort().reverse().slice(0, 15);
+        }
+        filenum = 6 - (daykey.length % 5);
+        var index = 0;
+        while (index < daykey.length) {
+            var div__noteid = document.createElement("div");
+            div__noteid.id = dayNotedict[daykey[index]][0];
+            div__noteid.className = "anote call target_by_EachNote";
+            div__noteid.style = "display: block; height: 300px; border: 1px solid whitesmoke; border-radius: 8px; margin-bottom: 2%; align-items: center; padding-left: 1%; padding-right: 1%; flex - basis: 16 %;";
+
+            var div__noteid__img = document.createElement("img");
+            div__noteid__img.className = "anote__img";
+            //console.log(dayNotedict[daykey[index]][1]);
+            div__noteid__img.src = dayNotedict[daykey[index]][1];
+            div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
+
+            var div__noteid__div = document.createElement("div");
+            div__noteid__div.className = "anote__contents";
+            div__noteid__div.style = "width: 100%; height: 90px; object-fit: cover; display: flex; align-items: center; vertical-align: middle;";
+
+            var div__noteid__div__div2 = document.createElement("div");
+            div__noteid__div__div2.className = "content__titlenamedate";
+
+            var div__noteid__div__div2__h4 = document.createElement("h4");
+            div__noteid__div__div2__h4.innerHTML = dayNotedict[daykey[index]][2];
+            div__noteid__div__div2__h4.style = "margin: 0;";
+            var div__noteid__div__div2__h5 = document.createElement("h5");
+            div__noteid__div__div2__h5.innerHTML = dayNotedict[daykey[index]][3];
+            div__noteid__div__div2__h5.style = "margin: 0;";
+            var div__noteid__div__div2__h6 = document.createElement("h6");
+            div__noteid__div__div2__h6.innerHTML = dayNotedict[daykey[index]][4];
+            div__noteid__div__div2__h6.style = "margin: 0;";
+
+            div__noteid__div__div2.appendChild(div__noteid__div__div2__h4);
+            div__noteid__div__div2.appendChild(div__noteid__div__div2__h5);
+            div__noteid__div__div2.appendChild(div__noteid__div__div2__h6);
+
+            div__noteid__div.appendChild(div__noteid__div__div2);
+
+            div__noteid.appendChild(div__noteid__img);
+            div__noteid.appendChild(div__noteid__div);
+
+            document.querySelector(".area__notes").appendChild(div__noteid);
+            index = index + 1;
+        }
+
     } else if (nowfoldername == "notinfolder") {
-        console.log("here");
-        console.log(folder__filedict["notinfolder"]);
+        //console.log("here");
+        //console.log(folder__filedict["notinfolder"]);
         filenum = 6 - (folder__filedict["notinfolder"].length % 5);
         folder__filedict["notinfolder"].forEach(element3 => {
             var div__noteid = document.createElement("div");
@@ -529,7 +586,7 @@ function loadright(nowfoldername, folder__filedict) {
 
             var div__noteid__img = document.createElement("img");
             div__noteid__img.className = "anote__img";
-            console.log(element3[1]);
+            //console.log(element3[1]);
             div__noteid__img.src = String(element3[1]);
             div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
 
@@ -571,7 +628,7 @@ function loadright(nowfoldername, folder__filedict) {
 
             var div__noteid__img = document.createElement("img");
             div__noteid__img.className = "anote__img";
-            console.log(element3[1]);
+            //console.log(element3[1]);
             div__noteid__img.src = String(element3[1]);
             div__noteid__img.style = "margin-top: 4%; width: 100%; height: 150px; object-fit: contain;";
 
@@ -686,8 +743,8 @@ function loadright(nowfoldername, folder__filedict) {
         show__fileopenback();
     }));
     targetAfolder.forEach((target) => target.addEventListener("click", function () {
-        console.log(this.id);
-        console.log(this);
+        //console.log(this.id);
+        //console.log(this);
         document.getElementById(this.id).click();
     }));
     document.querySelector('#notopenfilebtn').addEventListener("click", function () {
@@ -751,7 +808,7 @@ function show__fileopenback() {
 
 document.getElementById('openfilebtn').addEventListener("click", function () {
     videoId = document.getElementById('nowopen__title').className
-    console.log("클릭한 비디오 아이디", videoId);
+    //console.log("클릭한 비디오 아이디", videoId);
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var tab = tabs[0];
         chrome.tabs.update(tab.id, { url: 'https://www.youtube.com/watch?v=' + videoId });
@@ -825,8 +882,8 @@ function show__plusbtnback() {
 
     db.collection("doITyourselfDB_user").doc(nowuser).collection("videos").get().then(function (querySnapshot) {
         var returnArr2 = snapshotToarray(querySnapshot);
-        console.log(document.getElementById('createtext').value);
-        console.log(returnArr2[1]['notinfolder']);
+        //console.log(document.getElementById('createtext').value);
+        //console.log(returnArr2[1]['notinfolder']);
         //<option value="비디오아이디">비디오이름</option>
         returnArr2[1]['notinfolder'].forEach(element => {
             var option = document.createElement("option");
@@ -838,9 +895,9 @@ function show__plusbtnback() {
     function createnewfolder() {
         var selected__file = document.getElementById('selected__file');
         var selected__fileid = selected__file.options[selected__file.selectedIndex].value;
-        console.log(selected__fileid);
+        //console.log(selected__fileid);
         db.collection("doITyourselfDB_user").doc(nowuser).collection("videos").doc(selected__fileid).update({ folder_name: document.getElementById('createtext').value });
-        console.log("폴더이름-파일이름 이 추가되었습니다.");
+        //console.log("폴더이름-파일이름 이 추가되었습니다.");
         close__plusbtnback();
         //reload 필요!
     }
@@ -878,8 +935,8 @@ function show_deletefolderback() {
         var returnArr2 = snapshotToarray(querySnapshot);
         var folderlist = returnArr2[0];
         var filelist = returnArr2[1];
-        console.log(folderlist);
-        console.log(filelist);
+        //console.log(folderlist);
+        //console.log(filelist);
         //<option value="폴더이름">폴더이름</option>
         folderlist.sort();
         folderlist.forEach(element => {
@@ -893,13 +950,13 @@ function show_deletefolderback() {
         function deletefolder() {
             var selected__folder = document.getElementById('delete__selected__folder');
             var selected__folderid = selected__folder.options[selected__folder.selectedIndex].value;
-            console.log(filelist[selected__folderid]);
+            //console.log(filelist[selected__folderid]);
             filelist[selected__folderid].forEach(element => {
-                console.log(element[0]);
+                //console.log(element[0]);
                 //db.collection("doITyourselfDB_user").doc(nowuser).collection("videos").doc(selected__fileid).update({ folder_name: document.getElementById('createtext').value });
                 db.collection("doITyourselfDB_user").doc(nowuser).collection("videos").doc(element[0]).update({ folder_name: "" });
-                console.log("폴더이름이 삭제되었습니다.");
-                console.log(selected__folderid);
+                //console.log("폴더이름이 삭제되었습니다.");
+                //console.log(selected__folderid);
                 close__deletefolderback();
             });
             //reload 필요!
@@ -947,8 +1004,8 @@ function show__editfolderback() {
         var filelist = returnArr2[1];
         var fileidname = {};
         var filename = [];
-        console.log(folderlist);
-        console.log(filelist);
+        //console.log(folderlist);
+        //console.log(filelist);
         //폴더 목록 만듬
         //<option value="폴더이름">폴더이름</option>
         folderlist.sort();
@@ -968,7 +1025,7 @@ function show__editfolderback() {
         //<option value="파일id">파일 이름</option>
         folderlist.forEach(foldername => {
             filelist[foldername].forEach(file => {
-                console.log(file);
+                //console.log(file);
                 fileidname[file[1]] = file[0];
                 filename.push(file[1]);
             });
@@ -985,15 +1042,15 @@ function show__editfolderback() {
         function editfolder() {
             var selected__folder = document.getElementById('edit__selectbtn__folder');
             var selected__folderid = selected__folder.options[selected__folder.selectedIndex].value;
-            console.log(selected__folderid);
+            //console.log(selected__folderid);
 
             var selected__file = document.getElementById('edit__selectbtn__file');
             var selected__fileid = selected__file.options[selected__file.selectedIndex].value;
-            console.log(selected__fileid);
+            //console.log(selected__fileid);
 
             db.collection("doITyourselfDB_user").doc(nowuser).collection("videos").doc(selected__fileid).update({ folder_name: selected__folderid });
-            console.log("파일의 폴더가 변경되었습니다.");
-            console.log(selected__folderid);
+            //console.log("파일의 폴더가 변경되었습니다.");
+            //console.log(selected__folderid);
             close__editfolderback();
 
             //reload 필요!
