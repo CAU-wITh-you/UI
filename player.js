@@ -51,7 +51,7 @@ function onPlayerStateChange() {
     else{
         if(player.getPlayerState() == 1){
             console.log("play " + player.getCurrentTime()+"s");
-            document.getElementById("playBtn").src="buttons/pausebutton-pink.png";
+            document.getElementById("playBtn").src="buttons/pausebutton-"+color+".png";
             if(canvasClickable){
                 canvasVisible = true;
                 canvasClickable = false;
@@ -61,7 +61,7 @@ function onPlayerStateChange() {
         }
         else if(player.getPlayerState() == 2){
             console.log("pause " + player.getCurrentTime()+"s");
-            document.getElementById("playBtn").src="buttons/playbutton-pink.png";
+            document.getElementById("playBtn").src="buttons/playbutton-"+color+".png";
         } 
         document.getElementById("playbutton").hidden=false;
         drawTimecanvas();
