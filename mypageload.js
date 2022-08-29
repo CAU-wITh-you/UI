@@ -194,8 +194,9 @@ function loadColor(nowuser) {
 var db = firebase.firestore();
 var nowdarkcolor;
 var nowneoncolor;
+var allfilenum;
 function loadleft(foldername, folder__filedict, forrightload) {
-    var sum = 0;
+    allfilenum = 0;
     //console.log(folder__filedict);
     //console.log("keys");
     //console.log(Object.keys(folder__filedict));
@@ -206,8 +207,6 @@ function loadleft(foldername, folder__filedict, forrightload) {
     var foldernum = 6 - nowfoldernum % 5;
     foldername.forEach(function (element) {
         if (element != "notinfolder") {
-            sum += 1;
-            var tempfiles;
             var div__folder = document.createElement("div");
             div__folder.className = "folder target_by_EachleftFolder";
             div__folder.id = element;
@@ -411,8 +410,17 @@ function loadleft(foldername, folder__filedict, forrightload) {
         }));
     });
 
-    document.getElementById("allnote__num").innerHTML = sum + folder__filedict["notinfolder"].length;//총 파일 개수
-    document.getElementById("recentnote__num").innerHTML = "15";
+    console.log(foldername);
+    foldername.forEach(afoldername => {
+        allfilenum = allfilenum + folder__filedict[afoldername].length;
+    });
+    console.log(allfilenum);
+    document.getElementById("allnote__num").innerHTML = allfilenum;//총 파일 개수
+    if (allfilenum < 15) {
+        document.getElementById("recentnote__num").innerHTML = allfilenum;
+    } else {
+        document.getElementById("recentnote__num").innerHTML = "15";
+    }
     document.getElementById("notinfolder__num").innerHTML = folder__filedict["notinfolder"].length;
 }
 function snapshotToarray2(querySnapshot) {
