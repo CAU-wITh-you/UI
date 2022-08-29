@@ -37,7 +37,40 @@ const firebaseConfig = {
           console.log('Value is set to ' + user_email);
       });
     }
-    db.collection("doITyourselfDB_user").doc(user_email).set({color:'pink'}, {merge: true});
+
+    
+    db.collection("doITyourselfDB_user").doc(user_email).get().then((doc) => {
+      if (doc.exists == false) {
+        db.collection("doITyourselfDB_user").doc(user_email).set({color:'pink'}, {merge: true}); 
+      }
+      else{
+        console.log(doc.data()["color"])
+        color = doc.data()["color"]
+        document.getElementById("c0").style.backgroundColor = "var(--color-"+color+")";
+        document.getElementById("questionbtn").style.color = "var(--color-"+color+")";
+        document.getElementById("language__Cpp").style.backgroundColor = "var(--color-dark-"+color+")";
+        document.getElementById("5minbeforeBtn").src = "buttons/5minbeforebutton-"+color+".png"
+        document.getElementById("playBtn").src = "buttons/playbutton-"+color+".png"
+        document.getElementById("5minafterBtn").src = "buttons/5minafterbutton-"+color+".png"
+        document.getElementById("startbtn").src = "buttons/startbutton-"+color+".png"
+        document.getElementById("codebtn").src = "buttons/codebutton-"+color+".png"
+        document.getElementById("endbtn").src = "buttons/endbutton-"+color+".png"
+
+        if (timestampOpen == false) {
+            document.getElementById("timestampbtn").style.backgroundColor = "var(--color-"+color+")";
+            document.getElementById("timestampbtn__icon").style.color = "var(--color-dark-"+color+")";
+            document.getElementById("timestamp_area").style.backgroundColor = "var(--color-dark-"+color+")";
+        } else {
+            document.getElementById("timestampbtn").style.backgroundColor = "var(--color-dark-"+color+")";
+            document.getElementById("timestampbtn__icon").style.color = "var(--color-"+color+")";
+            document.getElementById("realtimestamp").style.backgroundColor = "var(--color-"+color+")";
+        }
+        if (clock == true) document.getElementById("clockbtn__icon").style.color = "var(--color-dark-"+color+")";
+        if (openedit == true) document.getElementById("sortbtn__icon").style.color = "var(--color-dark-"+color+")";
+        if (orderchange == true) document.getElementById("sortbtn__icon").style.color = "var(--color-dark-"+color+")";
+        if (clickdeletionbtn == true) document.getElementById("deletebtn__icon").style.color = "var(--color-dark-"+color+")";
+      }
+    });
 
     var videoId = videoUrl.searchParams.get("v");
     var docRef = db.collection("doITyourselfDB_user").doc(user_email).collection("videos").doc(videoId);

@@ -60,7 +60,7 @@ document.getElementById("exitbutton__icon").addEventListener("mouseover", exitov
 function exitover() {
     //console.log("hover");
     document.getElementById("exitbutton__icon").className = "fas fa-door-open";
-    document.getElementById("exitbutton__icon").style.color = "var(--color-dark-pink)";
+    document.getElementById("exitbutton__icon").style.color = "var(--color-dark-"+color+")";
 }
 document.getElementById("exitbutton__icon").addEventListener("mouseout", exitout);
 function exitout() {
@@ -148,8 +148,8 @@ function clicktimestamp() {
     if (timestampOpen == false) {
         document.getElementById("timestampbtn").title = "click to open timestamp";
         document.getElementById("timestampbtn").style.transform = "rotate(0deg)";
-        document.getElementById("timestampbtn").style.backgroundColor = "var(--color-pink)";
-        document.getElementById("timestampbtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("timestampbtn").style.backgroundColor = "var(--color-"+color+")";
+        document.getElementById("timestampbtn__icon").style.color = "var(--color-dark-"+color+")";
 
         document.getElementById("realtimestamp").style.display = "none";
 
@@ -162,11 +162,11 @@ function clicktimestamp() {
     } else {
         document.getElementById("timestampbtn").title = "click to add new timestamp";
         document.getElementById("timestampbtn").style.transform = "rotateY(180deg)";
-        document.getElementById("timestampbtn").style.backgroundColor = "var(--color-dark-pink)";
-        document.getElementById("timestampbtn__icon").style.color = "var(--color-pink)";
+        document.getElementById("timestampbtn").style.backgroundColor = "var(--color-dark-"+color+")";
+        document.getElementById("timestampbtn__icon").style.color = "var(--color-"+color+")";
 
         document.getElementById("realtimestamp").style.display = "block";
-        document.getElementById("realtimestamp").style.backgroundColor = "var(--color-pink)";
+        document.getElementById("realtimestamp").style.backgroundColor = "var(--color-"+color+")";
         for (i = 1; i <= timestampNum; i++) {
             var carrot = document.getElementById('time' + i);
             if (carrot) {
@@ -220,12 +220,12 @@ function setDefault(){
     document.getElementById("deletebtn__icon").style.color = "whitesmoke";
 }
 
-document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
+document.getElementById("clockbtn__icon").style.color = "var(--color-dark-"+color+")";
 document.getElementById("clockbtn").addEventListener('click', function () {
     setDefault();
     clock = !clock;
     if (clock == true) {
-        document.getElementById("clockbtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("clockbtn__icon").style.color = "var(--color-dark-"+color+")";
     }
     else {
         document.getElementById("clockbtn__icon").style.color = "whitesmoke";
@@ -312,7 +312,7 @@ function changebutton() {
         document.getElementById("sortbtn").style.display = "flex";
         document.getElementById("deletebtn").style.display = "flex";
         document.getElementById("backbtn").style.display = "flex";
-        document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("sortbtn__icon").style.color = "var(--color-dark-"+color+")";
         document.getElementById("sortbtn__icon").style.color = "whitesmoke";
         document.getElementById("deletebtn__icon").style.color = "whitesmoke";
         orderchange = false;
@@ -337,7 +337,7 @@ function orderchangefunc() {
     setDefault();
     orderchange = !prev
     if (orderchange == true) {
-        document.getElementById("sortbtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("sortbtn__icon").style.color = "var(--color-dark-"+color+")";
         console.log("sortable 진입");
         sortableEnable();    }
     else {
@@ -356,7 +356,7 @@ function deletionfunc() {
     clickdeletionbtn = !prev
     console.log(clickdeletionbtn);
     if (clickdeletionbtn == true) {
-        document.getElementById("deletebtn__icon").style.color = "var(--color-dark-pink)";
+        document.getElementById("deletebtn__icon").style.color = "var(--color-dark-"+color+")";
     }
     else {
         document.getElementById("deletebtn__icon").style.color = "whitesmoke";

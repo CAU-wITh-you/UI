@@ -2,7 +2,7 @@
 var selectLanguage = true;
 var language = "cpp";
 
-document.getElementById("language__Cpp").style.backgroundColor = "var(--color-dark-pink)";
+document.getElementById("language__Cpp").style.backgroundColor = "var(--color-dark-"+color+")";
 document.getElementById("language__Cpp").style.borderRadius = "15px";
 
 document.getElementById("realselectionbtn").addEventListener('click', function () {
@@ -17,10 +17,10 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
             selectLanguage = true;
             language = "c";
             document.getElementById("language__Cpp").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
             document.getElementById("language__python").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
         });
         document.getElementById("language__Cpp").addEventListener('click', function () {
@@ -28,10 +28,10 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
             selectLanguage = true;
             language = "cpp";
             document.getElementById("language__C").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
             document.getElementById("language__python").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
         });
         document.getElementById("language__python").addEventListener('click', function () {
@@ -39,10 +39,10 @@ document.getElementById("realselectionbtn").addEventListener('click', function (
             selectLanguage = true;
             language = "python3";
             document.getElementById("language__C").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
             document.getElementById("language__Cpp").style.backgroundColor = null;
-            this.style.backgroundColor = "var(--color-dark-pink)";
+            this.style.backgroundColor = "var(--color-dark-"+color+")";
             this.style.borderRadius = "15px";
         });
 
