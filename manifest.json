@@ -47,8 +47,7 @@
         "./assets/jquery-3.6.0.js",
         "./assets/jquery-ui.js",
         "./assets/html2canvas.min.js",
-        "stopvideo.js","stopvideo2.js",
-        "mypageload.js"
+        "stopvideo.js","stopvideo2.js"
       ],
       "all-frames": true
     }

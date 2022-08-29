@@ -1,4 +1,12 @@
-var nowuser = "jstep0000@gmail.com";
+//var nowuser = "jstep0000@gmail.com";
+
+chrome.storage.sync.get(['user_email'], function(result) {
+    console.log(result);
+    console.log('Value currently is ' + result.user_email);
+    alert("It's loaded!! "+String(result.user_email));
+    loadMypage(result.user_email);
+});
+
 const firebaseConfig = {
     apiKey: "AIzaSyAnCGQzZWMcsci2ob13jqW1-gf8Sk-_7aU",
     authDomain: "reserve-gwabang.firebaseapp.com",
@@ -11,8 +19,6 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-console.log("hello index0");
 
 var db = firebase.firestore();
 var nowdarkcolor;
@@ -237,6 +243,7 @@ function loadleft(foldername, folder__filedict, forrightload) {
     document.getElementById("recentnote__num").innerHTML = "15";
     document.getElementById("notinfolder__num").innerHTML = folder__filedict["notinfolder"].length;
 }
+
 function snapshotToarray2(querySnapshot) {
     //var foldername = [];
     var files = {}
@@ -595,11 +602,7 @@ function loadMypage(nowuser) {
 }
 
 
-window.addEventListener('load', function () {
-    alert("It's loaded!");
-    loadMypage(nowuser);
-    //document.getElementById("allnote").click();
-});
+
 
 db.collection("doITyourselfDB_user").doc(nowuser).get().then((doc) => {
     console.log("바이바이");

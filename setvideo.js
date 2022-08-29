@@ -28,6 +28,9 @@ function getUserInfo(){
             var resp = JSON.parse(xmlHttp.responseText);
             console.log('email',resp.email)
             document.getElementById("user_email").innerHTML = resp.email;
+            chrome.storage.sync.set({"user_email": resp.email}, function() {
+                console.log('Value is set to ' + resp.email);
+            });
             loadNote();
         }
         xmlHttp.open("GET", authUrl, true); // true for asynchronous 

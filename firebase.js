@@ -33,6 +33,9 @@ const firebaseConfig = {
     while(user_email.indexOf('@') == -1){
       user_email = prompt("이메일을 입력해주세요!");
       document.getElementById("user_email").innerHTML = user_email;
+      chrome.storage.sync.set({"user_email": user_email}, function() {
+          console.log('Value is set to ' + user_email);
+      });
     }
 
     var videoId = videoUrl.searchParams.get("v");
@@ -131,16 +134,6 @@ const firebaseConfig = {
           console.error("Error adding document: ", error);
         });
     }
-  }
-  
-  async function asyncSaveNote() {
-    console.log("save");
-    if(document.getElementById("load_comp").innerHTML == "false"){
-      await promiseLoadNote();
-    }
-    console.log(document.getElementById("load_comp").innerHTML);
-    console.log(document.getElementById("user_email").innerHTML);
-    saveNote();
   }
   
   
