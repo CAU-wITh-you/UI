@@ -60,7 +60,6 @@
         "index.js",
         "mypageload.js",
         "mypage.js",
-        "http://news.google.com/",
         "https://code.jquery.com/jquery-latest.min.js",
         "https://html2canvas.hertzen.com/dist/html2canvas.min.js"
       ],
